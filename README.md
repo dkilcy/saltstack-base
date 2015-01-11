@@ -16,3 +16,8 @@ pillar_roots:
   openstack:
     - /srv/salt/openstack/states
 ```
+
+```
+salt '*' saltutil.refresh_pillar
+salt '*' saltutil.sync_all
+```
