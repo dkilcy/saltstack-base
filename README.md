@@ -15,29 +15,6 @@ The workstation is configured manually.
 
 A **node** runs the CentOS 7 minimal install.  They are installed using an automated installer built with kickstart.
 
-### Workstation Setup
-
-[Workstation Setup](workstation/README.md)
-
-### Node Setup
-
-[Node Setup](node/README.md)
-### Workstation Setup
-
-##### Tasks:
-
-  1. [] Install CentOS 7 GNOME Desktop
-  2. [] Set security policies
-  3. [] Configure GitHub and pull juno-saltstack
-  4. [] Set the hosts file
-  5. [] Add the EPEL and OpenStack repositories
-  6. [] Create the repository mirror
-  7. [] Setup apache
-  8. [] Setup NTPD
-  9. [] Setup DHCP server
-  10. [] Setup salt master
-  11. [] Create the kickstart image for nodes
-
 #### Steps
 
 1. Install CentOS 7 GNOME desktop on Workstation  
@@ -268,3 +245,27 @@ systemctl enable salt-master
 11. Create the kickstart image for nodes  
 
 12. 
+=======
+### saltstack-base
+
+Base environment for my Saltstack projects:
+- juno-saltstack
+
+```
+file_roots:
+  base:
+    - /srv/salt/base/states
+  openstack:
+    - /srv/salt/openstack/states
+ 
+pillar_roots:
+  base:
+    - /srv/salt/base/pillar
+  openstack:
+    - /srv/salt/openstack/states
+```
+
+```
+salt '*' saltutil.refresh_pillar
+salt '*' saltutil.sync_all
+```
