@@ -3,21 +3,21 @@
 Base environment for my Saltstack projects:
 - juno-saltstack
 
+Create a file called /etc/salt/master.d/99-salt-envs.conf
+
 ```
 file_roots:
   base:
     - /srv/salt/base/states
-  openstack:
-    - /srv/salt/openstack/states
- 
 pillar_roots:
   base:
     - /srv/salt/base/pillar
-  openstack:
-    - /srv/salt/openstack/pillar
 ```
 
+Restart Salt Master after adding file.
 ```
+systemctl restart salt-master.service
+salt '*' test.ping
 salt '*' saltutil.refresh_pillar
 salt '*' saltutil.sync_all
 ```
@@ -42,11 +42,9 @@ git clone https://github.com/dkilcy/juno-saltstack.git
 mv /etc/hosts /etc/hosts.`date +%s`
 cp /home/devops/git/juno-saltstack/files/workstation/etc/hosts /etc/hosts
 ```   
-5. Add the EPEL and OpenStack repositories  
+5. Add the EPEL and update
 ```
-yum install -y yum-plugin-priorities
 yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
-yum install -y http://rdo.fedorapeople.org/openstack-juno/rdo-release-juno.rpm
 yum update -y
 yum upgrade -y
 ```   
