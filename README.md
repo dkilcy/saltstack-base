@@ -28,8 +28,8 @@ salt '*' saltutil.sync_all
 2. Set security policies as root
 ```
 setenforce 0
-systemctl stop firewalld
-systemctl disable firewalld
+systemctl stop iptables.service
+systemctl disable iptables.service
 ```   
 3. Configure GitHub and pull juno-saltstack as devops user
 ```
@@ -61,14 +61,14 @@ yum grouplist
 7. Setup apache  
 ```
 yum install -y httpd
-systemctl start httpd
-systemctl enable httpd
+systemctl start httpd.service
+systemctl enable httpd.service
 ```
 
 8. Setup NTPD  
 ```
-systemctl start ntpd
-systemctl enable ntpd
+systemctl start ntpd.service
+systemctl enable ntpd.service
 ntpq -p
 ```
 
@@ -77,8 +77,8 @@ ntpq -p
 yum install -y dhcp
 mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.`date +%s`
 cp /home/devops/git/juno-saltstack/files/workstation/etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf
-systemctl start dhcpd
-systemctl enable dhcpd
+systemctl start dhcpd.service
+systemctl enable dhcpd.service
 ```
 
 10. Setup salt master  
@@ -87,8 +87,8 @@ yum install salt-master
 
 ln -sf /home/devops/git/saltstack-base /srv/salt/base
 
-systemctl restart salt-master
-systemctl enable salt-master
+systemctl restart salt-master.service
+systemctl enable salt-master.service
 ```
 
 11. Create the kickstart image for nodes  
