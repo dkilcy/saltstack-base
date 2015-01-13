@@ -27,6 +27,7 @@ Create 3 VLANs
 - Create VLAN 100
 - Create VLAN 101
 - Create VLAN 102
+
 From Port Config Tab:
 - Select 15-16 as Link Type TRUNK, PVID 1, click Appy
 - 
