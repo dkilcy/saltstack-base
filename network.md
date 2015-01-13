@@ -30,7 +30,6 @@ Create 3 VLANs
 
 From Port Config Tab:
 - Select 15-16 as Link Type TRUNK, PVID 1, click Appy
-- 
 
 Other commands:
 ```
