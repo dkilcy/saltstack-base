@@ -103,5 +103,5 @@ salt '*' saltutil.sync_all
 
 12. Setup Nodes
 
- [1]: [https://github.com/dkilcy/juno-saltstack]
+ [1]: https://github.com/dkilcy/juno-saltstack
  
