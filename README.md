@@ -1,7 +1,7 @@
 ### saltstack-base
 
 Base environment for my Saltstack projects:
-- juno-saltstack [https://github.com/dkilcy/juno-saltstack]
+- [juno-saltstack][1]
 
 
 
@@ -103,3 +103,5 @@ salt '*' saltutil.sync_all
 
 12. Setup Nodes
 
+ [1]: [https://github.com/dkilcy/juno-saltstack]
+ 
