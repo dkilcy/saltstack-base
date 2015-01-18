@@ -1,26 +1,9 @@
 ### saltstack-base
 
 Base environment for my Saltstack projects:
-- juno-saltstack
+- [juno-saltstack][1]
 
-Create a file called /etc/salt/master.d/99-salt-envs.conf
 
-```
-file_roots:
-  base:
-    - /srv/salt/base/states
-pillar_roots:
-  base:
-    - /srv/salt/base/pillar
-```
-
-Restart Salt Master after adding file.
-```
-systemctl restart salt-master.service
-salt '*' test.ping
-salt '*' saltutil.refresh_pillar
-salt '*' saltutil.sync_all
-```
 
 #### Setup Salt Master
 
@@ -91,8 +74,34 @@ systemctl restart salt-master.service
 systemctl enable salt-master.service
 ```
 
+```
+[root@workstation2 ~]# salt --version
+salt 2014.7.0 (Helium)
+```
+
+Create a file called /etc/salt/master.d/99-salt-envs.conf
+
+```
+file_roots:
+  base:
+    - /srv/salt/base/states
+pillar_roots:
+  base:
+    - /srv/salt/base/pillar
+```
+
+Restart Salt Master after adding file.
+```
+systemctl restart salt-master.service
+salt '*' test.ping
+salt '*' saltutil.refresh_pillar
+salt '*' saltutil.sync_all
+```
+
+
 11. Create the kickstart image for nodes  
 
 12. Setup Nodes
-13. 
 
+ [1]: https://github.com/dkilcy/juno-saltstack
+ 
