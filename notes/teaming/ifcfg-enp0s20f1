@@ -1,0 +1,6 @@
+DEVICE="enp0s20f1"
+DEVICETYPE="TeamPort"
+ONBOOT="yes"
+BOOTPROTO="none"
+TEAM_MASTER="team0"
+IPV6INIT="no"
