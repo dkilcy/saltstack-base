@@ -13,6 +13,11 @@ rsync -avrt rsync://mirror.umd.edu/centos/6/os .
 rsync -avrt rsync://mirror.umd.edu/centos/6/updates .
 rsync -avrt rsync://mirror.umd.edu/centos/6/extras .
 
+cd /var/yum/repo/centos/6/epel
+rsync -avrt rsync://mirror.pnl.gov/epel/6/i386 .
+rsync -avrt rsync://mirror.pnl.gov/epel/6/x86_64 .
+
+
 ### CentOS 7
 
 mkdir -p /var/yum/repo/centos/7/os
