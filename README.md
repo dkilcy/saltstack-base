@@ -7,8 +7,15 @@ Base environment for my Saltstack projects:
 
 #### Setup Salt Master
 
-1. Install CentOS 7 with Mate desktop
+1. Install CentOS 7 from media image
+2. Add the EPEL and update. Reboot when finished to install the new kernel
+```
+yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
+yum update -y
+yum upgrade -y
+```
 
+3. Install MATE Desktop: `yum groupinstall "MATE Desktop"`
 
 2. Set security policies as root
 ```
@@ -27,12 +34,7 @@ git clone https://github.com/dkilcy/juno-saltstack.git
 mv /etc/hosts /etc/hosts.`date +%s`
 cp /home/devops/git/juno-saltstack/files/workstation/etc/hosts /etc/hosts
 ```   
-5. Add the EPEL and update
-```
-yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
-yum update -y
-yum upgrade -y
-```   
+
 6. Create the repository mirror  
 ```
 reposync.sh
