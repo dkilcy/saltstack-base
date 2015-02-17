@@ -8,6 +8,8 @@ Base environment for my Saltstack projects:
 #### Setup Salt Master
 
 1. Install CentOS 7 with Mate desktop
+
+
 2. Set security policies as root
 ```
 setenforce 0
