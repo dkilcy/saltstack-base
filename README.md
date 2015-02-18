@@ -2,9 +2,11 @@
 
 ### Introduction
 
-This repository is for documenting my home lab environment.  It describes all of the steps to configure a set of bare-metal servers which act in a manager role to administer the rest of the physical servers in the lab.  It at the 'unboxing' state, and assumes no other infrastructre than an existing network with Internet access.
+Difficulty: Intermediate
 
-These systems run CentOS 7 and SaltStack (Salt) for configuration management.   They act in the Salt master role, with the rest of the servers in the lab acting in the minion role.   This repository does not deal with anything other than the servers to act as the Salt masters.
+This repository is for documenting my home lab environment.  It describes all of the steps to configure a set of bare-metal servers which act in a manager role to administer the rest of the physical servers in the lab.  It at the 'unboxing' state, and assumes no other infrastructure than an existing network with Internet access.
+
+These systems run CentOS 7 and SaltStack (Salt) for configuration management.   They act in the Salt master role, with the rest of the servers in the lab acting in the minion role.   This repository does not deal with anything other than the servers to be configured as Salt masters.
 
 Specifications for the Salt masters:
 - Intel i5 x86 quad-core
@@ -20,11 +22,19 @@ Specifications for the Salt masters:
 Other projects that use this repository:
 - [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - Openstack 3+ node architecture on CentOS 7
 
+- Go over a quick SaltStack tutorial [HERE]()
+- Go over a 
 
-### Initial Setup
+### Install CentOS 7
 
-1. Install CentOS 7 from the media image.  Create a user devops as an administrator.
-2. Add the EPEL and update: 
+1. Install CentOS 7 from media image.  These steps are documented [HERE]()
+ TODO: Create a user devops as an administrator.
+ 
+### Setup Base Environment 
+
+Boot into the OS.
+
+1. Add the EPEL and update: 
 
  ```bash
 yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
