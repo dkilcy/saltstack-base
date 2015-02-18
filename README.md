@@ -27,19 +27,23 @@ Other projects that use this repository:
 
 ### Install CentOS 7
 
-1. Install CentOS 7 from media image.  These steps are documented [HERE](notes/centos-7-manual.md#manual-install-from-media)
+1. Install CentOS 7 from a media image.  These steps are documented [HERE](notes/centos-7-manual.md#manual-install-from-media)  
+
+Make sure the user **devops** is created with the administrator role during installation.
 
 ### Setup Base Environment 
 
-Boot into the OS.
+Boot into the OS and login as devops user.  Open a terminal window and `sudo su -` to root.
 
-1. Add the EPEL and update: 
+1. Perform a `yum upgrade` and install the EPEL: 
 
  ```bash
+yum update
+yum upgrade
+
 yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
-yum update -y
-yum upgrade -y
 ```
+NOTE: `reboot` if the kernel was updated
 
 2. Install MATE Desktop: `yum groupinstall "MATE Desktop"`
 3. Using `visudo` allow devops user to sudo without password: `devops ALL=(ALL) NOPASSWD: ALL`
