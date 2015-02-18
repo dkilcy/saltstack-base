@@ -74,14 +74,14 @@ mkdir /etc/salt/master.d
 
 3. Create a YAML file to hold the customized Salt configuration. Execute `vi /etc/salt/master.d/99-salt-envs.conf` and add the following to the new file:
 
----
+ ```yaml
 file_roots:
   base:
     - /srv/salt/base/states
 pillar_roots:
   base:
     - /srv/salt/base/pillar
----
+```
 
 4. Point Salt to the development environment
 
