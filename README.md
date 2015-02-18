@@ -4,7 +4,7 @@
 
 Difficulty: Intermediate
 
-This repository is for documenting my home lab environment.  It describes all of the steps to configure a set of bare-metal servers which act in a manager role to administer the rest of the physical servers in the lab.  It at the 'unboxing' state, and assumes no other infrastructure than an existing network with Internet access.
+This GitHub repository is for documenting my home lab environment.  It describes all of the steps to configure a set of bare-metal servers which act in a manager role to administer the rest of the physical servers in the lab.  It at the 'unboxing' state, and assumes no other infrastructure than an existing network with Internet access.
 
 These systems run CentOS 7 and SaltStack (Salt) for configuration management.   They act in the Salt master role, with the rest of the servers in the lab acting in the minion role.   This repository does not deal with anything other than bootstrapping these servers to be the Salt masters.
 
@@ -176,7 +176,7 @@ xy.ns.gin.ntt.ne 64.113.32.5      2 u    1   64    1   38.966  -17.327   0.921
 [root@workstation1 minion.d]#
 ```
 
-3. Create the repository mirror as root user.
+3. Create the local mirror as root user.
 
  ```bash
 cp /home/devops/git/saltstack-base/states/yumrepo/files/reposync.sh ~
@@ -188,13 +188,19 @@ yum clean all
 yum update
 ```
 
-4. Verify the yum repository succeeded
+7. Remove the EPEL repository installed earlier and use the local mirror
+
+ ```bash
+ yum remove epel... TODO
+ ```
+ 
+4. Verify that the yum mirror is working
  ```bash
 yum repolist
 yum grouplist
 ```
 
-5. Setup apache to host the repository 
+5. Setup apache to host the yum repository 
  
  ```bash
 yum install httpd
@@ -203,14 +209,6 @@ systemctl enable httpd.service
 ```
 
 6. Set one of the masters to update the repository at 4am every day via cron
-
-7. Remove the EPEL repository installed earlier and use the local mirror
-
- ```bash
- yum remove epel... TODO
- ```
-
-8. yum update
 
 9. Install DHCP server   
 
@@ -228,6 +226,9 @@ The workstation setup is complete.
 
 1. Test and burn-in the hardware using Prime95
 
+Download [Prime95](http://www.mersenne.org/ftp_root/gimps/p95v285.linux64.tar.gz)
+
 #### References
+
 
  
