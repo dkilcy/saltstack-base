@@ -52,27 +52,27 @@ iptables.service - IPv4 firewall with iptables
 
 ### Setup Salt Master
 
-1. Configure GitHub and pull projects as devops user
+1. Install git as root user: `yum install git`
+2. Configure GitHub and pull projects as devops user
 
  ```bash
-yum install git
+git config --global user.name "dkilcy"
+git config --global user.email "david@kilcyconsulting.com"
+ 
 mkdir ~/git ; cd ~/git
 git clone https://github.com/dkilcy/saltstack-base.git
 git clone https://github.com/dkilcy/juno-saltstack.git
 ```
 
-2. Install the Salt master and minion on the workstation 
+3. Install the Salt master and minion on the workstation as root user
 
  ```bash
 yum install salt-master salt-minion
 salt --version
+mkdir /etc/salt/master.d
 ```
-3. Point Salt to the development environment
 
- ```bash
-ln -sf /home/devops/git/saltstack-base /srv/salt/base
-```
-4. Create a file called /etc/salt/master.d/99-salt-envs.conf
+3. Create a file to hold the customized Salt configuration. Execute `vi /etc/salt/master.d/99-salt-envs.conf` and add the following to the new file:
 
  ```bash
 file_roots:
@@ -82,6 +82,13 @@ pillar_roots:
   base:
     - /srv/salt/base/pillar
 ```
+
+4. Point Salt to the development environment
+
+ ```bash
+ln -sf /home/devops/git/saltstack-base /srv/salt/base
+```
+
 5. Start the Salt master and minion on the workstation machine
 
  ```bash 
