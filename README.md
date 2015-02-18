@@ -6,7 +6,7 @@ Difficulty: Intermediate
 
 This repository is for documenting my home lab environment.  It describes all of the steps to configure a set of bare-metal servers which act in a manager role to administer the rest of the physical servers in the lab.  It at the 'unboxing' state, and assumes no other infrastructure than an existing network with Internet access.
 
-These systems run CentOS 7 and SaltStack (Salt) for configuration management.   They act in the Salt master role, with the rest of the servers in the lab acting in the minion role.   This repository does not deal with anything other than bootstrapping the servers to be the Salt masters.
+These systems run CentOS 7 and SaltStack (Salt) for configuration management.   They act in the Salt master role, with the rest of the servers in the lab acting in the minion role.   This repository does not deal with anything other than bootstrapping these servers to be the Salt masters.
 
 Specifications for the Salt masters:
 - Intel i5 x86 quad-core
