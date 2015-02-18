@@ -74,7 +74,7 @@ mkdir /etc/salt/master.d
 
 3. Create a file to hold the customized Salt configuration. Execute `vi /etc/salt/master.d/99-salt-envs.conf` and add the following to the new file:
 
- ```bash
+ ```vi
 file_roots:
   base:
     - /srv/salt/base/states
