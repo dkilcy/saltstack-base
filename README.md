@@ -14,7 +14,7 @@ Lab Configuration:
 | workstation1 | 192.168.1.5 | 10.0.0.5 |
 | workstation2 | 192.168.1.6 | 10.0.0.6 |
 
-#### Initial Setup
+### Initial Setup
 
 1. Install CentOS 7 from the media image.  Create a user devops as an administrator.
 2. Add the EPEL and update: 
@@ -88,7 +88,7 @@ salt '*' saltutil.refresh_pillar
 salt '*' saltutil.sync_all
 ```
 
-#### Post-Installation tasks
+### Post-Installation tasks
 
 TODO: Put the following into a state file for workstation
 
