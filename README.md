@@ -1,8 +1,11 @@
 ### saltstack-base
 
-Base environment for my other projects:
-- [juno-saltstack][1]
+This is a work-in-progress.
 
+This repository is for configuring a workstation to bootstrap other machines in my lab.
+
+This is a base environment for my other projects:
+- [juno-saltstack](https://github.com/dkilcy/juno-saltstack)
 
 #### Initial Setup
 
@@ -68,22 +71,25 @@ salt '*' saltutil.sync_all
 
 #### Post-Installation tasks
 
+TODO: Put the following into a state file for workstation
+
+1. Setup NTPD or the workstation to be an NTP time server
+```
+systemctl start ntpd.service
+systemctl enable ntpd.service
+ntpq -p
+```
 1. Set the hosts file as root
 ```
 mv /etc/hosts /etc/hosts.`date +%s`
 cp /home/devops/git/juno-saltstack/files/workstation/etc/hosts /etc/hosts
 ```   
+
 2. Setup apache  
 ```
 yum install -y httpd
 systemctl start httpd.service
 systemctl enable httpd.service
-```
-3. Setup NTPD  
-```
-systemctl start ntpd.service
-systemctl enable ntpd.service
-ntpq -p
 ```
 4. Setup DHCP server   
 ```
@@ -108,5 +114,5 @@ yum grouplist
 The workstation setup is complete.
 
 #### References
-- [juno-saltstack](https://github.com/dkilcy/juno-saltstack)
+
  
