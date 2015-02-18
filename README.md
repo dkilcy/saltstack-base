@@ -36,7 +36,19 @@ systemctl stop iptables.service
 systemctl disable iptables.service
 ```   
 
-7. Reboot to implement the change and log back in
+7. Reboot to implement the change and log back in. 
+ ```bash
+[devops@workstation1 ~]$ sudo su -
+Last login: Tue Feb 17 19:56:47 EST 2015 on pts/0
+[root@workstation1 ~]# sestatus
+SELinux status:                 disabled
+[root@workstation1 ~]# systemctl status iptables.service
+iptables.service - IPv4 firewall with iptables
+   Loaded: loaded (/usr/lib/systemd/system/iptables.service; disabled)
+   Active: inactive (dead)
+
+[root@workstation1 ~]# 
+```
 
 ### Setup Salt Master
 
