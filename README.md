@@ -1,18 +1,27 @@
-### saltstack-base
+## saltstack-base
 
-This is a work-in-progress.
+### Introduction
 
-This repository is for configuring a workstation for bootstrap other machines in my lab.
+This repository is for documenting my home lab environment.  It describes all of the steps to configure a set of bare-metal servers which act in a manager role to administer the rest of the physical servers in the lab.  
 
-This is a base environment for my other projects:
-- [juno-saltstack](https://github.com/dkilcy/juno-saltstack)
+These systems run CentOS 7 and SaltStack (Salt) for configuration management.   They act in the Salt master role, with the rest of the servers in the lab acting in the minion role.
 
-Lab Configuration:
+Specifications:
+- Intel i5 x86 quad-core
+- 8GB memory
+- 1x 300GB SSD
+- 2x 1Gb NICs
 
-| Hostname | Public IP | Lab IP |
+| Hostname | Public IP (.pub) | Lab IP (.mgmt) |
 |----------|-----------|--------|
 | workstation1 | 192.168.1.5 | 10.0.0.5 |
 | workstation2 | 192.168.1.6 | 10.0.0.6 |
+
+
+Other projects that depend on this repository:
+- [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - Openstack 3+ node architecture on CentOS 7
+
+
 
 ### Initial Setup
 
@@ -159,20 +168,12 @@ xy.ns.gin.ntt.ne 64.113.32.5      2 u    1   64    1   38.966  -17.327   0.921
 [root@workstation1 minion.d]#
 ```
 
-3. Setup DHCP server   
+5. Create the repository mirror as root user.
 
  ```bash
-yum install dhcp
-mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.`date +%s`
-cp /home/devops/git/juno-saltstack/files/workstation/etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf
-systemctl start dhcpd.service
-systemctl enable dhcpd.service
-```
-5. Create the repository mirror  
-
- ```bash
-cp /home/devops/git/saltstack-base/states/yumrepo/files/reposync.sh
-reposync.sh
+cp /home/devops/git/saltstack-base/states/yumrepo/files/reposync.sh ~
+cd ~
+./reposync.sh
 
 yum clean all
 yum update
@@ -193,8 +194,22 @@ systemctl enable httpd.service
  ```bash
  yum remove epel
  ```
- 
+
+3. Install DHCP server   
+
+ ```bash
+yum install dhcp
+#mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.`date +%s`
+#cp /home/devops/git/juno-saltstack/files/workstation/etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf
+systemctl start dhcpd.service
+systemctl enable dhcpd.service
+```
+
 The workstation setup is complete.
+
+### Recommended 
+
+1. Test and burn-in the hardware using Prime95
 
 #### References
 
