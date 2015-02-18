@@ -22,14 +22,12 @@ Specifications for the Salt masters:
 Other projects that use this repository:
 - [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - Openstack 3+ node architecture on CentOS 7
 
-- Go over a quick SaltStack tutorial [HERE]()
-- Go over a 
+- TODO: Go over a quick SaltStack tutorial [HERE]() 
 
 ### Install CentOS 7
 
-1. Install CentOS 7 from media image.  These steps are documented [HERE]()
- TODO: Create a user devops as an administrator.
- 
+1. Install CentOS 7 from media image.  These steps are documented [HERE](saltstack-base/notes/centos-7-manual.md#manual-install-from-media)
+
 ### Setup Base Environment 
 
 Boot into the OS.
