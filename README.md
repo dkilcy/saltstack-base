@@ -72,7 +72,7 @@ salt --version
 mkdir /etc/salt/master.d
 ```
 
-3. Create a YAML file to hold the customized Salt configuration. Execute `vi /etc/salt/master.d/99-salt-envs.conf` and add the following to the new file:
+3. Create a YAML file to hold the customized Salt configuration.  As root user, execute `vi /etc/salt/master.d/99-salt-envs.conf` and add the following to the new file:
 
  ```yaml
 file_roots:
@@ -83,28 +83,55 @@ pillar_roots:
     - /srv/salt/base/pillar
 ```
 
-4. Point Salt to the development environment
+4. Point Salt to the development environment as root user.
 
  ```bash
+mkdir /srv/salt
 ln -sf /home/devops/git/saltstack-base /srv/salt/base
 ```
 
-5. Start the Salt master and minion on the workstation machine
+5. Start the Salt master on the workstation machine as root user.
 
  ```bash 
 systemctl start salt-master.service
 systemctl enable salt-master.service
 ```
-6. Test the installation
+6. Configure and start the Salt minion on the workstation machine as root user.
+
+ ```bash
+hostname -s > /etc/salt/minion_id
+echo "master: localhost" > /etc/salt/minion.d/99-salt.conf
+
+systemctl start salt-minion.service
+systemctl enable salt-minion.service
+```
+
+7. Add the minion to the master as root user.
+
+ ```bash
+[root@workstation1 minion.d]# salt-key -L
+Accepted Keys:
+Unaccepted Keys:
+workstation1
+Rejected Keys:
+[root@workstation1 minion.d]# salt-key -A 
+The following keys are going to be accepted:
+Unaccepted Keys:
+workstation1
+Proceed? [n/Y]  
+Key for minion workstation1 accepted.
+```
+
+6. Test the installation as root user.
 
  ```bash
 salt '*' test.ping
 ```
-7. Update all the minions with the pillar data
+
+7. Update the local minion with the pillar data as root user.
 
  ```bash
 salt '*' saltutil.refresh_pillar
-salt '*' saltutil.sync_all
 ```
 
 ### Post-Installation tasks
