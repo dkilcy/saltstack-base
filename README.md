@@ -52,7 +52,9 @@ systemctl stop iptables.service
 systemctl disable iptables.service
 ```   
 
-5. Reboot to implement the change and log back in using MATE. 
+5. Reboot to implement the change: `reboot`
+6. Log back in using MATE as devops user. Open a terminal window.
+6. Verify that SELinux and iptables are disabled.
  ```bash
 [devops@workstation1 ~]$ sudo su -
 Last login: Tue Feb 17 19:56:47 EST 2015 on pts/0
