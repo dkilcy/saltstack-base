@@ -18,11 +18,11 @@ Lab Configuration:
 
 1. Install CentOS 7 from the media image.  Create a user devops as an administrator.
 2. Add the EPEL and update: 
-```
-yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
-yum update -y
-yum upgrade -y
-```
+  ```
+  yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
+  yum update -y
+  yum upgrade -y
+  ```
 3. Install MATE Desktop: `yum groupinstall "MATE Desktop"`
 4. Reboot and log back in using MATE
 5. Using `visudo` allow devops user to sudo without password: `devops ALL=(ALL) NOPASSWD: ALL`
