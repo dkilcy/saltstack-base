@@ -176,20 +176,25 @@ xy.ns.gin.ntt.ne 64.113.32.5      2 u    1   64    1   38.966  -17.327   0.921
 [root@workstation1 minion.d]#
 ```
 
-5. Create the repository mirror as root user.
+3. Create the repository mirror as root user.
 
  ```bash
 cp /home/devops/git/saltstack-base/states/yumrepo/files/reposync.sh ~
 cd ~
 ./reposync.sh
 
+cp local.repo /etc/yum.repos.d/  TODO 
 yum clean all
 yum update
+```
 
+4. Verify the yum repository succeeded
+ ```bash
+yum repolist
 yum grouplist
 ```
 
-6. Setup apache to host the repository 
+5. Setup apache to host the repository 
  
  ```bash
 yum install httpd
@@ -197,15 +202,17 @@ systemctl start httpd.service
 systemctl enable httpd.service
 ```
 
-6. Remove the EPEL repository installed earlier and use the local mirror
+6. Set one of the masters to update the repository at 4am every day via cron
+
+7. Remove the EPEL repository installed earlier and use the local mirror
 
  ```bash
- yum remove epel
+ yum remove epel... TODO
  ```
 
-1. Update yum
+8. yum update
 
-3. Install DHCP server   
+9. Install DHCP server   
 
  ```bash
 yum install dhcp
