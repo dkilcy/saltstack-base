@@ -26,7 +26,7 @@ Other projects that use this repository:
 
 ### Install CentOS 7
 
-1. Install CentOS 7 from media image.  These steps are documented [HERE](saltstack-base/notes/centos-7-manual.md#manual-install-from-media)
+1. Install CentOS 7 from media image.  These steps are documented [HERE](notes/centos-7-manual.md#manual-install-from-media)
 
 ### Setup Base Environment 
 
