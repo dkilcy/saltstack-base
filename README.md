@@ -31,7 +31,7 @@ yum upgrade -y
 6. Set security policies as root:
 
  ```bash
-sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/sysconfig/selinux
+sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
 systemctl stop iptables.service
 systemctl disable iptables.service
 ```   
