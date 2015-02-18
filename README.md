@@ -138,31 +138,31 @@ salt '*' saltutil.refresh_pillar
 
 TODO: Put the following into a state file for workstation
 
-1. Setup NTPD or the workstation to be an NTP time server
+1. Setup ntpd on the workstation to be an NTP time server
 
  ```bash
+yum install ntp
 systemctl start ntpd.service
 systemctl enable ntpd.service
-ntpq -p
 ```
-1. Set the hosts file as root
+
+2. Verify the NTP installation
 
  ```bash
-mv /etc/hosts /etc/hosts.`date +%s`
-cp /home/devops/git/juno-saltstack/files/workstation/etc/hosts /etc/hosts
-```   
-
-2. Setup apache  
- 
- ```bash
-yum install -y httpd
-systemctl start httpd.service
-systemctl enable httpd.service
+ [root@workstation1 minion.d]# ntpq -p
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+xy.ns.gin.ntt.ne 64.113.32.5      2 u    1   64    1   38.966  -17.327   0.921
+*ntp.your.org    .CDMA.           1 u    2   64    1   28.120   -0.308   8.118
+ www.linas.org   129.250.35.250   3 u    1   64    1   46.393   -3.929   2.743
+ ntp3.junkemailf 149.20.64.28     2 u    2   64    1  106.421    2.786   0.000
+[root@workstation1 minion.d]#
 ```
-4. Setup DHCP server   
+
+3. Setup DHCP server   
 
  ```bash
-yum install -y dhcp
+yum install dhcp
 mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.`date +%s`
 cp /home/devops/git/juno-saltstack/files/workstation/etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf
 systemctl start dhcpd.service
@@ -180,8 +180,20 @@ yum update
 yum grouplist
 ```
 
+6. Setup apache to host the repository 
+ 
+ ```bash
+yum install httpd
+systemctl start httpd.service
+systemctl enable httpd.service
+```
+
 6. Remove the EPEL repository installed earlier and use the local mirror
 
+ ```bash
+ yum remove epel
+ ```
+ 
 The workstation setup is complete.
 
 #### References
