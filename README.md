@@ -29,33 +29,40 @@ yum upgrade -y
 4. Reboot and log back in using MATE
 5. Using `visudo` allow devops user to sudo without password: `devops ALL=(ALL) NOPASSWD: ALL`
 6. Set security policies as root:
-```
+
+ ```bash
 sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/sysconfig/selinux
 systemctl stop iptables.service
 systemctl disable iptables.service
 ```   
+
 7. Reboot to implement the change and log back in
 
 ### Setup Salt Master
 
 1. Configure GitHub and pull projects as devops user
-```
+
+ ```bash
 yum install git
 mkdir ~/git ; cd ~/git
 git clone https://github.com/dkilcy/saltstack-base.git
 git clone https://github.com/dkilcy/juno-saltstack.git
 ```
-2. Install the Salt master and minion on the workstation  
-```
+
+2. Install the Salt master and minion on the workstation 
+
+ ```bash
 yum install salt-master salt-minion
 salt --version
 ```
 3. Point Salt to the development environment
-```
+
+ ```bash
 ln -sf /home/devops/git/saltstack-base /srv/salt/base
 ```
 4. Create a file called /etc/salt/master.d/99-salt-envs.conf
-```
+
+ ```bash
 file_roots:
   base:
     - /srv/salt/base/states
@@ -64,16 +71,19 @@ pillar_roots:
     - /srv/salt/base/pillar
 ```
 5. Start the Salt master and minion on the workstation machine
-```
+
+ ```bash 
 systemctl start salt-master.service
 systemctl enable salt-master.service
 ```
 6. Test the installation
-```
+
+ ```bash
 salt '*' test.ping
 ```
 7. Update all the minions with the pillar data
-```
+
+ ```bash
 salt '*' saltutil.refresh_pillar
 salt '*' saltutil.sync_all
 ```
@@ -83,25 +93,29 @@ salt '*' saltutil.sync_all
 TODO: Put the following into a state file for workstation
 
 1. Setup NTPD or the workstation to be an NTP time server
-```
+
+ ```bash
 systemctl start ntpd.service
 systemctl enable ntpd.service
 ntpq -p
 ```
 1. Set the hosts file as root
-```
+
+ ```bash
 mv /etc/hosts /etc/hosts.`date +%s`
 cp /home/devops/git/juno-saltstack/files/workstation/etc/hosts /etc/hosts
 ```   
 
 2. Setup apache  
-```
+ 
+ ```bash
 yum install -y httpd
 systemctl start httpd.service
 systemctl enable httpd.service
 ```
 4. Setup DHCP server   
-```
+
+ ```bash
 yum install -y dhcp
 mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.`date +%s`
 cp /home/devops/git/juno-saltstack/files/workstation/etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf
@@ -109,7 +123,8 @@ systemctl start dhcpd.service
 systemctl enable dhcpd.service
 ```
 5. Create the repository mirror  
-```
+
+ ```bash
 cp /home/devops/git/saltstack-base/states/yumrepo/files/reposync.sh
 reposync.sh
 
@@ -118,6 +133,7 @@ yum update
 
 yum grouplist
 ```
+
 6. Remove the EPEL repository installed earlier and use the local mirror
 
 The workstation setup is complete.
