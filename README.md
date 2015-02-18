@@ -78,7 +78,6 @@ git config --global user.email "david@kilcyconsulting.com"
  
 mkdir ~/git ; cd ~/git
 git clone https://github.com/dkilcy/saltstack-base.git
-git clone https://github.com/dkilcy/juno-saltstack.git
 ```
 
 3. Install the Salt master and minion on the workstation as root user
