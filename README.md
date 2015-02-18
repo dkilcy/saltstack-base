@@ -81,7 +81,7 @@ file_roots:
 pillar_roots:
   base:
     - /srv/salt/base/pillar
----
+ ---
 
 4. Point Salt to the development environment
 
