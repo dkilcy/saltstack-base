@@ -20,7 +20,7 @@ Lab Configuration:
 2. Add the EPEL and update: 
 
  ```bash
-yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm
+yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 yum update -y
 yum upgrade -y
 ```
