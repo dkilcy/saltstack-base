@@ -2,11 +2,11 @@
 
 ### Introduction
 
-This repository is for documenting my home lab environment.  It describes all of the steps to configure a set of bare-metal servers which act in a manager role to administer the rest of the physical servers in the lab.  
+This repository is for documenting my home lab environment.  It describes all of the steps to configure a set of bare-metal servers which act in a manager role to administer the rest of the physical servers in the lab.  It at the 'unboxing' state, and assumes no other infrastructre than an existing network with Internet access.
 
-These systems run CentOS 7 and SaltStack (Salt) for configuration management.   They act in the Salt master role, with the rest of the servers in the lab acting in the minion role.
+These systems run CentOS 7 and SaltStack (Salt) for configuration management.   They act in the Salt master role, with the rest of the servers in the lab acting in the minion role.   This repository does not deal with anything other than the servers to act as the Salt masters.
 
-Specifications:
+Specifications for the Salt masters:
 - Intel i5 x86 quad-core
 - 8GB memory
 - 1x 300GB SSD
@@ -17,10 +17,8 @@ Specifications:
 | workstation1 | 192.168.1.5 | 10.0.0.5 |
 | workstation2 | 192.168.1.6 | 10.0.0.6 |
 
-
-Other projects that depend on this repository:
+Other projects that use this repository:
 - [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - Openstack 3+ node architecture on CentOS 7
-
 
 
 ### Initial Setup
@@ -194,6 +192,8 @@ systemctl enable httpd.service
  ```bash
  yum remove epel
  ```
+
+1. Update yum
 
 3. Install DHCP server   
 
