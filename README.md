@@ -2,10 +2,17 @@
 
 This is a work-in-progress.
 
-This repository is for configuring a workstation to bootstrap other machines in my lab.
+This repository is for configuring a workstation for bootstrap other machines in my lab.
 
 This is a base environment for my other projects:
 - [juno-saltstack](https://github.com/dkilcy/juno-saltstack)
+
+Lab Configuration:
+
+| Hostname | Public IP | Lab IP |
+|----------|-----------|--------|
+| workstation1 | 192.168.1.5 | 10.0.0.5 |
+| workstation2 | 192.168.1.6 | 10.0.0.6 |
 
 #### Initial Setup
 
