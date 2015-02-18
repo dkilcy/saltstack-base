@@ -6,13 +6,14 @@ Difficulty: Intermediate
 
 This repository is for documenting my home lab environment.  It describes all of the steps to configure a set of bare-metal servers which act in a manager role to administer the rest of the physical servers in the lab.  It at the 'unboxing' state, and assumes no other infrastructure than an existing network with Internet access.
 
-These systems run CentOS 7 and SaltStack (Salt) for configuration management.   They act in the Salt master role, with the rest of the servers in the lab acting in the minion role.   This repository does not deal with anything other than the servers to be configured as Salt masters.
+These systems run CentOS 7 and SaltStack (Salt) for configuration management.   They act in the Salt master role, with the rest of the servers in the lab acting in the minion role.   This repository does not deal with anything other than bootstrapping the servers to be the Salt masters.
 
 Specifications for the Salt masters:
 - Intel i5 x86 quad-core
 - 8GB memory
 - 1x 300GB SSD
 - 2x 1Gb NICs
+- Keyboard/Video/Mouse
 
 | Hostname | Public IP (.pub) | Lab IP (.mgmt) |
 |----------|-----------|--------|
@@ -20,7 +21,7 @@ Specifications for the Salt masters:
 | workstation2 | 192.168.1.6 | 10.0.0.6 |
 
 Other projects that use this repository:
-- [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - Openstack 3+ node architecture on CentOS 7
+- [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
 
 - TODO: Go over a quick SaltStack tutorial [HERE]() 
 
@@ -40,10 +41,9 @@ yum update -y
 yum upgrade -y
 ```
 
-3. Install MATE Desktop: `yum groupinstall "MATE Desktop"`
-4. Reboot and log back in using MATE
-5. Using `visudo` allow devops user to sudo without password: `devops ALL=(ALL) NOPASSWD: ALL`
-6. Set security policies as root:
+2. Install MATE Desktop: `yum groupinstall "MATE Desktop"`
+3. Using `visudo` allow devops user to sudo without password: `devops ALL=(ALL) NOPASSWD: ALL`
+4. Set security policies as root:
 
  ```bash
 sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
@@ -51,7 +51,7 @@ systemctl stop iptables.service
 systemctl disable iptables.service
 ```   
 
-7. Reboot to implement the change and log back in. 
+5. Reboot to implement the change and log back in using MATE. 
  ```bash
 [devops@workstation1 ~]$ sudo su -
 Last login: Tue Feb 17 19:56:47 EST 2015 on pts/0
