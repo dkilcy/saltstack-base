@@ -35,19 +35,16 @@ Make sure the user **devops** is created with the administrator role during inst
 
 Boot into the OS and login as devops user.  Open a terminal window and `sudo su -` to root.
 
-1. Perform a `yum upgrade` and install the EPEL: 
+1. Update the OS and install the EPEL: 
 
  ```bash
 yum update
-yum upgrade
-
 yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 ```
-NOTE: `reboot` if the kernel was updated
 
 2. Install MATE Desktop: `yum groupinstall "MATE Desktop"`
-3. Using `visudo` allow devops user to sudo without password: `devops ALL=(ALL) NOPASSWD: ALL`
-4. Set security policies as root:
+3. Using `visudo` allow devops user to sudo without password. Add `devops ALL=(ALL) NOPASSWD: ALL` to the end of the file.
+4. Disable SELinux and iptables:
 
  ```bash
 sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
