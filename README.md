@@ -7,11 +7,12 @@ This GitHub repository is for documenting my home lab environment.  It describes
 These systems run CentOS 7 and SaltStack (Salt) for configuration management.   They act in the Salt master role, with the rest of the servers in the lab acting in the minion role.   This repository does not deal with anything other than bootstrapping these servers to be the Salt masters.
 
 Specifications for the Salt masters:
-- Intel i5 x86 quad-core
-- 8GB memory
-- 1x 300GB SSD
+- [MintBox 2](http://www.amazon.com/MintBox-IPC-D2x2-C3337NL-H500-WB-XLM-FM4U-BMint-2-Desktop/dp/B00EONR674) 
+- Intel Core i5-3337U @ 1.8 GHz
+- 8GB DDR3 1600 memory
+- 1x Intel S3500 300GB SSD
 - 2x 1Gb NICs
-- Keyboard/Video/Mouse
+- CentOS 7 with MATE Desktop
 
 | Hostname | Public IP (.pub) | Lab IP (.mgmt) |
 |----------|-----------|--------|
