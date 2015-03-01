@@ -2,10 +2,6 @@
 
 ### Introduction
 
-This GitHub repository is for documenting my home lab environment.  It describes all of the steps to configure a set of bare-metal servers which act in a manager role to administer the rest of the physical servers in the lab.  It at the 'unboxing' state, and assumes no other infrastructure than an existing network with Internet access.
-
-These systems run CentOS 7 and SaltStack (Salt) for configuration management.   They act in the Salt master role, with the rest of the servers in the lab acting in the minion role.   This repository does not deal with anything other than bootstrapping these servers to be the Salt masters.
-
 Specifications for the Salt masters:
 - [MintBox 2](http://www.amazon.com/MintBox-IPC-D2x2-C3337NL-H500-WB-XLM-FM4U-BMint-2-Desktop/dp/B00EONR674) 
 - Intel Core i5-3337U @ 1.8 GHz
