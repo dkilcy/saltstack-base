@@ -36,9 +36,8 @@ ethtool -g enp0s20f3
 - [https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Performance_Tuning_Guide/chap-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Storage_and_File_Systems.html#sect-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Considerations-Generic_tuning_considerations_for_file_systems](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Performance_Tuning_Guide/chap-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Storage_and_File_Systems.html#sect-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Considerations-Generic_tuning_considerations_for_file_systems)
 - [https://communities.bmc.com/docs/DOC-10204](https://communities.bmc.com/docs/DOC-10204)
 - [http://www.iozone.org/](http://www.iozone.org/)
-  [http://blackbird.si/tips-for-optimizing-disk-performance-on-linux](http://blackbird.si/tips-for-optimizing-disk-performance-on-linux/)
+- [http://blackbird.si/tips-for-optimizing-disk-performance-on-linux](http://blackbird.si/tips-for-optimizing-disk-performance-on-linux/)
 - [http://dak1n1.com/blog/7-performance-tuning-intel-10gbe](http://dak1n1.com/blog/7-performance-tuning-intel-10gbe)
 - [http://linuxmantra.com/2013/11/disk-read-ahead-in-linux.html](http://linuxmantra.com/2013/11/disk-read-ahead-in-linux.html)
 - [https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/ch04s02s03.html](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/ch04s02s03.html)
-- 
 
