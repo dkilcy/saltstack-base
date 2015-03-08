@@ -2,6 +2,11 @@
 
 Systems still take a performance hit if iptables is stopped.  It needs to be unloaded from the kernel to see a boost in network performance
 
+- CentOS 6: `service iptables stop`
+- CentOS 7: `systemctl stop iptables.service`
+
+##### Prevent the kernel modules from loading at boot.
+
 ```
 [root@workstation1 ~]# cat /etc/modprobe.d/netfilter.conf 
 alias ip_tables off
