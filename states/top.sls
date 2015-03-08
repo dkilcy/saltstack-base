@@ -2,15 +2,15 @@
 
 base:
   '*':
-    - local
+#    - local
 #    - yumrepo
-    - selinux
-    - ipv6
-    - ssd
-    - cpupower
+#    - selinux
+#    - ipv6
+#    - ssd
+#    - cpupower
 #    - ntp
 #    - users
-#    - vim
+    - vim
 
   'ring*':
     - iptables
