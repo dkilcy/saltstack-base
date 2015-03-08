@@ -40,4 +40,4 @@ ethtool -g enp0s20f3
 - [http://dak1n1.com/blog/7-performance-tuning-intel-10gbe](http://dak1n1.com/blog/7-performance-tuning-intel-10gbe)
 - [http://linuxmantra.com/2013/11/disk-read-ahead-in-linux.html](http://linuxmantra.com/2013/11/disk-read-ahead-in-linux.html)
 - [https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/ch04s02s03.html](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/ch04s02s03.html)
-  - [http://forum.osmc.tv/showthread.php?tid=6825](http://forum.osmc.tv/showthread.php?tid=6825)
+- [http://forum.osmc.tv/showthread.php?tid=6825](http://forum.osmc.tv/showthread.php?tid=6825)
