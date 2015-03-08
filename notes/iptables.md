@@ -39,3 +39,9 @@ Perhaps iptables or your kernel needs to be upgraded.
 [root@workstation1 ~]# lsmod | grep ip
 [root@workstation1 ~]# 
 ```
+
+#### References
+- [http://www.pc-freak.net/blog/resolving-nf_conntrack-table-full-dropping-packet-flood-message-in-dmesg-linux-kernel-log/](http://www.pc-freak.net/blog/resolving-nf_conntrack-table-full-dropping-packet-flood-message-in-dmesg-linux-kernel-log/)
+- [http://nginx.com/blog/nginx-se-linux-changes-upgrading-rhel-6-6/](http://nginx.com/blog/nginx-se-linux-changes-upgrading-rhel-6-6/)
+- [http://www.cyberciti.biz/faq/redhat-centos-disable-ipv6-networking/](http://www.cyberciti.biz/faq/redhat-centos-disable-ipv6-networking/)
+- 
