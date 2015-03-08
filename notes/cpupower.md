@@ -6,7 +6,7 @@ Change the frequency governor from **ondemand** to **performance**
 
 View current frequency info
 ```
-[root@controller1 ~]$ cpupower frequency-info
+$ cpupower frequency-info
 analyzing CPU 0:
   driver: acpi-cpufreq
   CPUs which run at the same hardware frequency: 0
