@@ -4,7 +4,7 @@
 
 Change the frequency governor from **ondemand** to **performance**
 
-** view current policy **
+View current frequency info
 ```
 [root@controller1 ~]$ cpupower frequency-info
 analyzing CPU 0:
@@ -22,7 +22,10 @@ analyzing CPU 0:
   boost state support:
     Supported: no
     Active: no
-    
+```
+
+Show the current CPU speed for each core
+```
 $ grep -E '^model name|^cpu MHz' /proc/cpuinfo
 model name	: Intel(R) Atom(TM) CPU  C2758  @ 2.40GHz
 cpu MHz		: 2400.000
@@ -44,7 +47,6 @@ cpu MHz		: 1200.000
 ```
 
 Set governor policy to **performance**
-
 ```
 $ cpupower frequency-set --governor performance
 Setting cpu: 0
@@ -58,7 +60,6 @@ Setting cpu: 7
 ```
 
 Verify the change
-
 ```
 $ cpupower frequency-info
 analyzing CPU 0:
@@ -99,4 +100,5 @@ cpu MHz		: 2400.000
 ##### References
 
 - [http://unix.stackexchange.com/questions/77410/centos-conservative-governor-nice-error](http://unix.stackexchange.com/questions/77410/centos-conservative-governor-nice-error)
+- [http://www.servernoobs.com/avoiding-cpu-speed-scaling-in-modern-linux-distributions-running-cpu-at-full-speed-tips/](http://www.servernoobs.com/avoiding-cpu-speed-scaling-in-modern-linux-distributions-running-cpu-at-full-speed-tips/)
 
