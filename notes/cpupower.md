@@ -97,6 +97,12 @@ model name	: Intel(R) Atom(TM) CPU  C2758  @ 2.40GHz
 cpu MHz		: 2400.000
 ```
 
+Persist the change to activate on reboot
+```
+echo "/bin/cpupower frequency-set --governor performance" >> /etc/rc.d/rc.local
+chmod 754 /etc/rc.d/rc.local
+```
+
 ##### References
 
 - [http://unix.stackexchange.com/questions/77410/centos-conservative-governor-nice-error](http://unix.stackexchange.com/questions/77410/centos-conservative-governor-nice-error)
