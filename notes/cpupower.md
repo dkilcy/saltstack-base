@@ -100,7 +100,7 @@ cpu MHz		: 2400.000
 Persist the change to activate on reboot
 ```
 echo "/bin/cpupower frequency-set --governor performance" >> /etc/rc.d/rc.local
-chmod 754 /etc/rc.d/rc.local
+chmod +x /etc/rc.d/rc.local
 ```
 
 ##### References
