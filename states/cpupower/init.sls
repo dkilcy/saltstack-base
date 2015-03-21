@@ -6,5 +6,4 @@ cpupower:
   file.append:
     - name: /etc/rc.d/rc.local
     - text:
-      - 'cpupower frequency-set --governor performance'
-
+      - '/bin/cpupower frequency-set --governor performance'

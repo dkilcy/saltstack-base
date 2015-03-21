@@ -2,15 +2,14 @@
 
 base:
   '*':
-#    - local
-#    - yumrepo
+    - local
+    - yumrepo
 #    - selinux
 #    - ipv6
 #    - ssd
 #    - cpupower
-#    - ntp
+    - ntp
 #    - users
-    - vim
-
-  'ring*':
-    - iptables
+#    - vim
+# NOTE: iptables is required for juno-saltstack
+#    - iptables
