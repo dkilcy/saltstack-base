@@ -1,8 +1,7 @@
 
-#policycoreutils:
-#  pkg.installed:
-#    - pkgs:
-#      - policycoreutils
-#      - policycoreutils-python
 
+/etc/selinux/config:
+  file.replace:
+    - pattern: 'SELINUX=enforcing'
+    - repl: 'SELINUX=disabled'
 
