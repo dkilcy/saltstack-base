@@ -7,6 +7,8 @@ Other projects that use this repository:
 
 Use SaltStack (Salt) in conjunction with Kickstart to install and provision multiple bare-metal machines running CentOS 7.
 
+In this project, the Salt masters are installed manually, and the minions are installed via Kickstart.
+
 - TODO: Go over a quick SaltStack tutorial [HERE]() 
 
 The reference system for the Salt masters for testing is described in the next section. 
@@ -30,6 +32,8 @@ Bare-metal machines take on one of two roles:
 | workstation1 | 192.168.1.5 | 10.0.0.5 |
 | workstation2 | 192.168.1.6 | 10.0.0.6 |
 | workstation3 | 192.168.1.6 | 10.0.0.7 |
+
+### Setup Salt Master
 
 ### Install CentOS 7
 
@@ -233,6 +237,7 @@ Download [Prime95](http://www.mersenne.org/ftp_root/gimps/p95v285.linux64.tar.gz
 
 ### Setup Salt Minions
 
+Create USB media with Kickstart here:
 
 #### References
 
