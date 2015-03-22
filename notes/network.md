@@ -1,6 +1,10 @@
 
 ### Network
 
+- Stats: `ss`
+- Add default route `ip route add default via 192.168.1.1 dev enp5s0`
+
+
 ##### Switch setup
 
 1. Connect the USB console cable
