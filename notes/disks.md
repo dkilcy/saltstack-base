@@ -84,3 +84,6 @@ Disk Performance:  `dd if=/dev/zero of=test2.dat bs=1MB count=100 conv=fdatasync
 | MicroSD c10 | Flash |  10 MB/s | USB 2.0|
 | Hitachi HCC54755 | HDD | 80 MB/s | SATA |
 | INTEL SSDSC2BB30 | SSD | 275 MB/s | SATA |
+
+#### References
+[Disk Caching](http://www.linuxatemyram.com/index.html)
