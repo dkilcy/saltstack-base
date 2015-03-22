@@ -7,8 +7,9 @@ Other projects that use this repository:
 
 Use SaltStack (Salt) in conjunction with Kickstart to install and provision multiple bare-metal machines running CentOS 7.
 
-In this project, the Salt masters are installed manually, and the minions are installed via Kickstart.
-You can read on how to create Kickstart files here: https://github.com/dkilcy/saltstack-base/notes/kickstart/README.md
+In this project, the Salt masters are installed manually, and the minions are installed via Kickstart.  
+You can read on how to create Kickstart files here:  
+  saltstack-base/notes/kickstart/README.md
 
 - TODO: Go over a quick SaltStack tutorial [HERE]() 
 
