@@ -1,6 +1,15 @@
-## saltstack-base
+## Salt tools for bare-metal provisioning
 
 ### Introduction
+
+Use SaltStack (Salt) in conjunction with Kickstart to install and provision multiple bare-metal servers running CentOS 7.
+
+Other projects that use this repository:
+- [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
+
+- TODO: Go over a quick SaltStack tutorial [HERE]() 
+
+Reference Architecture:
 
 Specifications for the Salt masters:
 - [MintBox 2](http://www.amazon.com/MintBox-IPC-D2x2-C3337NL-H500-WB-XLM-FM4U-BMint-2-Desktop/dp/B00EONR674) 
@@ -14,11 +23,6 @@ Specifications for the Salt masters:
 |----------|-----------|--------|
 | workstation1 | 192.168.1.5 | 10.0.0.5 |
 | workstation2 | 192.168.1.6 | 10.0.0.6 |
-
-Other projects that use this repository:
-- [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
-
-- TODO: Go over a quick SaltStack tutorial [HERE]() 
 
 ### Install CentOS 7
 
