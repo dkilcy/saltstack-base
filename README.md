@@ -248,7 +248,7 @@ Download [Prime95](http://www.mersenne.org/ftp_root/gimps/p95v285.linux64.tar.gz
 2. Set the grains for the minion: 
 
 ```bash
-salt 'workstation*' grains.setvals "{'saltstack-base:{'role':'master'}}"
+salt '<minion_id>' grains.setvals "{'saltstack-base:{'role':'minion'}}"
 ```
 
 #### References
