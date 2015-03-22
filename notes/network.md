@@ -4,6 +4,19 @@
 - Stats: `ss`
 - Add default route `ip route add default via 192.168.1.1 dev enp5s0`
 
+#### Networking
+- IP: `ip addr`  `ip route`
+- Sockets: `ss`
+- Show which process is using a port: `netstat -anp | grep 8775`  
+
+##### Disable NetworkManager
+```
+service NetworkManager stop
+chkconfig NetworkManager off
+
+service network start
+chkconfig network on
+```
 
 ##### Switch setup
 
