@@ -1,4 +1,26 @@
 
+#### Disks
+- Disk partition info: `fdisk -l /dev/sda`  `parted -l /dev/sda`  
+- Disk info: `hdparm -iI /dev/sda`
+- Disk speed measurement: `hdparm -tT /dev/sda`  
+- DD write: `dd if=/dev/zero of=/tmp/output.dat bs=1MB count=100`  
+- DD read:  `dd if=/tmp/output.dat of=/dev/null bs=4096k`  
+- Linux md devices (aka RAID): `mdadm`
+- Destroy data: `dd if=/dev/zero of=/dev/sdb bs=4096 count=512`
+
+##### Block devices
+```
+lsblk
+blkid
+```
+
+##### LVM:
+```
+pvdisplay
+lvdisplay
+lvmdiskscan
+```
+
 ### dd
 
 - Use fdatasync attribute to show the status rate only after the data is completely written to disk.
