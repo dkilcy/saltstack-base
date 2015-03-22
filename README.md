@@ -16,8 +16,8 @@ Reference Architecture:
 Bare-metal machines take on one of two roles:
 - Salt masters
 - Salt minions
-- 
-Salt master:
+
+#### Salt master:
 - [MintBox 2](http://www.amazon.com/MintBox-IPC-D2x2-C3337NL-H500-WB-XLM-FM4U-BMint-2-Desktop/dp/B00EONR674) 
 - Intel Core i5-3337U @ 1.8 GHz
 - 8GB DDR3 1600 memory
@@ -29,6 +29,7 @@ Salt master:
 |----------|-----------|--------|
 | workstation1 | 192.168.1.5 | 10.0.0.5 |
 | workstation2 | 192.168.1.6 | 10.0.0.6 |
+| workstation3 | 192.168.1.6 | 10.0.0.7 |
 
 ### Install CentOS 7
 
