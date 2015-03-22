@@ -47,6 +47,13 @@ show system-info
 show ip http secure-server
 ```
 
+### Hardware
+- picocom:  `picocom -D /dev/ttyUSB0 -b 38400`  
+- minicom:  `minicom -D /dev/ttyUSB0 -b 38400`
+- Notes:
+    - Make sure hardware flow control is OFF
+
+
 ##### References
 
 [http://www.ccnpguide.com/end-to-end-vs-local-vlan-models/]
