@@ -18,7 +18,7 @@ service network start
 chkconfig network on
 ```
 
-##### Switch setup
+### TP-Link Switch setup
 
 1. Connect the USB console cable
 2. Start minicom: `minicom -D /dev/ttyUSB0 -b 38400`
