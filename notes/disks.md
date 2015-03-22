@@ -55,10 +55,8 @@ df
 findmnt /dev/sdb1
 ```
 
-
 Disk Performance:  `dd if=/dev/zero of=test2.dat bs=1MB count=100 conv=fdatasync`
 
- ```
 | Device | Type | Speed | Interface |
 |--------|------|-------|-----------|
 | MicroSD c10 | Flash |  10 MB/s | USB 2.0|
