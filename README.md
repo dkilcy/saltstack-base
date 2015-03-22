@@ -1,13 +1,18 @@
 ## Salt tools for bare-metal provisioning
 
-### Introduction
-
-Use SaltStack (Salt) in conjunction with Kickstart to install and provision multiple bare-metal servers running CentOS 7.
-
 Other projects that use this repository:
 - [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
 
-- TODO: Go over a quick SaltStack tutorial [HERE]() 
+### Introduction
+
+Use SaltStack (Salt) in conjunction with Kickstart to install and provision multiple bare-metal machines running CentOS 7.
+
+
+Bare-metal machines take on one of two roles:
+- Salt masters
+- Salt minions
+
+The reference system for the Salt masters is described in the next section. 
 
 Reference Architecture:
 
