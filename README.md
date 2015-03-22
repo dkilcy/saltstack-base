@@ -162,6 +162,12 @@ salt '*' test.ping
 salt '*' saltutil.refresh_pillar
 ```
 
+8. Set the grains for the Salt master:
+
+```bash
+salt 'workstation*' grains.setvals "{'saltstack-base:{'role':'master'}}"
+```
+
 ### Post-Installation tasks
 
 TODO: Put the following into a state file for workstation
@@ -238,7 +244,12 @@ Download [Prime95](http://www.mersenne.org/ftp_root/gimps/p95v285.linux64.tar.gz
 
 ### Setup Salt Minions
 
-Create USB media with Kickstart here:
+1. Create USB media with Kickstart here:
+2. Set the grains for the minion: 
+
+```bash
+salt 'workstation*' grains.setvals "{'saltstack-base:{'role':'master'}}"
+```
 
 #### References
 
