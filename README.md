@@ -7,16 +7,17 @@ Other projects that use this repository:
 
 Use SaltStack (Salt) in conjunction with Kickstart to install and provision multiple bare-metal machines running CentOS 7.
 
+- TODO: Go over a quick SaltStack tutorial [HERE]() 
+
+The reference system for the Salt masters for testing is described in the next section. 
+
+Reference Architecture:
 
 Bare-metal machines take on one of two roles:
 - Salt masters
 - Salt minions
-
-The reference system for the Salt masters is described in the next section. 
-
-Reference Architecture:
-
-Specifications for the Salt masters:
+- 
+Salt master:
 - [MintBox 2](http://www.amazon.com/MintBox-IPC-D2x2-C3337NL-H500-WB-XLM-FM4U-BMint-2-Desktop/dp/B00EONR674) 
 - Intel Core i5-3337U @ 1.8 GHz
 - 8GB DDR3 1600 memory
@@ -187,7 +188,6 @@ ind assid status  conf reach auth condition  last_event cnt
   3  3550  9424   yes   yes  none candidate   reachable  2
   4  3551  9424   yes   yes  none candidate   reachable  2
 [root@workstation1 ~]# 
-
 ```
 
 3. Create the local mirror as root user.
@@ -202,19 +202,7 @@ yum clean all
 yum update
 ```
 
-7. Remove the EPEL repository installed earlier and use the local mirror
-
- ```bash
- yum remove epel... TODO
- ```
- 
-4. Verify that the yum mirror is working
- ```bash
-yum repolist
-yum grouplist
-```
-
-5. Setup apache to host the yum repository 
+4. Setup apache to host the yum repository 
  
  ```bash
 yum install httpd
@@ -222,9 +210,9 @@ systemctl start httpd.service
 systemctl enable httpd.service
 ```
 
-6. Set one of the masters to update the repository at 4am every day via cron
+5. Set one of the masters to update the repository at 4am every day via cron
 
-9. Install DHCP server   
+6. Install DHCP server   
 
  ```bash
 yum install dhcp
@@ -241,6 +229,9 @@ The workstation setup is complete.
 1. Test and burn-in the hardware using Prime95
 
 Download [Prime95](http://www.mersenne.org/ftp_root/gimps/p95v285.linux64.tar.gz)
+
+### Setup Salt Minions
+
 
 #### References
 
