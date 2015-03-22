@@ -12,7 +12,7 @@
 100+0 records out
 100000000 bytes (100 MB) copied, 11.1252 s, 9.0 MB/s
 [root@workstation2 mnt]# 
-
+```
 
 Mount a USB drive
 
