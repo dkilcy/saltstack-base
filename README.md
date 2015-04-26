@@ -227,6 +227,13 @@ systemctl enable dhcpd.service
 
 The workstation setup is complete.
 
+Assign roles:
+
+```bash
+# salt '*' grains.setvals "{'saltstack-base':'minion'}"
+# salt 'workstation2' grains.setvals "{'saltstack-base':'master'}"
+```
+
 ### Recommended 
 
 1. Test and burn-in the hardware using Prime95
