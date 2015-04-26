@@ -1,7 +1,24 @@
 
 ### Network
 
-##### Switch setup
+- Stats: `ss`
+- Add default route `ip route add default via 192.168.1.1 dev enp5s0`
+
+#### Networking
+- IP: `ip addr`  `ip route`
+- Sockets: `ss`
+- Show which process is using a port: `netstat -anp | grep 8775`  
+
+##### Disable NetworkManager
+```
+service NetworkManager stop
+chkconfig NetworkManager off
+
+service network start
+chkconfig network on
+```
+
+### TP-Link Switch setup
 
 1. Connect the USB console cable
 2. Start minicom: `minicom -D /dev/ttyUSB0 -b 38400`
@@ -43,8 +60,15 @@ show system-info
 show ip http secure-server
 ```
 
+### Hardware
+- picocom:  `picocom -D /dev/ttyUSB0 -b 38400`  
+- minicom:  `minicom -D /dev/ttyUSB0 -b 38400`
+- Notes:
+    - Make sure hardware flow control is OFF
+
+
 ##### References
 
-[http://www.ccnpguide.com/end-to-end-vs-local-vlan-models/]
-[http://www.informit.com/library/content.aspx?b=CCNP_Studies_Switching&seqNum=44]
-[http://www.informit.com/library/content.aspx?b=CCNP_Studies_Switching&seqNum=18]
+- [http://www.ccnpguide.com/end-to-end-vs-local-vlan-models/]
+- [http://www.informit.com/library/content.aspx?b=CCNP_Studies_Switching&seqNum=44]
+- [http://www.informit.com/library/content.aspx?b=CCNP_Studies_Switching&seqNum=18]

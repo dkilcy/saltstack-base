@@ -1,8 +1,26 @@
-## saltstack-base
+## Salt tools for bare-metal provisioning
+
+Other projects that use this repository:
+- [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
 
 ### Introduction
 
-Specifications for the Salt masters:
+Use SaltStack (Salt) in conjunction with Kickstart to install and provision multiple bare-metal machines running CentOS 7.
+
+In this project, the Salt masters are installed manually, and the minions are installed via Kickstart.  
+You can read on how to create Kickstart files [here](notes/kickstart/README.md)
+
+- TODO: Go over a quick SaltStack tutorial [HERE]() 
+
+The reference system for the Salt masters for testing is described in the next section. 
+
+Reference Architecture:
+
+Bare-metal machines take on one of two roles:
+- Salt masters
+- Salt minions
+
+#### Salt master:
 - [MintBox 2](http://www.amazon.com/MintBox-IPC-D2x2-C3337NL-H500-WB-XLM-FM4U-BMint-2-Desktop/dp/B00EONR674) 
 - Intel Core i5-3337U @ 1.8 GHz
 - 8GB DDR3 1600 memory
@@ -14,11 +32,9 @@ Specifications for the Salt masters:
 |----------|-----------|--------|
 | workstation1 | 192.168.1.5 | 10.0.0.5 |
 | workstation2 | 192.168.1.6 | 10.0.0.6 |
+| workstation3 | 192.168.1.6 | 10.0.0.7 |
 
-Other projects that use this repository:
-- [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
-
-- TODO: Go over a quick SaltStack tutorial [HERE]() 
+### Setup Salt Master
 
 ### Install CentOS 7
 
@@ -146,6 +162,12 @@ salt '*' test.ping
 salt '*' saltutil.refresh_pillar
 ```
 
+8. Set the grains for the Salt master:
+
+```bash
+salt 'workstation*' grains.setvals "{'saltstack-base:{'role':'master'}}"
+```
+
 ### Post-Installation tasks
 
 TODO: Put the following into a state file for workstation
@@ -178,7 +200,6 @@ ind assid status  conf reach auth condition  last_event cnt
   3  3550  9424   yes   yes  none candidate   reachable  2
   4  3551  9424   yes   yes  none candidate   reachable  2
 [root@workstation1 ~]# 
-
 ```
 
 3. Create the local mirror as root user.
@@ -193,19 +214,7 @@ yum clean all
 yum update
 ```
 
-7. Remove the EPEL repository installed earlier and use the local mirror
-
- ```bash
- yum remove epel... TODO
- ```
- 
-4. Verify that the yum mirror is working
- ```bash
-yum repolist
-yum grouplist
-```
-
-5. Setup apache to host the yum repository 
+4. Setup apache to host the yum repository 
  
  ```bash
 yum install httpd
@@ -213,9 +222,9 @@ systemctl start httpd.service
 systemctl enable httpd.service
 ```
 
-6. Set one of the masters to update the repository at 4am every day via cron
+5. Set one of the masters to update the repository at 4am every day via cron
 
-9. Install DHCP server   
+6. Install DHCP server   
 
  ```bash
 yum install dhcp
@@ -239,6 +248,15 @@ Assign roles:
 1. Test and burn-in the hardware using Prime95
 
 Download [Prime95](http://www.mersenne.org/ftp_root/gimps/p95v285.linux64.tar.gz)
+
+### Setup Salt Minions
+
+1. Create USB media with Kickstart here:
+2. **From the Salt master:** Set the grains for the minion: 
+
+```bash
+salt '<minion_id>' grains.setvals "{'saltstack-base:{'role':'minion'}}"
+```
 
 #### References
 
