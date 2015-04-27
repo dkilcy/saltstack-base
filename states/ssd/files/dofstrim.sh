@@ -7,7 +7,7 @@ echo "dofstrim started `date`"
 # get the locally mounted block devices - those starting with "/dev:
 # run df -k, pipe the result through grep and save the sixth field in
 # in the mountpoint array
-mountpoint=( $(df -k | grep ^/dev | awk '{print $6}') )
+mountpoint=( $(df -k | grep ^/dev | grep -v '/dev/fuse' | awk '{print $6}') )
 
 # loop through the array and run fstrim on every mountpoint
 for i in "${mountpoint[@]}"

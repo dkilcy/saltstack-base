@@ -54,12 +54,12 @@ clearpart --all
 #ignoredisk --drives=sda
 
 # Disk partitioning information
-part /boot --fstype="ext4" --ondisk=sda --size=512 --fsoptions=rw,noatime,nodiratime
+part /boot --fstype="ext4" --ondisk=sda --size=512 --fsoptions=rw,noatime
 part swap --fstype="swap" --ondisk=sda --size=4096
-part / --fstype="ext4" --ondisk=sda --size=1 --grow --fsoptions=rw,noatime,nodiratime
+part / --fstype="ext4" --ondisk=sda --size=1 --grow --fsoptions=rw,noatime
 
-part /scality/disk1 --fstype="ext4" --ondisk=sdb --size=1 --grow --fsoptions=rw,noatime,nodiratime
-part /scality/disk2 --fstype="ext4" --ondisk=sdc --size=1 --grow --fsoptions=rw,noatime,nodiratime
+part /scality/disk1 --fstype="ext4" --ondisk=sdb --size=1 --grow --fsoptions=rw,noatime
+part /scality/disk2 --fstype="ext4" --ondisk=sdc --size=1 --grow --fsoptions=rw,noatime
 
 # Reboot
 reboot --eject
