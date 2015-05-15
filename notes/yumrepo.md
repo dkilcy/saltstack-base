@@ -1,7 +1,7 @@
 
 ### yumrepo
 
-For configuring minions to use the local yum repository on the Salt master (aliased as `yumrepo`).
+For configuring minions to use the local yum repository on the Salt master (aliased as `yumrepo`).  
 **This is not to be run on the Salt master.**
 
 Contents: 
