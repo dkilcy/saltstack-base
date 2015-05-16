@@ -1,8 +1,9 @@
-### Example Wireshark commands
 
-Tested on CentOS 7 with TShark 1.10.3
+### wireshark
 
-Install: `yum install wireshark`
+Installs wireshark's `tshark` command-line tool.
+
+#### Example Wireshark commands
 
 - Show version: `tshark -v`
 - Show captureable interfaces and exit: `tshark -D`
