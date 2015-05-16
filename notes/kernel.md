@@ -11,7 +11,6 @@
 - Virtual memory stats in MB: `vmstat -S M`  
 - Swap space: `swapon -s`  
 - Top batch-mode, run once: `top -b -n 1`  
-- 
 
 #### Networking
 
