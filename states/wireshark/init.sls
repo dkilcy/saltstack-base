@@ -1,4 +1,5 @@
 
 wireshark:
   pkg.installed:
-    - name: tshark
+    - pkgs:
+      - wireshark
