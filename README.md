@@ -102,7 +102,7 @@ mkdir /etc/salt/master.d
 
 3. Create a YAML file to hold the customized Salt configuration.  As root user, execute `vi /etc/salt/master.d/99-salt-envs.conf` and add the following to the new file:
 
- ```yaml
+```yaml
 file_roots:
   base:
     - /srv/salt/base/states
