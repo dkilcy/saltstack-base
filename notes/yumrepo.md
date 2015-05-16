@@ -9,7 +9,7 @@ Contents:
   - Cleans out the contents of /etc/yum.repos.d excluding `*local.repo*`
   - Copies the `local.repo` file to /etc/yum.repos.d
 - files:
-  - `local.repo`: Points the base,updates,extras and epel repos to the local mirror aliases as `yumrepo`
+  - `local.repo`: Points the base,updates,extras and epel repos to the local mirror aliased as `yumrepo`
 
 ### Notes
 
