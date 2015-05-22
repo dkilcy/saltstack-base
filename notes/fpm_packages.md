@@ -50,7 +50,6 @@ cd tengine-2.1.0
   --http-log-path=/var/log/nginx/access.log \
   --pid-path=/var/run/nginx/nginx.pid \
   --lock-path=/var/run/nginx/nginx.lock
-  
 make
 rm -Rf /tmp/tengine-2.1.0
 mkdir /tmp/tengine-2.1.0
