@@ -18,30 +18,36 @@ tar zxvf node-latest.tar.gz
 cd node-v0.12.3
 ./configure --prefix=/usr/
 make 
-mkdir /tmp/nodejs
-make install DESTDIR=/tmp/nodejs/
-fpm -s dir -t rpm -n nodejs -v 0.12.3 -C /tmp/nodejs/ usr/bin usr/lib
+rm -Rf /tmp/node-v0.12.3
+mkdir /tmp/node-v0.12.3
+make install DESTDIR=/tmp/node-v0.12.3/
+fpm -s dir -t rpm -n nodejs -v 0.12.3 -C /tmp/node-v0.12.3/ usr/bin usr/lib
 ```
 
 #### Create Tengine with LuaJIT support
 ```
 cd /usr/local/src
+wget http://luajit.org/download/LuaJIT-2.0.4.tar.gz
+cd LuaJIT-2.0.4
+make
+rm -Rf /tmp/LuaJIT-2.0.4
+make install DESTDIR=/tmp/LuaJIT-2.0.4
 
-
+yum install pcre-devel
+cd /usr/local/src
 wget http://tengine.taobao.org/download/tengine-2.1.0.tar.gz
 tar zxvf tengine-2.1.0.tar.gz
 cd tengine-2.1.0
-/configure --with-http_lua_module \
-            --prefix=/opt/nginx \
-            --error-log-path=/var/log/nginx/nginx_error.log \
+./configure --with-http_lua_module \
             --conf-path=/etc/nginx/nginx.conf \
-            --with-luajit-inc=/opt/LuaJIT-2.0.3/include/luajit-2.0 \
-            --with-luajit-lib=/opt/LuaJIT-2.0.3/lib       
+            --with-luajit-inc=/tmp/LuaJIT-2.0.4/usr/local/include/luajit-2.0 \
+            --with-luajit-lib=/tmp/LuaJIT-2.0.4/usr/local/lib       
             
 make
-mkdir /tmp/tengine
-make install DESTDIR=/tmp/nodejs/
-fpm -s dir -t rpm -n tengine 
+rm -Rf /tmp/tengine-2.1.0
+mkdir /tmp/tengine-2.1.0
+make install DESTDIR=/tmp/tengine-2.1.0/
+fpm -s dir -t rpm -n tengine -v 2.1.0 -C /tmp/tengine-2.1.0/ usr/local/nginx etc/nginx
 ```
 
 
