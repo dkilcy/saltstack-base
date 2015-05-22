@@ -1,5 +1,5 @@
 
-### Using fpm to create packages
+### Using FPM to create packages
 
 #### Setup FPM
 ```
