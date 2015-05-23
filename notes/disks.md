@@ -3,7 +3,8 @@
 - Disk partition info: `fdisk -l /dev/sda`  `parted -l /dev/sda`  
 - Disk info: `hdparm -iI /dev/sda`
 - Disk speed measurement: `hdparm -tT /dev/sda`  
-- DD write: `dd if=/dev/zero of=/tmp/output.dat bs=1MB count=100`  
+- DD write (cache): `dd if=/dev/zero of=/tmp/output.dat bs=1MB count=100`  
+- DD write (synchronous IO): `dd if=/dev/zero of=/tmp/output.dat bs=1MB count=100 conv=fsync`  
 - DD read:  `dd if=/tmp/output.dat of=/dev/null bs=4096k`  
 - Linux md devices (aka RAID): `mdadm`
 - Destroy data: `dd if=/dev/zero of=/dev/sdb bs=4096 count=512`
