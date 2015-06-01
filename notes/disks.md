@@ -21,9 +21,15 @@ blkid
 parted /dev/sdb mklabel gpt -s
 parted /dev/sdb mkpart primary 2048s 100% -s
 parted /dev/sdb align-check optimal 1
-
 ```
 
+```
+[root@workstation2 ~]# salt 'ring-a1' partition.mklabel /dev/sdb gpt
+ring-a1:
+[root@workstation2 ~]#  salt 'ring-a1' partition.mkpart /dev/sdb primary fs_type=ext2 start=2048s end=100%
+ring-a1:
+[root@workstation2 ~]#  salt 'ring-a1' extfs.mkfs /dev/sdb1 fs_type=ext4 
+```
 
 ##### LVM:
 ```
