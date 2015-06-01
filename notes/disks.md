@@ -15,6 +15,16 @@ lsblk
 blkid
 ```
 
+##### parted
+
+```
+parted /dev/sdb mklabel gpt -s
+parted /dev/sdb mkpart primary 2048s 100% -s
+parted /dev/sdb align-check optimal 1
+
+```
+
+
 ##### LVM:
 ```
 pvdisplay
@@ -36,6 +46,8 @@ lvmdiskscan
 100000000 bytes (100 MB) copied, 11.1252 s, 9.0 MB/s
 [root@workstation2 mnt]# 
 ```
+
+##### exFAT
 
 Mount a USB drive
 
