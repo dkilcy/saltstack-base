@@ -6,7 +6,7 @@
 1. Add MAC and IP address to /etc/dhcp/dhcpd.conf
 1. Boot server from USB stick [https://github.com/dkilcy/saltstack-base/notes/kickstart]
 2. At GRUB menu, highlight **Install CentOS 7** then hit **Tab**
-3. At prompt, remove `quiet` and append `ks=http://10.0.0.6/base.ks ksdev=enp0s20f0` 
+3. At prompt, remove `quiet` and append `ks=http://10.0.0.6/base.ks ksdev=enp0s20f0 HOSTNAME=localhost.localdomain` 
 4. Wait for install to finish
 5. SSH to server from workstation as root to test connectivity
 ```
