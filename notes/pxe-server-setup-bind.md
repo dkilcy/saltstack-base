@@ -45,25 +45,26 @@ subnet 10.0.0.0 netmask 255.255.255.0 {
 
 Create /var/lib/tftpboot/pxelinux.cfg/default
 ```
-default menu.c32
-prompt 0
-timeout 300
-ONTIMEOUT local
+DEFAULT    menu.c32
+PROMPT     0
+TIMEOUT    100
+ONTIMEOUT  Local
+ 
+MENU TITLE PXE Menu
+ 
+MENU       seperator
+LABEL      CentOS 7
+KERNEL     repo/centos/7/os/x86_64/isolinux/vmlinuz
+APPEND     initrd=repo/centos/7/os/x86_64/isolinux/initrd.img method=http://10.0.0.6/repo/centos/7/os/x86_64/ devfs=nomount
 
-menu title ########## PXE Boot Menu ##########
-
-label 1
-menu label ^1) Install CentOS 7 x64 with local repo
-kernel /var/repo/yum/centos/7/os/x86_64/isolinux/vmlinuz
-append initrd=/var/repo/yum/centos/7/os/x86_64/isolinux/initrd.img method=http://10.0.0.6/repo/centos/7/os/x86_64/ devfs=nomount
-
-label 2
-menu label ^3) Boot from local drive
+MENU       seperator
+LABEL      Local
+LOCALBOOT  0
 ```
 
 - Symlink `ln -s /var/repo/yum /var/www/html/repo`
+- Symlink `ln -s /var/repo/yum /var/lib/tftpboot/repo`
 - Edit `/etc/xinetd.d/tftp` and set `disable = no`
-
 - Start dhcpd: `service dhcpd start`
 - Start httpd: `service httpd start`
 - Start xinetd: `service xinetd start`
