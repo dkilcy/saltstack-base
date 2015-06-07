@@ -7,6 +7,7 @@ Install packages:
 - dnsmasq: provides DNS and DHCP services
 - syslinux: bootloaders for network booting
 - tftp-server: server bootable imaes
+- vsftpd
 
 Setup dnsmasq:
 ```
@@ -15,18 +16,25 @@ vi /etc/dnsmasq.conf
 ```
 # Interface to listen on
 interface=enp5s0
+
 # Domainname
 #domain=
+
 # DHCP IP range
-dhcp-range=enp5s0,10.0.0.164,10.0.0.199,12h
+dhcp-range=10.0.0.200,10.0.0.224,255.255.255.0,12h
+
 # PXE
 dhcp-boot=pxelinux.0,pxeserver,10.0.0.6
+
 # Gateway
 #dhcp-option=3,10.0.0.1
+
 # DNS server
 dhcp-option=6,10.0.0.6
+
 # Broadcast
 dhcp-option=28,10.0.0.255
+
 # NTP server
 dhcp-option=42,10.0.0.6
 
@@ -34,6 +42,10 @@ pxe-prompt="Press F8 for menu.", 60
 pxe-service=x86PC, "Install CentOS 7 from network server", pxelinux
 enable-tftp
 tftp-root=/var/lib/tftpboot
+
+# Persistent IP addresses
+dhcp-host=00:25:90:f1:4f:96,10.0.0.61
+dhcp-host=00:25:90:f1:0c:6c,10.0.0.62
 ```
 
 Copy bootloaders: `cp -r /usr/share/syslinux/* /var/lib/tftpboot/`
@@ -79,11 +91,6 @@ menu label ^3) Boot from local drive
 # systemctl stop dhcpd.service
 # systemctl start dnsmasq
 # systemctl status dnsmasq
-```
-
-TODO: does this need to be done?
-```
-# yum install vsftpd
 # systemctl start vsftpd
 # systemctl status vsftpd
 ```
