@@ -81,6 +81,7 @@ menu label ^3) Boot from local drive
 # systemctl status dnsmasq
 ```
 
+TODO: does this need to be done?
 ```
 # yum install vsftpd
 # systemctl start vsftpd
@@ -90,8 +91,6 @@ menu label ^3) Boot from local drive
 ### Test
 
 ftp://10.0.0.6/pub/
-
-
 
 
 ##### References
