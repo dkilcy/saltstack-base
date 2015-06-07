@@ -8,7 +8,6 @@ Install packages:
 - syslinux: bootloaders for network booting
 - tftp-server: server bootable imaes
 
-
 Setup dnsmasq:
 ```
 vi /etc/dnsmasq.conf
@@ -71,14 +70,19 @@ menu label ^3) Boot from local drive
 # cp /mnt/images/pxeboot/vmlinuz /var/lib/tftpboot/centos7
 # cp /mnt/images/pxeboot/initrd.img /var/lib/tftpboot/centos7
 
-# yum install vsftpd
+# mkdir -p /var/ftp/pub/
 # cp -r /mnt/* /var/ftp/pub/
+# \cp -rf /mnt/. /var/ftp/pub  # yes | cp -ri /mnt/. /var/ftp/pub
 # chmod -R 755 /var/ftp/pub
 
 # umount /mnt
 # systemctl stop dhcpd.service
 # systemctl start dnsmasq
 # systemctl status dnsmasq
+```
+
+```
+# yum install vsftpd
 # systemctl start vsftpd
 # systemctl status vsftpd
 ```
