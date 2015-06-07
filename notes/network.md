@@ -8,6 +8,7 @@
 - IP: `ip addr`  `ip route`
 - Sockets: `ss`
 - Show which process is using a port: `netstat -anp | grep 8775`  
+- Set MTU to 9000: `ip link set enp0s20f2 mtu 9000`
 
 ##### Disable NetworkManager
 ```
