@@ -61,11 +61,12 @@ label 2
 menu label ^3) Boot from local drive
 ```
 
-Symlink /var/www/html/repo to /var/repo/yum
+- Symlink `ln -s /var/repo/yum /var/www/html/repo`
+- Edit `/etc/xinetd.d/tftp` and set `disable = no`
 
 - Start dhcpd: `service dhcpd start`
-- Start httpd: `service httpd start'
-
+- Start httpd: `service httpd start`
+- Start xinetd: `service xinetd start`
 
 
 ##### References
