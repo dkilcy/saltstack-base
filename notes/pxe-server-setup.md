@@ -99,6 +99,12 @@ menu label ^3) Boot from local drive
 
 ftp://10.0.0.6/pub/
 
+## Things to check
+- Missing:
+  - ftp://10.0.0.6/pub/images/product.img
+  - ftp://10.0.0.6/pub/images/updates.img
+
+
 
 ##### References
 
