@@ -148,7 +148,7 @@ salt '*' saltutil.refresh_pillar
 
 8. Set the grains for the Salt master:
 
-```bash
+ ```bash
 salt 'workstation*' grains.setvals "{'saltstack-base:{'role':'master'}}"
 ```
 
@@ -212,12 +212,16 @@ systemctl start dhcpd.service
 systemctl enable dhcpd.service
 ```
 
-The workstation setup is complete.
-
-Assign roles:
+7. Assign the master role:
 
  ```bash
 # salt 'workstation2' grains.setvals "{'saltstack-base':{'role':'master'}}"
+```
+
+8. Setup PXE server 
+
+ ```bash
+**TODO**
 ```
 
 ### Recommended 
