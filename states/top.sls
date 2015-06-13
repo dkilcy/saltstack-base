@@ -1,11 +1,10 @@
 
 base:
 
-  'G@saltstack-base:master':
+  'G@saltstack-base:role:master':
     - local
     - selinux
     - iptables
-    - ipv6
     - ssd
 {% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
     #- cpupower
@@ -14,11 +13,10 @@ base:
 {% endif %}
     - vim
 
-  'G@saltstack-base:minion':
+  'G@saltstack-base:role:minion':
     - local
     - selinux
     - yumrepo
-    - ipv6
     - ssd
 {% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
     - cpupower

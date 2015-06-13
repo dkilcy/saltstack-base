@@ -1,20 +1,20 @@
-[base]
+[local-base]
 name=CentOS-$releasever - Base
 baseurl=http://yumrepo/repo/centos/$releasever/os/$basearch/
 gpgcheck=0
 enabled=1
-[updates]
+[local-updates]
 name=CentOS-$releasever - Updates
 baseurl=http://yumrepo/repo/centos/$releasever/updates/$basearch/
 gpgcheck=0
 enabled=1
-[extras]
+[local-extras]
 name=CentOS-$releasever - Extras
 baseurl=http://yumrepo/repo/centos/$releasever/extras/$basearch/
 gpgcheck=0
 enabled=1
-[epel]
+[local-epel]
 name=Extra Packages for Enterprise Linux $releasever - $basearch
-baseurl=http://yumrepo/repo/centos/$releasever/epel/
+baseurl=http://yumrepo/repo/centos/$releasever/epel/$basearch/
 gpgcheck=0
 enabled=1

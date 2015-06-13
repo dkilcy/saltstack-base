@@ -1,0 +1,61 @@
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+###############################################################################
+# Network:
+# *.mgmt    - OpenStack Internal Network
+# *.pub     - Public Network
+# *.vm      - VM Traffic Network
+# *.store   - Storage Network
+###############################################################################
+
+###############
+
+10.0.0.5        workstation1.mgmt workstation1
+10.0.0.6        workstation2.mgmt workstation2 salt ntp yumrepo pxeserver
+10.0.0.7        workstation3.mgmt workstation3
+
+10.0.0.11       controller1.mgmt  controller1
+10.0.0.12       controller2.mgmt  controller2
+
+10.0.0.21       network1.mgmt  network1
+10.0.0.22       network2.mgmt  network1
+
+10.0.0.31       compute1.mgmt  compute1
+10.0.0.32       compute2.mgmt  compute2
+10.0.0.33       compute3.mgmt  compute3
+10.0.0.34       compute4.mgmt  compute4
+
+10.0.0.41       store1.mgmt store1
+10.0.0.42       store2.mgmt store2
+10.0.0.43       store3.mgmt store3
+10.0.0.44       store4.mgmt store4
+10.0.0.45       store5.mgmt store5
+10.0.0.46       store6.mgmt store6
+
+###############
+
+10.0.1.21       network1.vm
+10.0.1.22       network2.vm
+
+10.0.1.31       compute1.vm
+10.0.1.32       compute2.vm
+10.0.1.33       compute3.vm
+10.0.1.34       compute4.vm
+
+10.0.1.41       store1.chord
+10.0.1.42       store2.chord
+10.0.1.43       store3.chord
+10.0.1.44       store4.chord
+10.0.1.45       store5.chord
+10.0.1.46       store6.chord
+
+###############
+
+192.168.1.5     workstation1.pub
+192.168.1.6     workstation2.pub
+192.168.1.7     workstation3.pub
+
+192.168.1.11    controller1.pub
+192.168.1.12    controller2.pub
+
