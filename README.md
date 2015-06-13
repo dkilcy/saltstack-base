@@ -239,8 +239,7 @@ The workstation setup is complete.
 Assign roles:
 
 ```bash
-# salt '*' grains.setvals "{'saltstack-base':'minion'}"
-# salt 'workstation2' grains.setvals "{'saltstack-base':'master'}"
+# salt 'workstation2' grains.setvals "{'saltstack-base':{'role':'master'}}"
 ```
 
 ### Recommended 
@@ -251,11 +250,11 @@ Download [Prime95](http://www.mersenne.org/ftp_root/gimps/p95v285.linux64.tar.gz
 
 ### Setup Salt Minions
 
-1. Create USB media with Kickstart here:
+1. Install OS from PXE server
 2. **From the Salt master:** Set the grains for the minion: 
 
 ```bash
-salt '<minion_id>' grains.setvals "{'saltstack-base:{'role':'minion'}}"
+salt '<minion_id>' grains.setvals "{'saltstack-base':{'role':'minion'}}"
 ```
 
 #### References
