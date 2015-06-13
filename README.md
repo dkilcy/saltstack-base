@@ -245,9 +245,13 @@ salt '<minion_id>' grains.setvals "{'saltstack-base':{'role':'minion'}}"
  
 3. TODO: setup networking, just for storage nodes
 ```bash
-salt '<minion_id>' state.sls bootstrap saltenv=base
 salt '<minion_id>' state.sls iptables saltenv=base
-salt '<minion_id>' cmd.run reboot
+salt '<minion_id>' state.sls bootstrap saltenv=base
+```
+From console: `reboot`
+
+```bash
+salt '<minion_id'> state.highstate
 ```
 
 #### References
