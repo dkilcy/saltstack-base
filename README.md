@@ -237,8 +237,9 @@ Download [Prime95](http://www.mersenne.org/ftp_root/gimps/p95v285.linux64.tar.gz
 
 ```bash
 salt-key -L
-salt '<minion_id>' grains.setvals "{'saltstack-base':{'role':'minion'}}"
 salt '<minion_id>' test.ping
+salt '<minion_id>' saltutil.refresh_pillar
+salt '<minion_id>' grains.setvals "{'saltstack-base':{'role':'minion'}}"
 ```
 
 #### References
