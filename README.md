@@ -246,7 +246,8 @@ salt '<minion_id>' grains.setvals "{'saltstack-base':{'role':'minion'}}"
 3. TODO: setup networking, just for storage nodes
 ```bash
 salt '<minion_id>' state.sls iptables saltenv=base
-salt '<minion_id>' state.sls bootstrap saltenv=base
+salt '<minion_id>' state.sls selinux saltenv=base
+salt '<minion_id>' state.sls network.bond saltenv=base
 ```
 From console: `reboot`
 
