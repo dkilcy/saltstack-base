@@ -235,11 +235,19 @@ Download [Prime95](http://www.mersenne.org/ftp_root/gimps/p95v285.linux64.tar.gz
 1. Install OS from PXE server
 2. **From the Salt master:** Accept the key and set the role grain for the minion: 
 
-```bash
+ ```bash
 salt-key -L
 salt '<minion_id>' test.ping
 salt '<minion_id>' saltutil.refresh_pillar
 salt '<minion_id>' grains.setvals "{'saltstack-base':{'role':'minion'}}"
+```
+ 
+ 
+3. TODO: setup networking, just for storage nodes
+```bash
+salt '<minion_id>' state.sls bootstrap saltenv=base
+salt '<minion_id>' state.sls iptables saltenv=base
+salt '<minion_id>' cmd.run reboot
 ```
 
 #### References
