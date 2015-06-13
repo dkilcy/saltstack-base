@@ -5,34 +5,13 @@ Other projects that use this repository:
 
 ### Introduction
 
-Use SaltStack (Salt) in conjunction with Kickstart to install and provision multiple bare-metal machines running CentOS 7.
+Use SaltStack (Salt) in conjunction with PXE server/kickstart to install and provision multiple bare-metal machines running CentOS.
 
 In this project, the Salt masters are installed manually, and the minions are installed via Kickstart.  
-You can read on how to create Kickstart files [here](notes/kickstart/README.md)
-
-- TODO: Go over a quick SaltStack tutorial [HERE]() 
-
-The reference system for the Salt masters for testing is described in the next section. 
-
-Reference Architecture:
 
 Bare-metal machines take on one of two roles:
 - Salt masters
 - Salt minions
-
-#### Salt master:
-- [MintBox 2](http://www.amazon.com/MintBox-IPC-D2x2-C3337NL-H500-WB-XLM-FM4U-BMint-2-Desktop/dp/B00EONR674) 
-- Intel Core i5-3337U @ 1.8 GHz
-- 8GB DDR3 1600 memory
-- 1x Intel S3500 300GB SSD
-- 2x 1Gb NICs
-- CentOS 7 with MATE Desktop
-
-| Hostname | Public IP (.pub) | Lab IP (.mgmt) |
-|----------|-----------|--------|
-| workstation1 | 192.168.1.5 | 10.0.0.5 |
-| workstation2 | 192.168.1.6 | 10.0.0.6 |
-| workstation3 | 192.168.1.6 | 10.0.0.7 |
 
 ### Setup Salt Master
 
@@ -63,8 +42,9 @@ systemctl stop iptables.service
 systemctl disable iptables.service
 ```   
 
-5. Reboot to implement the change: `reboot`
-6. Log back in using MATE as devops user. Open a terminal window.
+Reboot to implement the change: `reboot`
+
+6. Log back in using MATE as **devops** user. Open a terminal window.
 6. Verify that SELinux and iptables are disabled.
  ```bash
 [devops@workstation1 ~]$ sudo su -
@@ -81,8 +61,8 @@ iptables.service - IPv4 firewall with iptables
 
 ### Setup Salt Master
 
-1. Install git as root user: `yum install git`
-2. Configure GitHub and pull projects as devops user
+1. Install git as **root** user: `yum install git`
+2. Configure GitHub and pull projects as **devops** user
 
  ```bash
 git config --global user.name "dkilcy"
@@ -92,7 +72,12 @@ mkdir ~/git ; cd ~/git
 git clone https://github.com/dkilcy/saltstack-base.git
 ```
 
-3. Install the Salt master and minion on the workstation as root user
+3. Copy the hosts file from /home/devops/git/saltstack-base/network/files/hosts to /etc/hosts
+```
+cp /home/devops/git/saltstack-base/network/files/hosts /etc/
+```
+
+3. Install the Salt master and minion on the workstation as **root** user
 
  ```bash
 yum install salt-master salt-minion
@@ -100,7 +85,7 @@ salt --version
 mkdir /etc/salt/master.d
 ```
 
-3. Create a YAML file to hold the customized Salt configuration.  As root user, execute `vi /etc/salt/master.d/99-salt-envs.conf` and add the following to the new file:
+3. Create a YAML file to hold the customized Salt configuration.  As **root** user, execute `vi /etc/salt/master.d/99-salt-envs.conf` and add the following to the new file:
 
 ```yaml
 file_roots:
@@ -111,24 +96,23 @@ pillar_roots:
     - /srv/salt/base/pillar
 ```
 
-4. Point Salt to the development environment as root user.
+4. Point Salt to the development environment as **root** user.
 
  ```bash
 mkdir /srv/salt
 ln -sf /home/devops/git/saltstack-base /srv/salt/base
 ```
 
-5. Start the Salt master on the workstation machine as root user.
+5. Start the Salt master on the workstation machine as **root** user.
 
  ```bash 
 systemctl start salt-master.service
 systemctl enable salt-master.service
 ```
-6. Configure and start the Salt minion on the workstation machine as root user.
+6. Configure and start the Salt minion on the workstation machine as **root** user.
 
  ```bash
 hostname -s > /etc/salt/minion_id
-echo "master: localhost" > /etc/salt/minion.d/99-salt.conf
 
 systemctl start salt-minion.service
 systemctl enable salt-minion.service
@@ -202,16 +186,10 @@ ind assid status  conf reach auth condition  last_event cnt
 [root@workstation1 ~]# 
 ```
 
-3. Create the local mirror as root user.
+3. Install the reposync.sh tool as **root** user.
 
  ```bash
-cp /home/devops/git/saltstack-base/states/yumrepo/files/reposync.sh ~
-cd ~
-./reposync.sh
-
-cp local.repo /etc/yum.repos.d/  TODO 
-yum clean all
-yum update
+cp /home/devops/git/saltstack-base/states/yumrepo/files/reposync.sh /usr/local/bin/
 ```
 
 4. Setup apache to host the yum repository 
@@ -228,8 +206,8 @@ systemctl enable httpd.service
 
  ```bash
 yum install dhcp
-#mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.`date +%s`
-#cp /home/devops/git/juno-saltstack/files/workstation/etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf
+mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.`date +%s`
+cp /home/devops/git/saltstack-base/dhcp/files/dhcpd.conf /etc/dhcp/
 systemctl start dhcpd.service
 systemctl enable dhcpd.service
 ```
