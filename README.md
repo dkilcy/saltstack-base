@@ -237,9 +237,9 @@ Download [Prime95](http://www.mersenne.org/ftp_root/gimps/p95v285.linux64.tar.gz
 
  ```bash
 salt-key -L
-salt '<minion_id>' test.ping
-salt '<minion_id>' saltutil.refresh_pillar
-salt '<minion_id>' grains.setvals "{'saltstack-base':{'role':'minion'}}"
+salt '*' test.ping
+salt '*' saltutil.refresh_pillar
+salt 'store*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
 ```
  
  
@@ -249,6 +249,13 @@ salt '<minion_id>' state.sls iptables saltenv=base
 salt '<minion_id>' state.sls selinux saltenv=base
 salt '<minion_id>' state.sls network.bond saltenv=base
 ```
+
+```
+salt 'controller*' state.sls team.bond
+salt 'network*' state.sls team.bond
+salt 'compute*' state.sls team.bond
+```
+
 From console: `reboot`
 
 ```bash
