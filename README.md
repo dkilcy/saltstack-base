@@ -249,14 +249,15 @@ salt '<minion_id>' state.sls iptables saltenv=base
 salt '<minion_id>' state.sls selinux saltenv=base
 salt '<minion_id>' state.sls network.bond saltenv=base
 ```
-
-```
-salt 'controller*' state.sls team.bond
-salt 'network*' state.sls team.bond
-salt 'compute*' state.sls team.bond
-```
-
 From console: `reboot`
+
+4. TODO: setup networking for OpenStack 
+```
+salt 'controller*' state.sls network.team
+salt 'network*' state.sls network.team
+salt 'compute*' state.sls network.team
+```
+From console: `systemctl restart network.service`
 
 ```bash
 salt '<minion_id'> state.highstate
