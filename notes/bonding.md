@@ -116,3 +116,6 @@ Link Failure Count: 0
 Permanent HW addr: 00:25:90:f1:0d:a9
 Slave queue ID: 0
 ```
+
+#### References:
+- [RHEL: Linux Bond / Team Multiple Network Interfaces (NIC) Into a Single Interface](http://www.cyberciti.biz/tips/linux-bond-or-team-multiple-network-interfaces-nic-into-single-interface.html)
