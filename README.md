@@ -1,6 +1,7 @@
 ## Salt tools for bare-metal provisioning
 
 Other projects that use this repository:
+- [kilo-saltstack](https://github.com/dkilcy/kilo-saltstack) - OpenStack 3+ node architecture on CentOS 7
 - [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
 
 ### Introduction
