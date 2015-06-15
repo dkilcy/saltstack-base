@@ -15,8 +15,8 @@ Bare-metal machines take on one of two roles:
 
 ### Lab Setup
 
-- 3  MintBox2
-- 10 [Supermicro SYS-5108A](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101837)
+- 3  MintBox2 (Salt Masters)
+- 10 [Supermicro SYS-5108A](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101837) (Salt Minions)
 - 2 TP-Link TL-SG-3216 L2 Switches
 - 2 TP-Link TL-SG-3424 L2 Switches
 - 2 Dell Powerconnect 6224 L3 Switches
