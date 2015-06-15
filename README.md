@@ -19,7 +19,7 @@ Bare-metal machines take on one of two roles:
 
 1. Install CentOS 7 from a media image.  These steps are documented [HERE](notes/centos-7-manual.md#manual-install-from-media)  
 
-Make sure the user **devops** is created with the administrator role during installation.
+The process will creae a **devops** user with the administrator role during installation.
 
 ### Setup Base Environment 
 
