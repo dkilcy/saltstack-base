@@ -13,6 +13,14 @@ Bare-metal machines take on one of two roles:
 - Salt masters
 - Salt minions
 
+### Lab Setup
+
+- 3  MintBox2
+- 10 Supermicro SYS-5108A [http://www.newegg.com/Product/Product.aspx?Item=N82E16816101837](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101837)
+- 
+- 4 TP-Link L2 switches
+- Dell Powerconnect 6224 L3 Switches
+
 ### Setup Salt Master
 
 ### Install CentOS 7
