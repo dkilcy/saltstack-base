@@ -149,6 +149,26 @@ working. Further configuration is required.</p>
 https://rubygems.org/gems/
 
 ```
+[root@conn1 fpm-1.3.3]$ pwd
+/usr/local/src/fpm-1.3.3
+[root@conn1 fpm-1.3.3]$ ls -l
+total 1484
+-rw-r--r-- 1 root root  15360 Jun 16 02:07 arr-pm-0.0.10.gem
+-rw-r--r-- 1 root root  89600 Jun 16 02:07 backports-3.6.4.gem
+-rw-r--r-- 1 root root  20992 Jun 16 02:07 cabin-0.7.1.gem
+-rw-r--r-- 1 root root  28672 Jun 16 02:07 childprocess-0.5.6.gem
+-rw-r--r-- 1 root root  24576 Jun 16 02:07 clamp-0.6.5.gem
+-rw-r--r-- 1 root root 881152 Jun 16 02:07 ffi-1.9.8.gem
+-rw-r--r-- 1 root root 114176 Jun 16 02:07 fpm-1.3.3.gem
+-rw-r--r-- 1 root root   9728 Jun 16 02:07 insist-1.0.0.gem
+-rw-r--r-- 1 root root 152064 Jun 16 02:07 json-1.8.3.gem
+-rw-r--r-- 1 root root 135680 Jun 16 02:07 pry-0.10.1.gem
+-rw-r--r-- 1 root root  10240 Jun 16 02:07 rspec-3.3.0.gem
+-rw-r--r-- 1 root root  14336 Jun 16 02:07 stud-0.0.19.gem
+[root@conn1 fpm-1.3.3]$ 
+```
+
+```
 rm: remove regular file `clamp-1.0.0.gem'? y
 [root@conn1 fpm-1.3.3]$ gem install fpm
 ERROR:  http://rubygems.org/ does not appear to be a repository
@@ -167,21 +187,6 @@ Missing required -s flag. What package source did you want? {:level=>:warn}
 Missing required -t flag. What package output did you want? {:level=>:warn}
 No parameters given. You need to pass additional command arguments so that I know what you want to build packages from. For example, for '-s dir' you would pass a list of files and directories. For '-s gem' you would pass a one or more gems to package from. As a full example, this will make an rpm of the 'json' rubygem: `fpm -s gem -t rpm json` {:level=>:warn}
 Fix the above problems, and you'll be rolling packages in no time! {:level=>:fatal}
-[root@conn1 fpm-1.3.3]$ ls -l
-total 1484
--rw-r--r-- 1 root root  15360 Jun 16 02:07 arr-pm-0.0.10.gem
--rw-r--r-- 1 root root  89600 Jun 16 02:07 backports-3.6.4.gem
--rw-r--r-- 1 root root  20992 Jun 16 02:07 cabin-0.7.1.gem
--rw-r--r-- 1 root root  28672 Jun 16 02:07 childprocess-0.5.6.gem
--rw-r--r-- 1 root root  24576 Jun 16 02:07 clamp-0.6.5.gem
--rw-r--r-- 1 root root 881152 Jun 16 02:07 ffi-1.9.8.gem
--rw-r--r-- 1 root root 114176 Jun 16 02:07 fpm-1.3.3.gem
--rw-r--r-- 1 root root   9728 Jun 16 02:07 insist-1.0.0.gem
--rw-r--r-- 1 root root 152064 Jun 16 02:07 json-1.8.3.gem
--rw-r--r-- 1 root root 135680 Jun 16 02:07 pry-0.10.1.gem
--rw-r--r-- 1 root root  10240 Jun 16 02:07 rspec-3.3.0.gem
--rw-r--r-- 1 root root  14336 Jun 16 02:07 stud-0.0.19.gem
-[root@conn1 fpm-1.3.3]$ 
 ```
 
 ```
