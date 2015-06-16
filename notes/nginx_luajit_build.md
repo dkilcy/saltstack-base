@@ -38,10 +38,7 @@ make
 make install PREFIX=/usr DESTDIR=/tmp/tengine-2.1.0
 make install PREFIX=/usr
 ```
-```
-kconfig
-nginx -V
-```
+
 ```
 [root@conn1 sbin]$ which nginx
 /usr/sbin/nginx
