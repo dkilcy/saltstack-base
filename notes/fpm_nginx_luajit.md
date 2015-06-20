@@ -190,14 +190,17 @@ Fix the above problems, and you'll be rolling packages in no time! {:level=>:fat
 ```
 
 ```
+mkdir -p /tmp/tengine-2.1.0/etc/init.d/
+cp /etc/init.d/nginx /tmp/tengine-2.1.0/etc/init.d/
+
 cd /usr/local/src/tengine-2.1.0
-fpm -s dir -t rpm -n tengine -v 2.1.0 -C /tmp/tengine-2.1.0 usr etc
-rpm -q -filesbypkg -p tengine-2.1.0-1.x86_64.rpm
+fpm -f -s dir -t rpm -n tengine -v 2.1.0 -p tengine-2.1.0-1.el6.x86_64.rpm -d LuaJIT -C /tmp/tengine-2.1.0 usr etc
+rpm -q -filesbypkg -p tengine-2.1.0-1.el6.x86_64.rpm
 ```
 
 ```
-fpm -s dir -t rpm -n LuaJIT -v 2.0.4 -C /tmp/LuaJIT-2.0.4 usr
-rpm -q -filesbypkg -p LuaJIT-2.0.4-1.x86_64.rpm
+fpm -f -s dir -t rpm -n LuaJIT -v 2.0.4 -p LuaJIT-2.0.4-1.el6.x86_64.rpm -C /tmp/LuaJIT-2.0.4 usr
+rpm -q -filesbypkg -p LuaJIT-2.0.4-1.el6.x86_64.rpm
 ```
 
 
