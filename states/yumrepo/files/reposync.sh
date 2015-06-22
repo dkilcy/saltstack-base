@@ -30,6 +30,10 @@ rsync -avrt rsync://mirror.pnl.gov/epel/6/x86_64 .
 ### CentOS 6 - Scality Lorien
 ####################################################################################
 
+#reposync -p /var/repo/yum/centos/6/scality-lorien/x86_64 --repoid=scality-lorien-centos6 --norepopath
+#createrepo /var/repo/yum/centos/6/scality-lorien/x86_64
+
+
 ####################################################################################
 ### CentOS 7
 ####################################################################################
@@ -49,21 +53,10 @@ rsync -avrt rsync://mirror.umd.edu/centos/7/extras .
 ####################################################################################
 
 mkdir -p /var/repo/yum/centos/7/epel
-
 cd /var/repo/yum/centos/7/epel
-
 rsync -avrt rsync://mirror.pnl.gov/epel/7/x86_64 .
 
 ####################################################################################
-
-exit
-
-####################################################################################
-### CentOS 7 - Scality Lorien
-####################################################################################
-
-reposync -p /var/repo/yum/centos/7 --repoid=scality-lorien
-createrepo /var/repo/yum/centos/7/scality-lorien
 
 ####################################################################################
 ### CentOS 7 - Openstack Kilo
@@ -73,4 +66,9 @@ reposync -p /var/repo/yum/centos/7 --repoid=openstack-kilo
 createrepo /var/repo/yum/centos/7/openstack-kilo
 
 ####################################################################################
+### CentOS 7 - Scality Lorien
+####################################################################################
+
+#reposync -p /var/repo/yum/centos/7/scality-lorien/x86_64 --repoid=scality-lorien-centos7 --norepopath
+#createrepo /var/repo/yum/centos/7/scality-lorien/x86_64
 

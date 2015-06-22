@@ -118,5 +118,11 @@ systems:
       ipaddr: 10.0.1.51
       nic0: eth2
       nic1: eth3
+{% elif grains['id'] == 'super' %}
+  network:
+    bond0:
+      ipaddr: 10.0.0.61
+      nic0: eth0
+      nic1: eth1
 {% endif %}
 
