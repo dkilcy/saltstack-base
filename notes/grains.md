@@ -13,6 +13,14 @@ base:
     - local
 ```
 
+```
+{% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
+    - cpupower
+{% elif grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '6' %}
+    - cpuspeed
+{% endif %}
+```
+
 ##### References
 - [SaltStack Grains](http://docs.saltstack.com/en/latest/topics/targeting/grains.html)
 - [Using a grain in a configuration file](http://serverfault.com/questions/676796/how-to-use-saltstack-to-manage-different-config-file-for-different-minions)
