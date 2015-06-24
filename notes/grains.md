@@ -13,7 +13,7 @@ base:
     - local
 ```
 
-```
+```yaml
 {% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
     - cpupower
 {% elif grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '6' %}
