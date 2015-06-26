@@ -1,9 +1,9 @@
 
 ### Install CentOS 7 (Manual Install)
 
-### Overview
+#### Overview
 
-### Install CentOS 7
+#### Install CentOS 7
 
 1. Boot from media
 2. Keyboard and Language 
@@ -31,7 +31,7 @@
 23. Accept the License agreement
 24. Reboot 
 
-### Post-Install Setup
+#### Post-Install Setup
 
 Boot into the OS and login as **devops** user.  Open a terminal window and `sudo su -` to root.
 
@@ -69,19 +69,41 @@ iptables.service - IPv4 firewall with iptables
 [root@workstation1 ~]# 
 ```
 
-
-1. Install git as **root** user: `yum install git`
-2. Configure GitHub and pull projects as **devops** user
+1. Setup ntpd on the workstation to be an NTP time server
 
  ```bash
-git config --global user.name "dkilcy"
-git config --global user.email "david@kilcyconsulting.com"
- 
-mkdir ~/git ; cd ~/git
-git clone https://github.com/dkilcy/saltstack-base.git
+yum install ntp
+systemctl start ntpd.service
+systemctl enable ntpd.service
 ```
 
-3. Copy the hosts file from /home/devops/git/saltstack-base/network/files/hosts to /etc/hosts
+2. Verify the NTP installation
+
+ ```bash
+[root@workstation1 ~]# ntpq -p
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+-y.ns.gin.ntt.ne 198.64.6.114     2 u  465 1024  375   38.859  -14.201   8.438
+*ntp.your.org    .CDMA.           1 u  853 1024  377   29.042    1.957   4.626
++www.linas.org   129.250.35.250   3 u  470 1024  377   44.347    1.349   5.194
++ntp3.junkemailf 149.20.64.28     2 u  675 1024  337   78.504    4.305   3.001
+
+[root@workstation1 ~]# ntpq -c assoc
+
+ind assid status  conf reach auth condition  last_event cnt
+===========================================================
+  1  3548  933a   yes   yes  none   outlyer    sys_peer  3
+  2  3549  963a   yes   yes  none  sys.peer    sys_peer  3
+  3  3550  9424   yes   yes  none candidate   reachable  2
+  4  3551  9424   yes   yes  none candidate   reachable  2
+[root@workstation1 ~]# 
 ```
-cp /home/devops/git/saltstack-base/network/files/hosts /etc/
-```
+
+
+
+### Recommended 
+
+1. Test and burn-in the hardware using Prime95
+
+Download [Prime95](http://www.mersenne.org/ftp_root/gimps/p95v285.linux64.tar.gz)
+
