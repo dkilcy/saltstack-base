@@ -18,21 +18,22 @@ Bare-metal machines take on one of two roles:
 
 - 3 [MintBox2](http://www.fit-pc.com/web/products/mintbox/mintbox-2/)
 - 10 [Supermicro SYS-5108A](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101837)
-- 2 TP-Link TL-SG-3216 L2 Switches
-- 2 TP-Link TL-SG-3424 L2 Switches
-- 2 Dell Powerconnect 6224 L3 Switches
+- 2 [TP-Link TL-SG-3216 L2 Switches](http://www.tp-link.com/lk/products/details/cat-39_TL-SG3216.html)
+- 2 [TP-Link TL-SG-3424 L2 Switches](http://www.tp-link.com/lk/products/details/cat-39_TL-SG3424.html)
+- 2 [Dell Powerconnect 6224 L3 Switches](http://www.dell.com/us/business/p/powerconnect-6200-series/pd)
 
 The MintBox2 machines are the Salt masters running CentOS 7 with the MATE desktop.  The Supermicros are the Salt minions running CentOS 6 or 7.
 
-Network infrastructure is described [here](notes/centos-7-manual.md)
+Network infrastructure is described [here](notes/network.md)
 
 ### Lab Setup
 
-1. [Install CentOS 7 on MintBox2](notes/centos-7-manual.md#manual-install-from-media)
-2. [Install Salt Master on MintBox2]() 
-3. [Setup PXE Server on MintBox2]()
-4. [Setup Supermicros (or other MintBox2) via PXE Server]()
-5. [Setup Salt Minions on Supermicros]()
+1. [Install CentOS 7 on MintBox2](notes/centos-7-manual.md)
+2. [Setup Git and saltstack-base repository on MintBox2](notes/saltstack-base-setup.md)
+2. [Install Salt Master on MintBox2](notes/install-salt-master) 
+3. [Setup PXE Server on MintBox2](notes/pxe-server-setup)
+4. [Setup Supermicros (or other MintBox2) via PXE Server](notes/pxe-install)
+5. [Setup Salt Minions on Supermicros](notes/install-salt-minion)
 
 
 6. Configure and start the Salt minion on the workstation machine as **root** user.
@@ -77,84 +78,6 @@ salt '*' saltutil.refresh_pillar
  ```bash
 salt 'workstation*' grains.setvals "{'saltstack-base:{'role':'master'}}"
 ```
-
-### Post-Installation tasks
-
-TODO: Put the following into a state file for workstation
-
-1. Setup ntpd on the workstation to be an NTP time server
-
- ```bash
-yum install ntp
-systemctl start ntpd.service
-systemctl enable ntpd.service
-```
-
-2. Verify the NTP installation
-
- ```bash
-[root@workstation1 ~]# ntpq -p
-     remote           refid      st t when poll reach   delay   offset  jitter
-==============================================================================
--y.ns.gin.ntt.ne 198.64.6.114     2 u  465 1024  375   38.859  -14.201   8.438
-*ntp.your.org    .CDMA.           1 u  853 1024  377   29.042    1.957   4.626
-+www.linas.org   129.250.35.250   3 u  470 1024  377   44.347    1.349   5.194
-+ntp3.junkemailf 149.20.64.28     2 u  675 1024  337   78.504    4.305   3.001
-
-[root@workstation1 ~]# ntpq -c assoc
-
-ind assid status  conf reach auth condition  last_event cnt
-===========================================================
-  1  3548  933a   yes   yes  none   outlyer    sys_peer  3
-  2  3549  963a   yes   yes  none  sys.peer    sys_peer  3
-  3  3550  9424   yes   yes  none candidate   reachable  2
-  4  3551  9424   yes   yes  none candidate   reachable  2
-[root@workstation1 ~]# 
-```
-
-3. Install the reposync.sh tool as **root** user.
-
- ```bash
-cp /home/devops/git/saltstack-base/states/yumrepo/files/reposync.sh /usr/local/bin/
-```
-
-4. Setup apache to host the yum repository 
- 
- ```bash
-yum install httpd
-systemctl start httpd.service
-systemctl enable httpd.service
-```
-
-5. Set one of the masters to update the repository at 4am every day via cron
-
-6. Install DHCP server   
-
- ```bash
-yum install dhcp
-mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.`date +%s`
-cp /home/devops/git/saltstack-base/dhcp/files/dhcpd.conf /etc/dhcp/
-systemctl start dhcpd.service
-systemctl enable dhcpd.service
-```
-
-7. Assign the master role:
-
- ```bash
-# salt 'workstation2' grains.setvals "{'saltstack-base':{'role':'master'}}"
-```
-
-8. Setup PXE server 
-
- ```bash
-**TODO**
-```
-
-### Recommended 
-
-1. Test and burn-in the hardware using Prime95
-
-Download [Prime95](http://www.mersenne.org/ftp_root/gimps/p95v285.linux64.tar.gz)
 
 ### Setup Salt Minions
 
