@@ -8,65 +8,32 @@ Other projects that use this repository:
 
 Use SaltStack (Salt) in conjunction with PXE server/kickstart to install and provision multiple bare-metal machines running CentOS.
 
-In this project, the Salt masters are installed manually, and the minions are installed via Kickstart.  
+In this project, the Salt masters are installed manually, and the minions are installed via PXE/kickstart.  
 
 Bare-metal machines take on one of two roles:
-- Salt masters
-- Salt minions
+- Salt master 
+- Salt minion 
 
-### Lab Setup
+### Lab Infrastructure
 
-- 3  MintBox2 (Salt Masters)
-- 10 [Supermicro SYS-5108A](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101837) (Salt Minions)
+- 3 [MintBox2](http://www.fit-pc.com/web/products/mintbox/mintbox-2/)
+- 10 [Supermicro SYS-5108A](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101837)
 - 2 TP-Link TL-SG-3216 L2 Switches
 - 2 TP-Link TL-SG-3424 L2 Switches
 - 2 Dell Powerconnect 6224 L3 Switches
 
-### Setup Salt Master
+The MintBox2 machines are the Salt masters running CentOS 7 with the MATE desktop.  The Supermicros are the Salt minions running CentOS 6 or 7.
 
-### Install CentOS 7
+Network infrastructure is described [here](notes/centos-7-manual.md)
 
-1. Install CentOS 7 from a media image.  These steps are documented [HERE](notes/centos-7-manual.md#manual-install-from-media)  
+### Lab Setup
 
-The process will creae a **devops** user with the administrator role during installation.
+1. [Install CentOS 7 on MintBox2](notes/centos-7-manual.md#manual-install-from-media)
+2. [Install Salt Master on MintBox2]() 
+3. [Setup PXE Server on MintBox2]()
+4. [Setup Supermicros (or other MintBox2) via PXE Server]()
+5. [Setup Salt Minions on Supermicros]()
 
-### Setup Base Environment 
-
-Boot into the OS and login as devops user.  Open a terminal window and `sudo su -` to root.
-
-1. Update the OS and install the EPEL: 
-
- ```bash
-yum update
-yum install epel-release
-```
-
-2. Install MATE Desktop: `yum groupinstall "MATE Desktop"`
-3. Using `visudo` allow devops user to sudo without password. Add `devops ALL=(ALL) NOPASSWD: ALL` to the end of the file.
-4. Disable SELinux and iptables:
-
- ```bash
-sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
-systemctl stop iptables.service
-systemctl disable iptables.service
-```   
-
-Reboot to implement the change: `reboot`
-
-6. Log back in using MATE as **devops** user. Open a terminal window.
-6. Verify that SELinux and iptables are disabled.
- ```bash
-[devops@workstation1 ~]$ sudo su -
-Last login: Tue Feb 17 19:56:47 EST 2015 on pts/0
-[root@workstation1 ~]# sestatus
-SELinux status:                 disabled
-[root@workstation1 ~]# systemctl status iptables.service
-iptables.service - IPv4 firewall with iptables
-   Loaded: loaded (/usr/lib/systemd/system/iptables.service; disabled)
-   Active: inactive (dead)
-
-[root@workstation1 ~]# 
-```
 
 ### Setup Salt Master
 
