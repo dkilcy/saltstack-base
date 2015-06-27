@@ -6,7 +6,7 @@ Perform all these steps on the workstation node as **root** user
 1. Install the Salt master 
 
  ```bash
- # yum install salt-master
+ yum install salt-master
  ```
 
 2. Verify the installation
@@ -19,15 +19,16 @@ Perform all these steps on the workstation node as **root** user
 
 3. Create the /etc/salt/master.d file to hold configuration files
 
-```bash
-# mkdir -p /etc/salt/master.d
-```
+ ```bash
+ mkdir -p /etc/salt/master.d
+ ```
 
 4. Star the Salt master
-```bash
-systemctl start salt-master.service
-systemctl enable salt-master.service
-```
+
+ ```bash
+ systemctl start salt-master.service
+ systemctl enable salt-master.service
+ ```
 
 5. Install the Salt minion
 
