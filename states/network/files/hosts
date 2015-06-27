@@ -9,8 +9,6 @@
 # *.store   - Storage Network
 ###############################################################################
 
-###############
-
 10.0.0.5        workstation1.mgmt workstation1
 10.0.0.6        workstation2.mgmt workstation2 salt ntp yumrepo pxeserver
 10.0.0.7        workstation3.mgmt workstation3
@@ -35,6 +33,8 @@
 
 10.0.0.51       conn1.mgmt conn1
 10.0.0.51       conn2.mgmt conn2
+
+10.0.0.61       super.mgmt super
 
 ###############
 
