@@ -33,7 +33,7 @@ Perform all these steps on the workstation node as **root** user
 5. Install the Salt minion
 
  ```bash
- # yum install salt-minion
+ yum install salt-minion
  ```
 
 6. Verify the installation
@@ -47,7 +47,7 @@ Perform all these steps on the workstation node as **root** user
 7. Set the minion ID as the short hostname
 
  ```bash
- # hostname -s > /etc/salt/minion_id
+ hostname -s > /etc/salt/minion_id
  ```
 
 8. Start the Salt minion 
@@ -60,27 +60,27 @@ Perform all these steps on the workstation node as **root** user
 9. Add the minion to the master.
 
  ```bash
-[root@workstation2 ~]# salt-key -L
-Accepted Keys:
-Unaccepted Keys:
-workstation2
-Rejected Keys:
+ [root@workstation2 ~]# salt-key -L
+ Accepted Keys:
+ Unaccepted Keys:
+ workstation2
+ Rejected Keys:
 ```
 
  ```bash
-[root@workstation2 ~]# salt-key -A 
-The following keys are going to be accepted:
-Unaccepted Keys:
-workstation2
-Proceed? [n/Y]  
-Key for minion workstation2 accepted.
+ [root@workstation2 ~]# salt-key -A 
+ The following keys are going to be accepted:
+ Unaccepted Keys:
+ workstation2
+ Proceed? [n/Y]  
+ Key for minion workstation2 accepted.
 ```
 
 10. Test the installation
 
  ```bash
-salt '*' test.ping
-```
+ salt '*' test.ping
+ ```
 
 11. Update the local minion with the pillar data as root user.
 
