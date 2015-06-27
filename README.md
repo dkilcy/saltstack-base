@@ -41,7 +41,19 @@ salt '<id>' grains.setvals "{'saltstack-base:{'role':'master'}}"
 salt '<id>' grains.setvals "{'saltstack-base:{'role':'minion'}}"
 ```
 
-#### Calling Highstate:
+#### Refreshing Pillar
+
+ ```bash
+ salt '*' saltutil.refresh_pillar
+ ```
+
+### Sync All
+
+```bash
+salt '*' saltutil.sync_all
+```
+  
+#### Calling Highstate
 
  ```bash
 salt '<minion_id'> state.highstate
