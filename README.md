@@ -4,6 +4,7 @@ Other projects that use this repository:
 - [kilo-saltstack](https://github.com/dkilcy/kilo-saltstack) - OpenStack 3+ node architecture on CentOS 7
 - [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
 
+Contents:
 1. [Introduction](#introduction)
 2. [Lab Infrastructure](#lab-infrastructure)
 3. [Lab Setup](#labsetup)
