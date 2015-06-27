@@ -1,12 +1,12 @@
 
 
-### Network
+## Network
 
 1. [General](#general)
-2. [CentOS 7 Teaming)(#centos-7-teaming)
+2. [CentOS 7 Teaming](#centos-7-teaming)
 3. [CentOS 6.5 Bonding](#centos-6.5-bonding)
 
-#### General
+### General
 
 - Stats: `ss`
 - Add default route `ip route add default via 192.168.1.1 dev enp5s0`
@@ -103,11 +103,11 @@ ports:
 
 ```
 
-#### CentOS 6.5 Bonding
+### CentOS 6.5 Bonding
 
 Bonding runs in user and kernel space.
 
-##### Example: eth1/eth2 bonded to bond0
+#### Example: eth1/eth2 bonded to bond0
 
 Create /etc/modprobe.d/bonding.conf to load the kernel module
 ```
@@ -226,4 +226,4 @@ Slave queue ID: 0
 
 #### References:
 - [RHEL: Linux Bond / Team Multiple Network Interfaces (NIC) Into a Single Interface](http://www.cyberciti.biz/tips/linux-bond-or-team-multiple-network-interfaces-nic-into-single-interface.html)
-- [http://techgnat.blogspot.com/2014/12/centos-teaming-with-vlans.html]
+- [CentOS Teaming with VLANS](http://techgnat.blogspot.com/2014/12/centos-teaming-with-vlans.html)
