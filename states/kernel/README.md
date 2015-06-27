@@ -18,8 +18,7 @@
 
 #### References
 
-- [https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Performance_Tuning_Guide/chap-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Storage_and_File_Systems.html#sect-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Considerations-Generic_tuning_considerations_for_file_systems](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Performance_Tuning_Guide/chap-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Storage_and_File_Systems.html#sect-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Considerations-Generic_tuning_considerations_for_file_systems)
-- [https://communities.bmc.com/docs/DOC-10204](https://communities.bmc.com/docs/DOC-10204)
-- [https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/ch04s02s03.html](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Performance_Tuning_Guide/ch04s02s03.html)
-- [http://forum.osmc.tv/showthread.php?tid=6825](http://forum.osmc.tv/showthread.php?tid=6825)
+- [Red Hat Enterprise Linux 6 Documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/index.html)
+- [Red Hat Enterprise Linux 7 Documentation](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/index.html)
+
 
