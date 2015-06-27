@@ -4,7 +4,7 @@
 
 1. [General](#general)
 2. [CentOS 7 Teaming](#centos-7-teaming)
-3. [CentOS 6.5 Bonding](#centos-6.5-bonding)
+3. [CentOS 6 Bonding](#centos-6-bonding)
 
 ### General
 
@@ -103,7 +103,7 @@ ports:
 
 ```
 
-### CentOS 6.5 Bonding
+### CentOS 6 Bonding
 
 Bonding runs in user and kernel space.
 
