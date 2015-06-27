@@ -46,25 +46,31 @@ salt '<id>' grains.setvals "{'saltstack-base:{'role':'minion'}}"
 
 #### Useful Commands
 
-Common:
-- Run a command: `salt '*' cmd.run 'date'`
-- Service restart: `salt '*' service.restart ntp`
-- View a file: `salt '*' cp.get_file_str /etc/hosts`
-- Force a pillar refresh:  `salt '*' saltutil.refresh_pillar`
-- Sync all: `salt '*' saltutil.sync_all`
-- Calling Highstate: `salt '*' state.highstate`
-- Copy a file: `salt-cp '*' /local/file /remote/file`
-
 Debug and output options:
+- Version: `salt --version`
 - Output data using pprint: `salt 'store1' grains.items --output=pprint`
 - Output data using json: `salt 'store1' grains.items --output=json`
 - State output mixed: `salt 'store1' test.ping --state-output=mixed`
-- Debug level: `salt 'store1' --log-level=debug --state-output=mixed state.highstate test=True`'
+- Debug level: `salt 'store1' --log-level=debug --state-output=mixed state.highstate test=True`
 - Verbose: `salt -v --log-level=debug --state-output=mixed 'store1' state.highstate test=True`
-- Version: `salt --version`
+
+Common commands:
+- Run a command: `salt '*' cmd.run 'date'`
+- Service restart: `salt '*' service.restart ntp`
+- View a file: `salt '*' cp.get_file_str /etc/hosts`
+- Look for a package: `salt 'store1' pkg.list_pkgs --output=json | grep ntp`
+- Copy a file: `salt-cp '*' /local/file /remote/file`
+
+State Execution:
+- Force a pillar refresh:  `salt '*' saltutil.refresh_pillar`
+- Sync all: `salt '*' saltutil.sync_all`
+- Calling Highstate: `salt '*' state.highstate`
 
 Jobs:
 - Lookup result of a job: `salt-run jobs.lookup_jid 20150627120734094928`
+
+Help:
+- Show module docstrings: `salt 'store1' sys.doc test.ping`
 
 ### References
 
