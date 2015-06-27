@@ -15,7 +15,8 @@ Using wget:
  ```bash
 salt 'workstation1' state.sls pxeserver
 ```
-##### State file does the following:
+
+#### State file does the following
 - Installs dhcp, httpd, syslinux, tftp-server and vsftpd
 - Creates the /var/lib/repo and /var/tmp/iso directories
 - Creates a symbolic link from /var/lib/repo to /var/www/html/repo
