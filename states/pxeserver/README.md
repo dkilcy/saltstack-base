@@ -4,7 +4,7 @@
 1. Populate the /var/tmp/iso directory with image files
 Using rsync:
  ```bash
-rsync -avrz /var/tmp/iso* root@workstation2:/var/tmp/iso
+rsync -avrz /var/tmp/iso/* root@workstation2:/var/tmp/iso/
 ```
 Using wget:
  ```bash
@@ -32,7 +32,7 @@ salt 'workstation1' state.sls pxeserver
 3. Populate the /var/lib/repo directory using rsync or reposync.sh  
 Using rsync: 
  ```bash
-rsync -avrz /var/lib/repo/* root@workstation2:/var/lib/repo
+rsync -avrz /var/lib/repo/* root@workstation2:/var/lib/repo/
 ```
 Using reposync.sh: 
  ```bash
@@ -45,3 +45,8 @@ Using reposync.sh:
 - Set the kickstart network device: `ksdev=enp0s20f0`
 - Set the kickstart URL: `ks=http://10.0.0.6/base.ks` 
  
+##### References
+
+- [Setting up a ‘PXE Network Boot Server’ for Multiple Linux Distribution Installations in RHEL/CentOS 7](http://www.tecmint.com/install-pxe-network-boot-server-in-centos-7/)
+- [PXE Boot Linux Install CentOS 6 – Part 1](https://conradjonesit.wordpress.com/2013/07/07/pxe-boot-linux-install-centos-6/)
+
