@@ -47,10 +47,13 @@ salt '<id>' grains.setvals "{'saltstack-base:{'role':'minion'}}"
 #### Useful Commands
 
 Common:
+- Run a command: `salt '*' cmd.run 'date'`
+- Service restart: `salt '*' service.restart ntp`
 - View a file: `salt '*' cp.get_file_str /etc/hosts`
 - Force a pillar refresh:  `salt '*' saltutil.refresh_pillar`
 - Sync all: `salt '*' saltutil.sync_all`
 - Calling Highstate: `salt '*' state.highstate`
+- Copy a file: `salt-cp '*' /local/file /remote/file`
 
 Debug and output options:
 - Output data using pprint: `salt 'store1' grains.items --output=pprint`
