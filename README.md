@@ -63,6 +63,9 @@ Debug and output options:
 - Verbose: `salt -v --log-level=debug --state-output=mixed 'store1' state.highstate test=True`
 - Version: `salt --version`
 
+Jobs:
+- Lookup result of a job: `salt-run jobs.lookup_jid 20150627120734094928`
+
 ### References
 
 - [Salt Module Index](http://docs.saltstack.com/en/latest/salt-modindex.html)
