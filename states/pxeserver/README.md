@@ -3,15 +3,18 @@
 
 1. Populate the /var/tmp/iso directory with image files
 Using wget:
+
  ```bash
  cd /var/tmp/iso
  wget http://mirror.umd.edu/centos/7/isos/x86_64/CentOS-7-x86_64-Everything-1503-01.iso
  wget http://mirror.umd.edu/centos/6/isos/x86_64/CentOS-6.6-x86_64-bin-DVD1.iso
  ```
 Using rsync from an existing workstation:
+
  ```bash
 rsync -avrz /var/tmp/iso/* root@workstation2:/var/tmp/iso/
 ```
+
 2. Call the pxeserver state to setup the PXE Server components
  ```bash
 salt 'workstation1' state.sls pxeserver
@@ -31,10 +34,12 @@ salt 'workstation1' state.sls pxeserver
 
 
 3. Populate the /var/lib/repo directory using rsync or reposync.sh  
+
 Using reposync.sh: 
  ```bash
 /usr/local/bin/reposync.sh
 ```
+
 Using rsync from an existing workstation: 
  ```bash
 rsync -avrz /var/lib/repo/* root@workstation2:/var/lib/repo/
