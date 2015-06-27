@@ -108,6 +108,9 @@ dhcp_service:
   service.running:
     - name: dhcpd
     - enable: True
+    - reload: True
+    - watch:
+      - file: /etc/dhcp/dhcpd.conf
 
 vsftpd_service:
   service.running:

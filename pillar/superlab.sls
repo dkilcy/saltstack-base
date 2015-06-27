@@ -23,7 +23,21 @@ kernel:
 #    vm.min_free_kbytes: 2000000
 
 systems:
-{% if grains['id'] == 'store1' %}
+{% if grains['id'] == 'workstation1' %}
+  dhcp:
+    subnet: 10.0.0.0
+    range: 10.0.0.0 10.0.0.16
+    domain-name-servers:
+      - 10.0.0.5
+      - workstation1.mgmt
+{% elif grains['id'] == 'workstation2' %}
+  dhcp:
+    subnet: 10.0.0.0
+    range: 10.0.0.16 10.0.0.32
+    domain-name-servers:
+      - 10.0.0.6
+      - workstation2.mgmt
+{% elif grains['id'] == 'store1' %}
   network:
     bond0: 
       ipaddr: 10.0.0.41
