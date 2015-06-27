@@ -1,3 +1,5 @@
+### Creating Bootable Media
+
 #### Create USB stick with CentOS 7 Network Install image
 
 1. Copy the contents of the ISO to a directory
