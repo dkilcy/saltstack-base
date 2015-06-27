@@ -16,7 +16,7 @@ Using wget:
 salt 'workstation1' state.sls pxeserver
 ```
 
-#### State file does the following
+##### State file does the following
 - Installs dhcp, httpd, syslinux, tftp-server and vsftpd
 - Creates the /var/lib/repo and /var/tmp/iso directories
 - Creates a symbolic link from /var/lib/repo to /var/www/html/repo
@@ -28,7 +28,9 @@ salt 'workstation1' state.sls pxeserver
 - Copies vminuz and initrd.img to the pxeboot directories
 - Copies the reposync.sh script to /usr/local/bin
 
+
 3. Populate the /var/lib/repo directory using rsync or reposync.sh  
+
 Using rsync: 
  ```bash
 rsync -avrz /var/lib/repo/* root@workstation2:/var/lib/repo
