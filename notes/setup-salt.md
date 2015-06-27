@@ -91,5 +91,5 @@ Perform all these steps on the workstation node as **root** user
 12. Set the grains for the Salt master:
 
  ```bash
- salt 'workstation2' grains.setvals "{'saltstack-base:{'role':'master'}}"
+ salt 'workstation2' grains.setvals "{'saltstack-base':{'role':'master'}}"
  ```
