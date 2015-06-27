@@ -3,7 +3,7 @@
 
 
 1. Call the pxeserver state to setup the PXE Server components
-```
+ ```bash
 salt 'workstation1' state.sls pxeserver
 ```
 
