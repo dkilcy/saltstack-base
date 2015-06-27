@@ -18,9 +18,9 @@ cd ~/git
 git clone https://github.com/dkilcy/saltstack-base.git
 ```
 
-3. Create a YAML file to hold the customized Salt configuration.  As **root** user, execute `vi /etc/salt/master.d/99-salt-envs.conf` and add the following to the new file:
+4. Create a YAML file to hold the customized Salt configuration.  As **root** user, execute `vi /etc/salt/master.d/99-salt-envs.conf` and add the following to the new file:
 
-```yaml
+ ```yaml
 file_roots:
   base:
     - /srv/salt/base/states
@@ -29,14 +29,14 @@ pillar_roots:
     - /srv/salt/base/pillar
 ```
 
-4. Point Salt to the development environment as **root** user.
+5. Point Salt to the development environment as **root** user.
 
  ```bash
 mkdir -p /srv/salt
 ln -sf /home/devops/git/saltstack-base /srv/salt/base
 ```
 
-5. Copy the hosts file from /home/devops/git/saltstack-base/network/files/hosts to /etc/hosts
+6. Copy the hosts file from /home/devops/git/saltstack-base/network/files/hosts to /etc/hosts
 ```
 cp /home/devops/git/saltstack-base/network/files/hosts /etc/
 ```
