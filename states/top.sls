@@ -6,6 +6,7 @@ base:
     - selinux
     - iptables
     - yumrepo
+    - packages
     - ssd
 {% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
     #- cpupower
@@ -14,7 +15,6 @@ base:
 {% endif %}
     - ntp.server
     - users
-    - vim
 
   'G@saltstack-base:role:minion':
     - local
@@ -22,6 +22,7 @@ base:
 # NOTE: iptables is required for juno-saltstack
 #    - iptables
     - yumrepo
+    - packages
     - ssd
 {% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
     - cpupower
@@ -30,5 +31,3 @@ base:
 {% endif %}
     - ntp.client
     - users
-    - vim
-

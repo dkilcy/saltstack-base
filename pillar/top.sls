@@ -1,6 +1,6 @@
 
 base:
   '*':
-    - systems
-    - users
-    - pkg
+    - packages
+    - superlab
+

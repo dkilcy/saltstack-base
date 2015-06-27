@@ -9,12 +9,10 @@
 /root/.vimrc:
   file.managed:
     - name: /root/.vimrc
-    - source: salt://vim/.vimrc
+    - source: salt://users/files/vimrc
     - mode: 644
     - user: root
     - group: root
-    - require:
-      - pkg: {{ pillar['pkgs']['vim'] }}
 
 {% for user in user_list %}
 
@@ -41,12 +39,10 @@
 {{ user.name }}_vimrc:
   file.managed:
     - name: /home/{{ user.name }}/.vimrc
-    - source: salt://vim/.vimrc
+    - source: salt://users/files/vimrc
     - mode: 644
     - user: {{ user.name }}
     - group: {{ user.group }}
-    - require: 
-      - pkg: {{ pillar['pkgs']['vim'] }} 
 
 /home/{{ user.name }}/.bashrc:
   file.append:
