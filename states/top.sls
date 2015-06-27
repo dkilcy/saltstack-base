@@ -5,6 +5,8 @@ base:
     - local
     - selinux
     - iptables
+    - network
+    - kernel
     - yumrepo
     - packages
     - ssd
@@ -15,12 +17,15 @@ base:
 {% endif %}
     - ntp.server
     - users
+    - dhcp.server
 
   'G@saltstack-base:role:minion':
     - local
     - selinux
 # NOTE: iptables is required for juno-saltstack
 #    - iptables
+    - network
+    - kernel
     - yumrepo
     - packages
     - ssd
