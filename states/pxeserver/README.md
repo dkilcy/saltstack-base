@@ -1,7 +1,8 @@
 
 ### PXE Server Setup
 
-1. Populate the /var/tmp/iso directory with image files
+1. Populate the /var/tmp/iso directory with image files.  
+
 Using wget:
 
  ```bash
