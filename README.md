@@ -36,18 +36,21 @@ Network infrastructure is described [here](notes/network.md)
 
 ### Assigning Roles to Machines
 
+```
+salt '<id>' grains.setvals "{'saltstack-base:{'role':'master'}}"
+salt '<id>' grains.setvals "{'saltstack-base:{'role':'minion'}}"
+```
 
 ### Scratch
 
-3. TODO: setup networking, just for storage nodes
+TODO: setup networking, just for storage nodes
 ```bash
 salt '<minion_id>' state.sls iptables saltenv=base
 salt '<minion_id>' state.sls selinux saltenv=base
 salt '<minion_id>' state.sls network.bond saltenv=base
 ```
-From console: `reboot`
 
-4. TODO: setup networking for OpenStack 
+TODO: setup networking for OpenStack 
 ```
 salt 'controller*' state.sls network.team
 salt 'network*' state.sls network.team
