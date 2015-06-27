@@ -3,6 +3,14 @@
 
 #### Overview
 
+1. Install the CentOS 7 Operating System
+2. Update the OS and install the EPEL
+3. Disable SELinux and iptables
+4. Install MATE Desktop
+5. Setup devops user to sudo without a password
+6. Setup NTP Server
+7. Verify the changes
+
 #### Install CentOS 7
 
 1. Boot from media
@@ -30,21 +38,16 @@
 22. Reboot
 23. Accept the License agreement
 24. Reboot 
+25. Login as **devops** user.  Open a terminal window and `sudo su -` to root.
 
-#### Post-Install Setup
-
-Boot into the OS and login as **devops** user.  Open a terminal window and `sudo su -` to root.
-
-1. Update the OS and install the EPEL: 
+#### Update the OS and install the EPEL 
 
  ```bash
 yum update
 yum install epel-release
 ```
 
-2. Install MATE Desktop: `yum groupinstall "MATE Desktop"`
-3. Using `visudo` allow devops user to sudo without password. Add `devops ALL=(ALL) NOPASSWD: ALL` to the end of the file.
-4. Disable SELinux and iptables:
+#### Disable SELinux and iptables
 
  ```bash
 sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
@@ -52,22 +55,20 @@ systemctl stop iptables.service
 systemctl disable iptables.service
 ```   
 
-Reboot to implement the change: `reboot`
+Reboot to implement the change
 
-6. Log back in using MATE as **devops** user. Open a terminal window.
-6. Verify that SELinux and iptables are disabled.
+#### Install MATE Desktop
+
  ```bash
-[devops@workstation1 ~]$ sudo su -
-Last login: Tue Feb 17 19:56:47 EST 2015 on pts/0
-[root@workstation1 ~]# sestatus
-SELinux status:                 disabled
-[root@workstation1 ~]# systemctl status iptables.service
-iptables.service - IPv4 firewall with iptables
-   Loaded: loaded (/usr/lib/systemd/system/iptables.service; disabled)
-   Active: inactive (dead)
-
-[root@workstation1 ~]# 
+yum groupinstall "MATE Desktop"
 ```
+
+#### Setup devops user to sudo without password
+
+Using `visudo` allow devops user to sudo without password.  
+Add `devops ALL=(ALL) NOPASSWD: ALL` to the end of the file.
+
+#### Setup NTP Server
 
 1. Setup ntpd on the workstation to be an NTP time server
 
@@ -99,9 +100,26 @@ ind assid status  conf reach auth condition  last_event cnt
 [root@workstation1 ~]# 
 ```
 
+#### Verify the changes
 
+1. Reboot: `reboot`
+2. Log back in using MATE as **devops** user. Open a terminal window.
+2. Verify that SELinux and iptables are disabled.
 
-### Recommended 
+ ```bash
+[devops@workstation1 ~]$ sudo su -
+Last login: Tue Feb 17 19:56:47 EST 2015 on pts/0
+[root@workstation1 ~]# sestatus
+SELinux status:                 disabled
+[root@workstation1 ~]# systemctl status iptables.service
+iptables.service - IPv4 firewall with iptables
+   Loaded: loaded (/usr/lib/systemd/system/iptables.service; disabled)
+   Active: inactive (dead)
+
+[root@workstation1 ~]# 
+```
+
+#### Recommended 
 
 1. Test and burn-in the hardware using Prime95
 
