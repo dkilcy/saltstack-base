@@ -30,68 +30,16 @@ Network infrastructure is described [here](notes/network.md)
 
 1. [Install CentOS 7 on MintBox2](notes/centos-7-manual.md)
 2. [Setup Git and saltstack-base repository on MintBox2](notes/saltstack-base-setup.md)
-2. [Install Salt Master on MintBox2](notes/install-salt-master) 
-3. [Setup PXE Server on MintBox2](notes/pxe-server-setup)
-4. [Setup Supermicros (or other MintBox2) via PXE Server](notes/pxe-install)
-5. [Setup Salt Minions on Supermicros](notes/install-salt-minion)
+2. [Setup Salt Master on MintBox2](notes/setup-salt-master.md) 
+3. [Setup PXE Server on MintBox2](notes/pxe-server-setup.md)
+4. [Install Supermicros (or other MintBox2) via PXE Server](notes/pxe-install.md)
+5. [Setup Salt Minions on Supermicros](notes/setup-salt-minion.md)
+
+### Assigning Roles to Machines
 
 
-6. Configure and start the Salt minion on the workstation machine as **root** user.
+### Scratch
 
- ```bash
-hostname -s > /etc/salt/minion_id
-
-systemctl start salt-minion.service
-systemctl enable salt-minion.service
-```
-
-7. Add the minion to the master as root user.
-
- ```bash
-[root@workstation1 minion.d]# salt-key -L
-Accepted Keys:
-Unaccepted Keys:
-workstation1
-Rejected Keys:
-[root@workstation1 minion.d]# salt-key -A 
-The following keys are going to be accepted:
-Unaccepted Keys:
-workstation1
-Proceed? [n/Y]  
-Key for minion workstation1 accepted.
-```
-
-6. Test the installation as root user.
-
- ```bash
-salt '*' test.ping
-```
-
-7. Update the local minion with the pillar data as root user.
-
- ```bash
-salt '*' saltutil.refresh_pillar
-```
-
-8. Set the grains for the Salt master:
-
- ```bash
-salt 'workstation*' grains.setvals "{'saltstack-base:{'role':'master'}}"
-```
-
-### Setup Salt Minions
-
-1. Install OS from PXE server
-2. **From the Salt master:** Accept the key and set the role grain for the minion: 
-
- ```bash
-salt-key -L
-salt '*' test.ping
-salt '*' saltutil.refresh_pillar
-salt 'store*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
-```
- 
- 
 3. TODO: setup networking, just for storage nodes
 ```bash
 salt '<minion_id>' state.sls iptables saltenv=base
