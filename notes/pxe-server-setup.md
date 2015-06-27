@@ -1,12 +1,33 @@
 
 ### PXE Server
 
-- Setup DHCP
-- Install Apache
-- Setup the yum repository
-- Setup the PXE server
+1. Install Apache to Host the YUM Repository 
+2. Setup the local YUM Repository
+3. Setup DHCP Server
+4. Setup PXE Server
+5. Verify the Installation
 
-6. Install DHCP server   
+#### Install Apache to Host the YUM Repository 
+ 
+ ```bash
+yum install httpd
+systemctl start httpd.service
+systemctl enable httpd.service
+```
+
+##### Setup the local YUM Repository
+
+1. Install the reposync.sh tool as **root** user.
+
+ ```bash
+cp /home/devops/git/saltstack-base/states/yumrepo/files/reposync.sh /usr/local/bin/
+```
+
+2. 
+3 Verify the Installation
+
+#### Setup DHCP Server
+
 
  ```bash
 yum install dhcp
@@ -16,21 +37,9 @@ mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.`date +%s`
 #systemctl enable dhcpd.service
 ```
 
-4. Setup apache to host the yum repository 
- 
- ```bash
-yum install httpd
-systemctl start httpd.service
-systemctl enable httpd.service
-```
 
-3. Install the reposync.sh tool as **root** user.
 
- ```bash
-cp /home/devops/git/saltstack-base/states/yumrepo/files/reposync.sh /usr/local/bin/
-```
-
-Install and setup PXE server on CentOS 7.  
+##### Alternate: Use dnsmasq instead of bind 
 
 Install packages:
 - dnsmasq: provides DNS and DHCP services
@@ -127,13 +136,6 @@ menu label ^3) Boot from local drive
 ### Test
 
 ftp://10.0.0.6/pub/
-
-## Things to check
-- Missing:
-  - ftp://10.0.0.6/pub/images/product.img
-  - ftp://10.0.0.6/pub/images/updates.img
-
-
 
 ##### References
 
