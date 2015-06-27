@@ -34,35 +34,21 @@ Network infrastructure is described [here](notes/network.md)
 3. [Setup PXE Server on MintBox2](notes/pxe-server-setup.md)
 4. [Install Supermicros (or other MintBox2) via PXE Server](notes/pxe-install.md)
 
-### Assigning Roles to Machines
+#### Assigning Roles to Machines
 
-```
+ ```bash
 salt '<id>' grains.setvals "{'saltstack-base:{'role':'master'}}"
 salt '<id>' grains.setvals "{'saltstack-base:{'role':'minion'}}"
 ```
 
-### Scratch
+#### Calling Highstate:
 
-TODO: setup networking, just for storage nodes
-```bash
-salt '<minion_id>' state.sls iptables saltenv=base
-salt '<minion_id>' state.sls selinux saltenv=base
-salt '<minion_id>' state.sls network.bond saltenv=base
-```
-
-TODO: setup networking for OpenStack 
-```
-salt 'controller*' state.sls network.team
-salt 'network*' state.sls network.team
-salt 'compute*' state.sls network.team
-```
-From console: `systemctl restart network.service`
-
-```bash
+ ```bash
 salt '<minion_id'> state.highstate
 ```
 
-#### References
+### References
 
+- [Salt Module Index](http://docs.saltstack.com/en/latest/salt-modindex.html)
 
  
