@@ -25,7 +25,8 @@ pxeserver_pkgs:
   file.managed:
     - name: /etc/dhcp/dhcpd.conf
     - source: salt://pxeserver/files/dhcpd.conf
-
+    - template: jinja
+    
 /var/lib/tftpboot/centos/7:
   file.directory:
     - name: /var/lib/tftpboot/centos/7
