@@ -1,5 +1,5 @@
 
-### Setup Salt Master and Minion on MintBox2
+### Setup Salt Master and Minion
 
 Perform all these steps on the workstation node as **root** user
 
