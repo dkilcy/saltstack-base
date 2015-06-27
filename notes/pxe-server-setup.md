@@ -6,6 +6,7 @@
 3. [Setup DHCP Server](#setup-dhcp-server)
 4. [Setup PXE Server](#setup-pxe-server)
 5. [Verify the Installation](#verify-the-installation)
+6. [References](#references)
 
 #### Install Apache to Host the YUM Repository 
  
