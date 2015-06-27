@@ -6,20 +6,21 @@
 Using wget:
 
  ```bash
- cd /var/tmp/iso
- wget http://mirror.umd.edu/centos/7/isos/x86_64/CentOS-7-x86_64-Everything-1503-01.iso
- wget http://mirror.umd.edu/centos/6/isos/x86_64/CentOS-6.6-x86_64-bin-DVD1.iso
- ```
+  cd /var/tmp/iso
+  wget http://mirror.umd.edu/centos/7/isos/x86_64/CentOS-7-x86_64-Everything-1503-01.iso
+  wget http://mirror.umd.edu/centos/6/isos/x86_64/CentOS-6.6-x86_64-bin-DVD1.iso
+  ```
 Using rsync from an existing workstation:
 
  ```bash
-rsync -avrz /var/tmp/iso/* root@workstation2:/var/tmp/iso/
-```
+ rsync -avrz /var/tmp/iso/* root@workstation2:/var/tmp/iso/
+ ```
 
 2. Call the pxeserver state to setup the PXE Server components
+
  ```bash
-salt 'workstation1' state.sls pxeserver
-```
+ salt 'workstation1' state.sls pxeserver
+ ```
 
  State file does the following
  - Installs dhcp, httpd, syslinux, tftp-server and vsftpd
