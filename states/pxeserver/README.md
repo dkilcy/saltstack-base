@@ -33,7 +33,7 @@ salt 'workstation1' state.sls pxeserver
 3. Populate the /var/lib/repo directory using rsync or reposync.sh  
 Using reposync.sh: 
  ```bash
-/usr/local/bin/reposync.sh`
+/usr/local/bin/reposync.sh
 ```
 Using rsync from an existing workstation: 
  ```bash
