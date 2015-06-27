@@ -3,15 +3,15 @@
 
 #### Overview
 
-1. Install the CentOS 7 Operating System
-2. Update the OS and install the EPEL
-3. Disable SELinux and iptables
-4. Install MATE Desktop
-5. Setup devops user to sudo without a password
-6. Setup NTP Server
-7. Verify the changes
+1. [Install the CentOS 7 Operating System]()
+2. [Update the OS and install the EPEL]()
+3. [Disable SELinux and iptables]()
+4. [Install MATE Desktop]()
+5. [Setup devops user to sudo without a password]()
+6. [Setup NTP Server]()
+7. [Verify the changes]()
 
-#### Install CentOS 7
+[1]: #### Install CentOS 7
 
 1. Boot from media
 2. Keyboard and Language 
