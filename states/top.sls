@@ -17,7 +17,6 @@ base:
 {% endif %}
     - ntp.server
     - users
-    - dhcp.server
 
   'G@saltstack-base:role:minion':
     - local
