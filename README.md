@@ -72,6 +72,8 @@ Jobs:
 Help:
 - Show module docstrings: `salt 'store1' sys.doc test.ping`
 
+[Salt Grains](nodes/grains.md)
+
 ### References
 
 - [Salt Module Index](http://docs.saltstack.com/en/latest/salt-modindex.html)
