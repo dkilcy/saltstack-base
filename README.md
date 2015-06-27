@@ -47,8 +47,8 @@ Network infrastructure is described [here](notes/network-setup.md)
 #### Assigning Roles to Machines
 
  ```bash
-salt '<id>' grains.setvals "{'saltstack-base:{'role':'master'}}"
-salt '<id>' grains.setvals "{'saltstack-base:{'role':'minion'}}"
+salt '<id>' grains.setvals "{'saltstack-base':{'role':'master'}}"
+salt '<id>' grains.setvals "{'saltstack-base':{'role':'minion'}}"
 ```
 
 ### Useful Commands
@@ -57,7 +57,6 @@ Debug and output options:
 - Version: `salt --version`
 - Output data using pprint: `salt 'store1' grains.items --output=pprint`
 - Output data using json: `salt 'store1' grains.items --output=json`
-- State output mixed: `salt 'store1' test.ping --state-output=mixed`
 - Debug level: `salt 'store1' --log-level=debug --state-output=mixed state.highstate test=True`
 - Verbose: `salt -v --log-level=debug --state-output=mixed 'store1' state.highstate test=True`
 

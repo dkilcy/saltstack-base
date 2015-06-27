@@ -2,12 +2,9 @@
 ### yumrepo
 
 For configuring minions to use the local yum repository on the Salt master (aliased as `yumrepo`).  
-**This is not to be run on the Salt master.**
 
 Contents: 
 - init.sls: 
-  - Cleans out the contents of /etc/yum.repos.d excluding `*local.repo*`
-  - Copies the `local.repo` file to /etc/yum.repos.d
 - files:
   - `local.repo`: Points the base,updates,extras and epel repos to the local mirror aliased as `yumrepo`
 
@@ -20,5 +17,6 @@ Contents:
 - Download an rpm and all its dependencies: `repotrack salt-master`
 - List available repositories: `yum repolist`
 - Clean yum cache: `yum clean all`
+- Info about package: `yum info git`
 
 ### 

@@ -20,3 +20,9 @@
     - name: /etc/yum.repos.d/local.repo
     - source: salt://yumrepo/files/local.repo
     - replace: True
+
+yum_clean_all:
+  cmd.run:
+    - name: 'yum clean all'
+    - require:
+      - file: /etc/yum.repos.d/local.repo
