@@ -72,7 +72,7 @@ Jobs:
 Help:
 - Show module docstrings: `salt 'store1' sys.doc test.ping`
 
-[Salt Grains](nodes/grains.md)
+[Salt Grains](notes/grains.md)
 
 ### References
 
