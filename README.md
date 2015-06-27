@@ -27,7 +27,7 @@ The MintBox2 machines are the Salt masters running CentOS 7 with the MATE deskto
 - [/etc/hosts](states/network/files/hosts) file
 - [/etc/dhcp/dhcpd.conf](states/dhcp/files/dhcpd.conf) file
 
-Network infrastructure is described [here](notes/network.md)
+Network infrastructure is described [here](notes/network-setup.md)
 
 ### Lab Setup
 
