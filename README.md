@@ -4,6 +4,12 @@ Other projects that use this repository:
 - [kilo-saltstack](https://github.com/dkilcy/kilo-saltstack) - OpenStack 3+ node architecture on CentOS 7
 - [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
 
+1. [Introduction](#)
+2. [Lab Infrastructure](#)
+3. Lab Setup
+4. Useful Commands
+5. [References]()
+
 ### Introduction
 
 Use SaltStack (Salt) in conjunction with PXE server/kickstart to install and provision multiple bare-metal machines running CentOS.
@@ -44,7 +50,7 @@ salt '<id>' grains.setvals "{'saltstack-base:{'role':'master'}}"
 salt '<id>' grains.setvals "{'saltstack-base:{'role':'minion'}}"
 ```
 
-#### Useful Commands
+### Useful Commands
 
 Debug and output options:
 - Version: `salt --version`
