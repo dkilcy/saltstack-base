@@ -7,7 +7,7 @@
 salt 'workstation1' state.sls pxeserver
 ```
 
-2. Populate the /var/lib/repo directory using rsync or reposync.sh
+2. Populate the /var/lib/repo directory using rsync or reposync.sh  
 Using rsync: 
  ```bash
 rsync -avrz /var/lib/repo/* root@workstation2:/var/lib/repo
