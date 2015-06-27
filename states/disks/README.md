@@ -105,4 +105,7 @@ Disk Performance:  `dd if=/dev/zero of=test2.dat bs=1MB count=100 conv=fdatasync
 | INTEL SSDSC2BB30 | SSD | 275 MB/s | SATA |
 
 #### References
-[Disk Caching](http://www.linuxatemyram.com/index.html)
+- [Disk Caching](http://www.linuxatemyram.com/index.html)
+- [http://blackbird.si/tips-for-optimizing-disk-performance-on-linux](http://blackbird.si/tips-for-optimizing-disk-performance-on-linux/)
+- [http://linuxmantra.com/2013/11/disk-read-ahead-in-linux.html](http://linuxmantra.com/2013/11/disk-read-ahead-in-linux.html)
+- 
