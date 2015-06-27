@@ -46,18 +46,18 @@ salt '<id>' grains.setvals "{'saltstack-base:{'role':'minion'}}"
 
 #### Useful Commands
 
+Common:
 - View a file: `salt '*' cp.get_file_str /etc/hosts`
 - Force a pillar refresh:  `salt '*' saltutil.refresh_pillar`
 - Sync all: `salt '*' saltutil.sync_all`
 - Calling Highstate: `salt '*' state.highstate`
 
+Debug and output options:
 - Output data using pprint: `salt 'store1' grains.items --output=pprint`
 - Output data using json: `salt 'store1' grains.items --output=json`
-
 - State output mixed: `salt 'store1' test.ping --state-output=mixed`
 - Debug level: `salt 'store1' --log-level=debug --state-output=mixed state.highstate test=True`'
 - Verbose: `salt -v --log-level=debug --state-output=mixed 'store1' state.highstate test=True`
-
 - Version: `salt --version`
 
 ### References
