@@ -1,23 +1,24 @@
 
 ### PXE Server Setup
 
+
 1. Call the pxeserver state to setup the PXE Server components
 ```
 salt 'workstation1' state.sls pxeserver
 ```
-2. Populate the repository directories with data
 
-- /var/lib/repo
-- /var/tmp/iso
-
-Populate the /var/lib/repo directory using rsync or reposync.sh
-
+2. Populate the /var/lib/repo directory using rsync or reposync.sh
 Using rsync: 
+ ```bash
+rsync -avrz /var/lib/repo/* root@workstation2:/var/lib/repo
+rsync -avrz /var/tmp/iso* root@workstation2:/var/tmp/iso```
+```
+Using reposync.sh: `/usr/local/bin/reposync.sh`
 
-- `rsync -avrz /var/lib/repo/* root@workstation2:/var/lib/repo`
-- `rsync -avrz /var/tmp/iso* root@workstation2:/var/tmp/iso`
-
-Using /usr/local/bin/reposync.sh: `/usr/local/bin/reposync.sh`
+3. Populate the /var/tmp/iso directory with image files
+ ```bash
+ wget ...
+ ```
 
 ##### Notes
 
