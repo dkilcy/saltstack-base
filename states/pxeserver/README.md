@@ -11,7 +11,6 @@ salt 'workstation1' state.sls pxeserver
 Using rsync: 
  ```bash
 rsync -avrz /var/lib/repo/* root@workstation2:/var/lib/repo
-rsync -avrz /var/tmp/iso* root@workstation2:/var/tmp/iso```
 ```
 Using reposync.sh: 
  ```bash
@@ -19,6 +18,11 @@ Using reposync.sh:
 ```
 
 3. Populate the /var/tmp/iso directory with image files
+Using rsync:
+ ```bash
+rsync -avrz /var/tmp/iso* root@workstation2:/var/tmp/iso```
+```
+Using wget:
  ```bash
  wget ...
  ```
