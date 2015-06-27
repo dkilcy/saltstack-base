@@ -13,7 +13,10 @@ Using rsync:
 rsync -avrz /var/lib/repo/* root@workstation2:/var/lib/repo
 rsync -avrz /var/tmp/iso* root@workstation2:/var/tmp/iso```
 ```
-Using reposync.sh: `/usr/local/bin/reposync.sh`
+Using reposync.sh: 
+ ```bash
+/usr/local/bin/reposync.sh`
+```
 
 3. Populate the /var/tmp/iso directory with image files
  ```bash
