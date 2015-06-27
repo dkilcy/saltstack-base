@@ -29,7 +29,7 @@ Network infrastructure is described [here](notes/network.md)
 ### Lab Setup
 
 1. [Install CentOS 7 on MintBox2](notes/centos-7-manual.md)
-2. [Setup Salt Master and Minion on MintBox2](notes/setup-salt-master.md) 
+2. [Setup Salt Master and Minion on MintBox2](notes/setup-salt.md) 
 2. [Setup Git and saltstack-base repository on MintBox2](notes/saltstack-base-setup.md)
 3. [Setup PXE Server on MintBox2](notes/pxe-server-setup.md)
 4. [Install Supermicros (or other MintBox2) via PXE Server](notes/pxe-install.md)
