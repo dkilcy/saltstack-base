@@ -44,3 +44,17 @@ salt '*' saltutil.refresh_pillar
  ```bash
 salt 'workstation*' grains.setvals "{'saltstack-base:{'role':'master'}}"
 ```
+
+
+1. Install OS from PXE server
+2. **From the Salt master:** Accept the key and set the role grain for the minion: 
+
+ ```bash
+salt-key -L
+salt '*' test.ping
+salt '*' saltutil.refresh_pillar
+salt 'store*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
+```
+ 
+ 
+ 
