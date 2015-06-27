@@ -1,5 +1,5 @@
 
-### kernel
+### Kernel
 
 - List open files: `lsof`
 - List kernel parameters: `sysctl -a`
