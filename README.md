@@ -47,7 +47,7 @@ Network infrastructure is described [here](notes/network-setup.md)
 1. [Setup Salt Master and Minion on MintBox2](notes/setup-salt.md) 
 1. [Setup Git and saltstack-base repository on MintBox2](notes/saltstack-base-setup.md)
 1. [Run Initial Highstate](notes/highstate.md)
-1. [Setup PXE Server on MintBox2](notes/pxe-server-setup.md)
+1. [Setup PXE Server on MintBox2](states/pxeserver/README.md)
 1. [Install Supermicros (or other MintBox2) via PXE Server](notes/pxe-install.md)
 1. [Run States on Minions](notes/run-states.md)
 
