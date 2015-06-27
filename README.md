@@ -24,6 +24,9 @@ Bare-metal machines take on one of two roles:
 
 The MintBox2 machines are the Salt masters running CentOS 7 with the MATE desktop.  The Supermicros are the Salt minions running CentOS 6 or 7.
 
+- [/etc/hosts](states/network/files/hosts) file
+- [/etc/dhcp/dhcpd.conf](states/dhcp/files/dhcpd.conf) file
+
 Network infrastructure is described [here](notes/network.md)
 
 ### Lab Setup
