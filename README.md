@@ -26,7 +26,8 @@ Bare-metal machines take on one of two roles:
 ### Lab Infrastructure
 
 - 3 [MintBox2](http://www.fit-pc.com/web/products/mintbox/mintbox-2/)
-- 10 [Supermicro SYS-5108A](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101837)
+- 6 [Supermicro SYS-5018A-TN4](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101836)
+- 4 [Supermicro SYS-5108A-FTN4](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101837)
 - 2 [TP-Link TL-SG-3216 L2 Switches](http://www.tp-link.com/lk/products/details/cat-39_TL-SG3216.html)
 - 2 [TP-Link TL-SG-3424 L2 Switches](http://www.tp-link.com/lk/products/details/cat-39_TL-SG3424.html)
 - 2 [Dell Powerconnect 6224 L3 Switches](http://www.dell.com/us/business/p/powerconnect-6200-series/pd)
