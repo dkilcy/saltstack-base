@@ -17,7 +17,7 @@ git clone https://github.com/dkilcy/saltstack-base.git
 ```
 
 4. Create a YAML file to hold the customized Salt configuration.  As **root** user, execute `vi /etc/salt/master.d/99-salt-envs.conf` and add the following to the new file:
- ```yaml
+```yaml
 file_roots:
   base:
     - /srv/salt/base/states
