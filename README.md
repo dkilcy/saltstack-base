@@ -31,12 +31,14 @@ Bare-metal machines take on one of two roles:
 - 2 [TP-Link TL-SG-3424 L2 Switches](http://www.tp-link.com/lk/products/details/cat-39_TL-SG3424.html)
 - 2 [Dell Powerconnect 6224 L3 Switches](http://www.dell.com/us/business/p/powerconnect-6200-series/pd)
 
+![Lab](notes/lab1.jpg "Lab")
+
 The MintBox2 machines are the Salt masters running CentOS 7 with the MATE desktop.  The Supermicros are the Salt minions running CentOS 6 or 7.
 
 ##### Environment Specific Files
 
 - [/etc/hosts](states/network/files/hosts)
-- [/etc/dhcp/dhcpd.conf](states/dhcp/files/dhcpd.conf)
+- [/etc/dhcp/dhcpd.conf](states/pxeserver/files/dhcpd.conf)
 - [pillar/top.sls](pillar/top.sls)
 
 Network infrastructure is described [here](notes/network-setup.md)

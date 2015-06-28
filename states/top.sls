@@ -11,9 +11,9 @@ base:
     - packages
     - ssd
 {% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
-    #- cpupower
+    - cpupower
 {% elif grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '6' %}
-    #- cpuspeed
+    - cpuspeed
 {% endif %}
     - ntp.server
     - users
