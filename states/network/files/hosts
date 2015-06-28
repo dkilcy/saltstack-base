@@ -6,7 +6,7 @@
 # *.mgmt    - OpenStack Internal Network
 # *.pub     - Public Network
 # *.vm      - VM Traffic Network
-# *.store   - Storage Network
+# *.chord   - CHORD Protocol Network
 ###############################################################################
 
 10.0.0.5        workstation1.mgmt workstation1
