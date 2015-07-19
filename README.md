@@ -1,14 +1,5 @@
 ## Salt tools for bare-metal provisioning
 
-Other projects that use this repository:
-- [kilo-saltstack](https://github.com/dkilcy/kilo-saltstack) - OpenStack 3+ node architecture on CentOS 7
-
-Deprecated projects:
-- [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
-- [icehouse-saltstack](https://github.com/dkilcy/icehouse-saltstack) - OpenStack on CentOS 6.5
-
-Tested against salt 2015.5.2 (Lithium)
-
 Contents:
 1. [Introduction](#introduction)
 2. [Lab Infrastructure](#lab-infrastructure)
@@ -16,15 +7,20 @@ Contents:
 4. [Useful Commands](#useful-commands)
 5. [References](#references)
 
+Other projects that use this repository:
+- [kilo-saltstack](https://github.com/dkilcy/kilo-saltstack) - OpenStack 3+ node architecture on CentOS 7
+
+Deprecated projects:
+- [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
+- [icehouse-saltstack](https://github.com/dkilcy/icehouse-saltstack) - OpenStack on CentOS 6.5
+
 ### Introduction
 
-Use SaltStack (Salt) in conjunction with PXE server/kickstart to install and provision multiple bare-metal machines running CentOS.
+This is the reference setup I use in my home lab.  
 
-In this project, the Salt masters are installed manually, and the minions are installed via PXE/kickstart.  
+SaltStack (Salt) is used in conjunction with PXE server/kickstart to install and provision multiple bare-metal machines running CentOS.  The machines designated as the Salt masters have the OS installed installed manually, and the Salt minions are installed via PXE/kickstart.  
 
-Bare-metal machines take on one of two roles:
-- Salt master 
-- Salt minion 
+Tested against salt 2015.5.2 (Lithium)
 
 ### Lab Infrastructure
 
@@ -37,20 +33,21 @@ Bare-metal machines take on one of two roles:
 
 ![Lab](notes/20150312_215209.jpg) "Lab"
 
-The MintBox2 machines are the Salt masters running CentOS 7 with the MATE desktop.  The Supermicros are the Salt minions running CentOS 6 or 7.
+The MintBox2 machines are the Salt masters running CentOS 7 with the MATE desktop.  They are also referred to as the **workstation** machines.  They are also the PXE servers, yum mirror, and NTP servers.
 
-##### Environment Specific Files
-
-- [/etc/hosts](states/network/files/hosts)
-- [/etc/dhcp/dhcpd.conf](states/pxeserver/files/dhcpd.conf)
-- [pillar/top.sls](pillar/top.sls)
+The Supermicros are the Salt minions running CentOS 6 or 7.  These have the Salt minion installed.  
 
 ##### Network infrastructure
 
 On the Supermicro 5018-series hardware the first 2 network interfaces (eth0 and eth1) are always bonded to team0. This is considered the management interface.  Depending on the use-case for the machine, the last 2 network interfaces may or may not be bonded to team1. 
 
-View the current network setup here in the [/etc/hosts](https://github.com/dkilcy/saltstack-base/blob/master/states/network/files/hosts) file used in this reference setup.  Unless you are going to use the exact same hardware and IP addressing scheme you need to change the values appropriately.
- 
+View the current network setup here: [/etc/hosts](states/network/files/hosts)   
+View the network interface setup here: [/etc/dhcp/dhcpd.conf](states/pxeserver/files/dhcpd.conf)
+
+**Unless you are going to use the exact same hardware and IP addressing scheme you need to change the values appropriately**
+
+View the pillar configuration here: [pillar/top.sls](pillar/top.sls)  **Unless you are going to use the exact same hardware and IP addressing scheme you need to change the pillar values appropriately**
+
 ### Lab Setup
 
 1. [Install CentOS 7 on MintBox2](notes/centos-7-manual.md)
