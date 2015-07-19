@@ -2,7 +2,9 @@
 
 Other projects that use this repository:
 - [kilo-saltstack](https://github.com/dkilcy/kilo-saltstack) - OpenStack 3+ node architecture on CentOS 7
+Deprecated projects:
 - [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
+- [icehouse-saltstack](https://github.com/dkilcy/icehouse-saltstack) - OpenStack 3+ node architecture on CentOS 6.5
 
 Tested against salt 2015.5.2 (Lithium)
 
@@ -42,8 +44,21 @@ The MintBox2 machines are the Salt masters running CentOS 7 with the MATE deskto
 - [/etc/dhcp/dhcpd.conf](states/pxeserver/files/dhcpd.conf)
 - [pillar/top.sls](pillar/top.sls)
 
-Network infrastructure is described [here](notes/network-setup.md)
+##### Network infrastructure
 
+On the Supermicro 5018-series hardware the first 2 network interfaces (eth0 and eth1) are always bonded to team0. This is considered the management interface.  Depending on the use-case for the machine, the last 2 network interfaces may or may not be bonded to team1. 
+
+Hostname | IP Address | Network Interface | Server | Role |
+-------- | ---------- | ----------------- | ------ | ---- |
+workstation1 | 192.168.1.5 | enp0s25 | MintBox 2 | Master
+ | 10.0.0.5 | enp5s0 | 
+workstation2 | 192.168.1.6 | enp0s25 | MintBox 2 | Master
+ | 10.0.0.6 | enp5s0
+store1 | 10.0.0.41 | bond0 | Supermicro 5108 | Minion
+ | 10.0.1.41 | bond1
+store2 | 10.0.0.42 | bond0 | 
+ | 10.0.1.42 | bond1
+ 
 ### Lab Setup
 
 1. [Install CentOS 7 on MintBox2](notes/centos-7-manual.md)
