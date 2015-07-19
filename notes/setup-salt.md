@@ -1,9 +1,17 @@
 
-### Setup Salt Master and Minion
+### Setup Salt Masters and Minions
 
 Perform all these steps on the workstation node as **root** user
 
-1. Install the Salt master 
+#### Overview
+
+1. Setup the Salt master and minion on the workstation machines.
+2. Setup the Salt minion on all other machines.
+3. Post-Install Setup
+
+#### Setup the Salt master
+
+1. Install the Salt master on all workstation (utility) nodes.
 
  ```bash
  yum install salt-master
@@ -29,6 +37,8 @@ Perform all these steps on the workstation node as **root** user
  systemctl start salt-master.service
  systemctl enable salt-master.service
  ```
+ 
+ #### Setup the Salt minion
 
 5. Install the Salt minion
 
@@ -57,7 +67,7 @@ Perform all these steps on the workstation node as **root** user
  systemctl enable salt-minion.service
  ```
 
-9. Add the minion to the master.
+9. Add the local minion to the master.
 
  ```bash
  [root@workstation2 ~]# salt-key -L
@@ -82,18 +92,22 @@ Perform all these steps on the workstation node as **root** user
  salt '*' test.ping
  ```
 
-11. Update the local minion with the pillar data as root user.
+11. Repeat for all other machines in the network designated as Salt minions.
+
+#### Post-Install Setup
+
+1. Update the local minion with the pillar data as root user.
 
  ```bash
  salt '*' saltutil.refresh_pillar
  ```
 
-12. Set the grains for the Salt master:
+2. Set the grains for the Salt master:
 
  ```bash
  salt 'workstation*' grains.setvals "{'saltstack-base':{'role':'master'}}"
  ```
-13. Set the grains for all the Salt minions:
+3. Set the grains for all the Salt minions:
 
  ```bash
  salt 'controller*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
