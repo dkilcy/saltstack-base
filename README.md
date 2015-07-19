@@ -43,10 +43,9 @@ On the Supermicro 5018-series hardware the first 2 network interfaces (eth0 and 
 
 View the current network setup here: [/etc/hosts](states/network/files/hosts)   
 View the network interface setup here: [/etc/dhcp/dhcpd.conf](states/pxeserver/files/dhcpd.conf)
+View the pillar configuration here: [pillar/top.sls](pillar/top.sls)  
 
-**Unless you are going to use the exact same hardware and IP addressing scheme you need to change the values appropriately**
-
-View the pillar configuration here: [pillar/top.sls](pillar/top.sls)  **Unless you are going to use the exact same hardware and IP addressing scheme you need to change the pillar values appropriately**
+If you plan to fork the repository, unless you use the exact same hardware and IP addressing scheme you need to change the pillar and other network infrastructure files appropriately.  There should be no other hardcoded dependency changes to make.
 
 ### Lab Setup
 
