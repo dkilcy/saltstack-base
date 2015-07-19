@@ -6,7 +6,7 @@ Perform all these steps on the workstation node as **root** user
 #### Overview
 
 1. Setup the Salt master and minion on the workstation machines.
-2. Setup the Salt minion on all other machines.
+2. Setup the Salt minion on all other machines (including the workstation machines).
 3. Post-Install Setup
 
 #### Setup the Salt master
