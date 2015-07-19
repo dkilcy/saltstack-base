@@ -91,5 +91,17 @@ Perform all these steps on the workstation node as **root** user
 12. Set the grains for the Salt master:
 
  ```bash
- salt 'workstation2' grains.setvals "{'saltstack-base':{'role':'master'}}"
+ salt 'workstation*' grains.setvals "{'saltstack-base':{'role':'master'}}"
  ```
+13. Set the grains for all the Salt minions:
+
+ ```bash
+ salt 'controller*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
+ salt 'network*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
+ salt 'compute*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
+ salt 'super*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
+ salt 'store*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
+ salt 'conn*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
+ ```
+
+ 
