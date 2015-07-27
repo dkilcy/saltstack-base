@@ -32,7 +32,11 @@
 10.0.0.46       store6.mgmt store6
 
 10.0.0.51       conn1.mgmt conn1
-10.0.0.51       conn2.mgmt conn2
+10.0.0.52       conn2.mgmt conn2
+10.0.0.53       conn3.mgmt conn3
+10.0.0.54       conn4.mgmt conn4
+10.0.0.55       conn5.mgmt conn5
+10.0.0.56       conn6.mgmt conn6
 
 10.0.0.61       super.mgmt super
 
@@ -55,6 +59,11 @@
 
 10.0.1.51       conn1.chord
 10.0.1.52       conn2.chord
+10.0.1.53       conn3.chord
+10.0.1.54       conn4.chord
+10.0.1.55       conn5.chord
+10.0.1.56       conn6.chord
+
 
 ###############
 
