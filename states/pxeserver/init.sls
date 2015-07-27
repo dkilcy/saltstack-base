@@ -16,32 +16,19 @@ pxeserver_pkgs:
   file.directory:
     - name: /var/tmp/repo
 
-/var/www/html/repo:
-  file.symlink:
-    - target: /var/lib/repo
+#/var/www/html/repo:
+#  file.symlink:
+#    - target: /var/lib/repo
 
-### TODO: generate dhcpd.conf from pillar
 /etc/dhcp/dhcpd.conf:
   file.managed:
     - name: /etc/dhcp/dhcpd.conf
     - source: salt://pxeserver/files/dhcpd.conf
     - template: jinja
     
-/var/lib/tftpboot/centos/7:
-  file.directory:
-    - name: /var/lib/tftpboot/centos/7
-    - makedirs: True
-
-/var/lib/tftpboot/centos/6:
-  file.directory:
-    - name: /var/lib/tftpboot/centos/6
-    - makedirs: True
-
 copy_bootloaders:
   cmd.run:
     - name: cp -r /usr/share/syslinux/* /var/lib/tftpboot/
-    - require:
-      - file: /var/lib/tftpboot/centos/7
 
 pxelinux_default:
   file.managed:
@@ -71,24 +58,35 @@ pxelinux_default:
     - persist: True
     - fstype: iso9660
 
-/var/lib/tftpboot/centos/7/vmlinuz:
+
+/var/lib/tftpboot/centos7:
+  file.directory:
+    - name: /var/lib/tftpboot/centos7
+    - makedirs: True
+
+/var/lib/tftpboot/centos6:
+  file.directory:
+    - name: /var/lib/tftpboot/centos6
+    - makedirs: True
+
+/var/lib/tftpboot/centos7/vmlinuz:
   file.copy:
-    - name: /var/lib/tftpboot/centos/7/vmlinuz
+    - name: /var/lib/tftpboot/centos7/vmlinuz
     - source: /var/ftp/pub/centos/7/images/pxeboot/vmlinuz
 
-/var/lib/tftpboot/centos/7/initrd.img:
+/var/lib/tftpboot/centos7/initrd.img:
   file.copy:
-    - name: /var/lib/tftpboot/centos/7/initrd.img
+    - name: /var/lib/tftpboot/centos7/initrd.img
     - source: /var/ftp/pub/centos/7/images/pxeboot/initrd.img
 
-/var/lib/tftpboot/centos/6/vmlinuz:
+/var/lib/tftpboot/centos6/vmlinuz:
   file.copy:
-    - name: /var/lib/tftpboot/centos/6/vmlinuz
+    - name: /var/lib/tftpboot/centos6/vmlinuz
     - source: /var/ftp/pub/centos/6/images/pxeboot/vmlinuz
 
-/var/lib/tftpboot/centos/6/initrd.img:
+/var/lib/tftpboot/centos6/initrd.img:
   file.copy:
-    - name: /var/lib/tftpboot/centos/6/initrd.img
+    - name: /var/lib/tftpboot/centos6/initrd.img
     - source: /var/ftp/pub/centos/6/images/pxeboot/initrd.img
 
 reposync.sh:
