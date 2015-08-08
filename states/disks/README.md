@@ -1,6 +1,8 @@
 
 #### Disks
-- Disk partition info: `fdisk -l /dev/sda`  `parted -l /dev/sda`  
+- Disk partition info:
+-   `fdisk -l /dev/sda` 
+-  ``parted -l /dev/sda`  
 - Disk info: `hdparm -iI /dev/sda`
 - Disk speed measurement: `hdparm -tT /dev/sda`  
 - DD write (cache): `dd if=/dev/zero of=/tmp/output.dat bs=1MB count=100`  
