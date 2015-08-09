@@ -11,7 +11,7 @@
 - Setting a grain: `salt 'store1' grains.setvals "{'saltstack-base:{'role':'minion'}}"`
 - Match all grains that have saltstack-base:role grain:  `# salt -G 'saltstack-base:role:minion' test.ping`
 - Using a grain in a state file: `{% set id = salt['pillar.get']('id') %}`
-- Jinja templating: salt '*' cmd.run template=jinja 'echo {{ grains.id }} {{ grains.fqdn_ip4[0] }}'
+- Jinja templating: `salt '*' cmd.run template=jinja 'echo {{ grains.id }} {{ grains.fqdn_ip4[0] }}'`
 - Matching minions in a pillar file using a grain: 
 ```yaml
 base:
