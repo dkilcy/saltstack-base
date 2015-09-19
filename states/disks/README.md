@@ -21,8 +21,11 @@ blkid
 
 ```
 parted /dev/sdb mklabel gpt -s
-parted /dev/sdb mkpart primary 2048s 100% -s
+parted /dev/sdb mkpart primary 0% 100% -s
 parted /dev/sdb align-check optimal 1
+
+mke2fs -t ext4 -O ^has_journal /dev/sdb1
+tune2fs -O ^has_journal /dev/sdb1
 ```
 
 ```
