@@ -8,17 +8,13 @@ pxeserver_pkgs:
       - tftp-server
       - vsftpd
 
-/var/lib/repo:
-  file.directory:
-    - name: /var/lib/repo
-
 /var/tmp/iso:
   file.directory:
     - name: /var/tmp/repo
 
-#/var/www/html/repo:
-#  file.symlink:
-#    - target: /var/lib/repo
+/var/www/html/repo:
+  file.directory:
+    - target: /var/www/html/repo
 
 /etc/dhcp/dhcpd.conf:
   file.managed:
