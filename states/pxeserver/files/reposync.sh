@@ -33,9 +33,6 @@ rsync -avrt --delete --exclude 'debug' --exclude 'drpms' rsync://mirror.pnl.gov/
 reposync -p /var/www/html/repo/centos/6/scality-lorien1/x86_64 --repoid=scality-lorien1-centos6 --norepopath
 createrepo /var/www/html/repo/centos/6/scality-lorien1/x86_64
 
-reposync -p /var/www/html/repo/centos/6/scality-lorien/x86_64 --repoid=scality-lorien-centos6 --norepopath
-createrepo /var/www/html/repo/centos/6/scality-lorien/x86_64
-
 ####################################################################################
 ### CentOS 7
 ####################################################################################
@@ -64,8 +61,8 @@ rsync -avrt --delete --exclude 'debug'  --exclude 'drpms' rsync://mirror.pnl.gov
 ### CentOS 7 - Openstack Kilo
 ####################################################################################
 
-reposync -p /var/www/html/repo/centos/7 --repoid=openstack-kilo
-createrepo /var/www/html/repo/centos/7/openstack-kilo
+#reposync -p /var/www/html/repo/centos/7 --repoid=openstack-kilo
+#createrepo /var/www/html/repo/centos/7/openstack-kilo
 
 ####################################################################################
 ### CentOS 7 - Scality Lorien
@@ -73,9 +70,6 @@ createrepo /var/www/html/repo/centos/7/openstack-kilo
 
 reposync -p /var/www/html/repo/centos/7/scality-lorien1/x86_64 --repoid=scality-lorien1-centos7 --norepopath
 createrepo /var/www/html/repo/centos/7/scality-lorien1/x86_64
-
-reposync -p /var/www/html/repo/centos/7/scality-lorien/x86_64 --repoid=scality-lorien-centos7 --norepopath
-createrepo /var/www/html/repo/centos/7/scality-lorien/x86_64
 
 ####################################################################################
 
