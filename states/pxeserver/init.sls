@@ -8,10 +8,6 @@ pxeserver_pkgs:
       - tftp-server
       - vsftpd
 
-/var/tmp/iso:
-  file.directory:
-    - name: /var/tmp/repo
-
 /var/www/html/repo:
   file.directory:
     - target: /var/www/html/repo
@@ -32,12 +28,42 @@ pxelinux_default:
     - source: salt://pxeserver/files/pxelinux.cfg.default
     - makedirs: True
 
+/var/lib/tftpboot/centos/7:
+  file.directory:
+    - name: /var/ftp/tftpboot/centos/7
+    - makedirs: True
+
+/var/lib/tftpboot/centos/7/initrd.img:
+  file.managed:
+    - name: /var/ftp/tftpboot/centos/7/initrd.img
+    - source: /var/tmp/iso/centos/7/initrd.img
+
+/var/lib/tftpboot/centos/7/vmlinuz:
+  file.managed:
+    - name: /var/ftp/tftpboot/centos/7/vmlinuz
+    - source: /var/tmp/iso/centos/7/vmlinuz
+
+/var/lib/tftpboot/centos/6:
+  file.directory:
+    - name: /var/ftp/tftpboot/centos/6
+    - makedirs: True
+
+/var/lib/tftpboot/centos/6/initrd.img:
+  file.managed:
+    - name: /var/ftp/tftpboot/centos/6/initrd.img
+    - source: /var/tmp/iso/centos/6/initrd.img
+
+/var/lib/tftpboot/centos/6/vmlinuz:
+  file.managed:
+    - name: /var/ftp/tftpboot/centos/6/vmlinuz
+    - source: /var/tmp/iso/centos/6/vmlinuz
+
 /var/ftp/pub/centos/7:
   file.directory:
     - name: /var/ftp/pub/centos/7
     - makedirs: True
   mount.mounted:
-    - device: /var/tmp/iso/CentOS-7-x86_64-Everything-1503-01.iso
+    - device: /var/tmp/iso/CentOS-7-x86_64-Everything-1511.iso
     - opts: loop,ro
     - mkmnt: True
     - persist: True
@@ -48,42 +74,11 @@ pxelinux_default:
     - name: /var/ftp/pub/centos/6
     - makedirs: True
   mount.mounted:
-    - device: /var/tmp/iso/CentOS-6.6-x86_64-bin-DVD1.iso
+    - device: /var/tmp/iso/CentOS-6.7-x86_64-bin-DVD1.iso
     - opts: loop,ro
     - mkmnt: True
     - persist: True
     - fstype: iso9660
-
-
-/var/lib/tftpboot/centos7:
-  file.directory:
-    - name: /var/lib/tftpboot/centos7
-    - makedirs: True
-
-/var/lib/tftpboot/centos6:
-  file.directory:
-    - name: /var/lib/tftpboot/centos6
-    - makedirs: True
-
-/var/lib/tftpboot/centos7/vmlinuz:
-  file.copy:
-    - name: /var/lib/tftpboot/centos7/vmlinuz
-    - source: /var/ftp/pub/centos/7/images/pxeboot/vmlinuz
-
-/var/lib/tftpboot/centos7/initrd.img:
-  file.copy:
-    - name: /var/lib/tftpboot/centos7/initrd.img
-    - source: /var/ftp/pub/centos/7/images/pxeboot/initrd.img
-
-/var/lib/tftpboot/centos6/vmlinuz:
-  file.copy:
-    - name: /var/lib/tftpboot/centos6/vmlinuz
-    - source: /var/ftp/pub/centos/6/images/pxeboot/vmlinuz
-
-/var/lib/tftpboot/centos6/initrd.img:
-  file.copy:
-    - name: /var/lib/tftpboot/centos6/initrd.img
-    - source: /var/ftp/pub/centos/6/images/pxeboot/initrd.img
 
 reposync.sh:
   file.managed:

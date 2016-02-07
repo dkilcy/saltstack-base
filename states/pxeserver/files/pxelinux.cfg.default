@@ -7,23 +7,23 @@ menu title ########## PXE Boot Menu ##########
 
 label 1
 menu label ^1) Install CentOS 6 - Kickstart
-kernel centos6/vmlinuz
-append initrd=centos6/initrd.img method=ftp://10.0.0.6/pub/centos/6 devfs=nomount ks=http://10.0.0.6/ks6.cfg ksdevice=eth0
+kernel centos/6/vmlinuz
+append initrd=centos/6/initrd.img method=ftp://10.0.0.6/pub/centos/6 devfs=nomount ks=http://10.0.0.6/ks6.cfg ksdevice=eth0
 
 label 2
 menu label ^2) Install CentOS 7 - Kickstart
-kernel centos7/vmlinuz
-append initrd=centos7/initrd.img method=ftp://10.0.0.6/pub/centos/7 devfs=nomount ks=http://10.0.0.6/ks7.cfg
+kernel centos/7/vmlinuz
+append initrd=centos/7/initrd.img method=ftp://10.0.0.6/pub/centos/7 devfs=nomount ks=http://10.0.0.6/ks7.cfg
 
 label 3
 menu label ^3) Install CentOS 6 - Manual
-kernel centos6/vmlinuz
-append initrd=centos6/initrd.img method=ftp://10.0.0.6/pub/centos/6 devfs=nomount ksdevice=eth0
+kernel centos/6/vmlinuz
+append initrd=centos/6/initrd.img method=ftp://10.0.0.6/pub/centos/6 devfs=nomount ksdevice=eth0
 
 label 4
 menu label ^4) Install CentOS 7 - Manual
-kernel centos6/vmlinuz
-append initrd=centos7/initrd.img method=ftp://10.0.0.6/pub/centos/7 devfs=nomount
+kernel centos/7/vmlinuz
+append initrd=centos/7/initrd.img method=ftp://10.0.0.6/pub/centos/7 devfs=nomount
 
 label 5
 menu label ^5) Boot from local drive
