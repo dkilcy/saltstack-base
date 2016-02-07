@@ -63,7 +63,7 @@ pxelinux_default:
     - name: /var/ftp/pub/centos/7
     - makedirs: True
   mount.mounted:
-    - device: /var/tmp/iso/CentOS-7-x86_64-Everything-1511.iso
+    - device: /var/tmp/iso/centos/7/CentOS-7-x86_64-Everything-1511.iso
     - opts: loop,ro
     - mkmnt: True
     - persist: True
@@ -74,7 +74,7 @@ pxelinux_default:
     - name: /var/ftp/pub/centos/6
     - makedirs: True
   mount.mounted:
-    - device: /var/tmp/iso/CentOS-6.7-x86_64-bin-DVD1.iso
+    - device: /var/tmp/iso/centos/6/CentOS-6.7-x86_64-bin-DVD1.iso
     - opts: loop,ro
     - mkmnt: True
     - persist: True
