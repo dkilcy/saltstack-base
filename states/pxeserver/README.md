@@ -45,11 +45,12 @@ Using reposync.sh:
  ```bash
 /usr/local/bin/reposync.sh
 ```
+4. Verify the installation
 
-4. Copy the CentOS bootloaders into /var/ftp/pub/
-##### Notes
+##### Install from the PXE Server
 
 - Boot the machine 
+- 
 - Get the kernel prompt: At GRUB menu, highlight **Install CentOS 7** then hit **Tab**
 - Set the kickstart network device: `ksdev=enp0s20f0`
 - Set the kickstart URL: `ks=http://10.0.0.6/base.ks` 
