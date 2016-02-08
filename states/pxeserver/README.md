@@ -40,7 +40,7 @@ Using wget:
  - Copies the reposync.sh script to /usr/local/bin
  - Starts the httpd, dhcp, xvtpd and xinetd services
 
-3. Run the reposync.sh script to populate the /var/www/html/repo directory. This can take a very long time for the 1st iteration.  It uses the University of Maryland which is fast for me.  You will want to change to the mirror that is fastest for you.  Add to cron to run nightly to sync with your mirror.
+3. Run the reposync.sh script to populate the /var/www/html/repo directory. This can take a very long time for the 1st iteration.  It uses the University of Maryland which is fast for me.  You will want to change to the mirror that is fastest for you.  Add to cron to run nightly to sync with your mirror.  After you are done all the machines in the data center can update packages from your mirror.
 
 Using reposync.sh: 
  ```bash
