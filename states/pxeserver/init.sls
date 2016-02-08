@@ -12,6 +12,16 @@ pxeserver_pkgs:
   file.directory:
     - target: /var/www/html/repo
 
+/var/www/html/ks6.cfg:
+  file.managed:
+    - name: /var/www/html/ks6.cfg
+    - source: salt://pxeserver/files/ks6.cfg
+
+/var/www/html/ks7.cfg:
+  file.managed:
+    - name: /var/www/html/ks7.cfg
+    - source: salt://pxeserver/files/ks7.cfg
+
 /etc/dhcp/dhcpd.conf:
   file.managed:
     - name: /etc/dhcp/dhcpd.conf
