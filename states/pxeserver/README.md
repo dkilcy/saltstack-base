@@ -40,12 +40,22 @@ Using wget:
  - Copies the reposync.sh script to /usr/local/bin
  - Starts the httpd, dhcp, xvtpd and xinetd services
 
-3. Populate the /var/www/html/repo directory using rsync or reposync.sh  
+3. Run the reposync.sh script to populate the /var/www/html/repo directory. This can take a very long time for the 1st iteration.  It uses the University of Maryland which is fast for me.  You will want to change to the mirror that is fastest for you.  Add to cron to run nightly to sync with your mirror.
 
 Using reposync.sh: 
  ```bash
 /usr/local/bin/reposync.sh
 ```
+
+```
+[root@workstation2 pillar]$ cat /etc/crontab 
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=root
+
+0 4 * * * root /usr/local/bin/reposync.sh > /var/log/reposync.out 2>&1
+```
+
 4. Verify the installation
 
 ##### Install from the PXE Server
