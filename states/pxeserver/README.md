@@ -1,5 +1,5 @@
 
-### PXE Server Setup
+### Setup PXE Server on MintBox2
 
 Create a PXE Server that can serve out both CentOS 6 and 7 images.
 
@@ -58,13 +58,8 @@ MAILTO=root
 
 4. Verify the installation
 
-##### Install from the PXE Server
-
-- Boot the machine 
-- Hold the F12 key to activate the Network Boot
-- At the boot menu, select CentOS 7 - Kickstart
-
-Troubleshooting: hit Tab at the boot menu 
+- ftp is available at ftp://10.0.0.6/pub
+- repo is available at http://yumrepo/repo/
  
 ##### References
 - [CentOS: Install PXE Server On CentOS 7](ravindrayadava.blogspot.com/2014/10/centos-install-pxe-server-on-centos-7.html)
