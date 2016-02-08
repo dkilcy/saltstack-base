@@ -4,6 +4,7 @@
 
 #### Post-Install
 
+s
 
 TODO: setup networking, just for storage nodes
 ```bash
