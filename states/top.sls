@@ -23,7 +23,7 @@ base:
     - selinux
 # NOTE: iptables is required for juno-saltstack
 #    - iptables
-    - network
+#    - network
     - kernel
     - yumrepo
     - packages

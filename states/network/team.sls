@@ -1,7 +1,7 @@
 
 {% set id = grains['id'] %}
 
-{% for num in range(0,4) %}
+{% for num in range(0,2) %}
 
 {% set team = 'team' + num|string %}
 
