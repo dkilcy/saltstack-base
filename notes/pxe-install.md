@@ -18,7 +18,7 @@
     - Restart networking again: `service network restart`
     - Verify connectivity: `ping salt`
 
-Proceed to Run States
+Proceed to [Run States](run-states.md)
 
 #### Notes
 
