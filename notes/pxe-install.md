@@ -17,7 +17,8 @@
     - restart networking: `service network restart`
     - Restart networking again: `service network restart`
     - Verify connectivity: `ping salt`
-11. Verify the connectivity for the Supermicro
+
+Proceed to Run States
 
 #### Notes
 
