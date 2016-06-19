@@ -3,9 +3,9 @@
 
 {% for num in range(0,2) %}
 
-{% set team = 'team' + num|string %}
-
 {% if pillar['systems']['network'][team] is defined %}
+
+{% set team = 'team' + num|string %}
 
 {% set nic0        = pillar['systems']['network'][team]['nic0'] %}
 {% set nic1        = pillar['systems']['network'][team]['nic1'] %}

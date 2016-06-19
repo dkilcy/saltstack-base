@@ -74,3 +74,9 @@
 192.168.1.11    controller1.pub
 192.168.1.12    controller2.pub
 
+###############
+
+10.0.0.31 scality-test1.compute1.mgmt
+10.0.0.31 scality-test2.compute1.mgmt
+10.0.0.31 scality-test3.compute1.mgmt
+
