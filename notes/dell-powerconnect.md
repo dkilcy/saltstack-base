@@ -44,8 +44,6 @@ console# exit
 - [Firmware](http://www.dell.com/support/home/us/en/04/product-support/product/powerconnect-6224/drivers)
 - [Stacking switches](http://www.dell.com/downloads/global/products/pwcnt/en/pwcnt_stacking_switches.pdf)
 - [Factory Reset](http://dcomcomputers.blogspot.com/2013/09/how-to-factory-default-and-test-ports.html)
-- [MTU - Oversize Packages](http://en.community.dell.com/techcenter/networking/f/4454/t/19415314)
+- [MTU Oversize Packages](http://en.community.dell.com/techcenter/networking/f/4454/t/19415314)
 - [MTU and VLANs](http://en.community.dell.com/support-forums/network-switches/f/866/t/19602268)
-- 
-- 
 
