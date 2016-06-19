@@ -34,7 +34,8 @@ ONBOOT="yes"
 BOOTPROTO="none"
 IPADDR=10.0.0.66
 NETMASK=255.255.255.0
-TEAM_CONFIG='{"runnner":{"name":"roundrobin"}}'
+#TEAM_CONFIG='{"runnner":{"name":"roundrobin"}}'
+TEAM_CONFIG='{"runnner":{"name":"lacp"}}'
 MTU=9000
 [root@ring-a6 ~]$ cat /etc/sysconfig/network-scripts/ifcfg-enp0s20f0
 DEVICE="enp0s20f0"
@@ -75,6 +76,13 @@ ports:
  3: enp0s20f1: up 0Mbit FD 
  2: enp0s20f0: up 0Mbit FD 
 [root@ring-a6 ~]$ 
+```
+
+```
+[root@store1 ~]$ teamnl team0 ports
+ 3: enp0s20f1: up 1000Mbit FD 
+ 2: enp0s20f0: up 1000Mbit FD 
+[root@store1 ~]$ 
 ```
 
 #### IP address information
