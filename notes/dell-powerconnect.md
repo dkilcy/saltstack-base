@@ -46,4 +46,5 @@ console# exit
 - [Factory Reset](http://dcomcomputers.blogspot.com/2013/09/how-to-factory-default-and-test-ports.html)
 - [MTU Oversize Packages](http://en.community.dell.com/techcenter/networking/f/4454/t/19415314)
 - [MTU and VLANs](http://en.community.dell.com/support-forums/network-switches/f/866/t/19602268)
+- [MTU and ESX](http://www.penguinpunk.net/blog/dell-powerconnect-and-jumbo-frames/)
 
