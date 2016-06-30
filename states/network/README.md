@@ -4,7 +4,7 @@
 
 1. [General](#general)
 2. [CentOS 7 Teaming](#centos-7-teaming)
-3. [CentOS 7 Static IP](#centos-6-static-ip)
+3. [CentOS 7 Static IP](#centos-7-static-ip)
 4. [CentOS 6 Bonding](#centos-6-bonding)
 5. [References](#references)
 
