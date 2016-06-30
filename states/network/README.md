@@ -4,8 +4,9 @@
 
 1. [General](#general)
 2. [CentOS 7 Teaming](#centos-7-teaming)
-3. [CentOS 6 Bonding](#centos-6-bonding)
-4. [References](#references)
+3. [CentOS 7 Static IP](#centos-6-static-ip)
+4. [CentOS 6 Bonding](#centos-6-bonding)
+5. [References](#references)
 
 ### General
 
@@ -110,6 +111,28 @@ ports:
        valid_lft forever preferred_lft forever
 [root@ring-a6 ~]$ 
 
+```
+
+### CentOS 7 Static IP
+
+Edit /etc/sysconfig/network
+```
+NETWORKING=yes
+HOSTNAME=store8.mgmt
+GATEWAY=10.241.127.1
+```
+
+Edit /etc/sysconfig/network-scripts/ifcfg-<adapter>
+```
+BOOTPROTO=static
+IPADDR=10.241.127.115
+```
+
+Disable NetworkManager and enable networking
+```
+systemctl disable NetworkManager.service
+systemctl enable network.service
+reboot
 ```
 
 ### CentOS 6 Bonding
@@ -241,3 +264,4 @@ Slave queue ID: 0
 - [RHEL: Linux Bond / Team Multiple Network Interfaces (NIC) Into a Single Interface](http://www.cyberciti.biz/tips/linux-bond-or-team-multiple-network-interfaces-nic-into-single-interface.html)
 - [CentOS Teaming with VLANS](http://techgnat.blogspot.com/2014/12/centos-teaming-with-vlans.html)
 - [http://dak1n1.com/blog/7-performance-tuning-intel-10gbe](http://dak1n1.com/blog/7-performance-tuning-intel-10gbe)
+- [https://www.unixmen.com/configure-static-ip-centos-7/](https://www.unixmen.com/configure-static-ip-centos-7/)
