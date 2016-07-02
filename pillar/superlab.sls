@@ -109,33 +109,66 @@ systems:
       nic0: enp0s20f2
       nic1: enp0s20f3
       team_config: '{"runnner":{"name":"lacp"}}'
-{% elif grains['id'] == 'controller1' %}
+{% elif grains['id'] == 'app1' %}
   network:
     team0: 
-      ipaddr: 10.0.0.11
-      nic0: enp0s20f0
-      nic1: enp0s20f1
-      team_config: '{"runnner":{"name":"lacp"}}'
-{% elif grains['id'] == 'compute1' %}
-  network:
-    team0:
       ipaddr: 10.0.0.31
       nic0: enp0s20f0
       nic1: enp0s20f1
       team_config: '{"runnner":{"name":"lacp"}}'
-{% elif grains['id'] == 'compute2' %}
+    team1:
+      ipaddr: 10.0.1.31
+      nic0: enp0s20f2
+      nic1: enp0s20f3
+      team_config: '{"runnner":{"name":"lacp"}}'
+{% elif grains['id'] == 'app2' %}
   network:
     team0:
       ipaddr: 10.0.0.32
       nic0: enp0s20f0
       nic1: enp0s20f1
       team_config: '{"runnner":{"name":"lacp"}}'
-{% elif grains['id'] == 'compute3' %}
+    team1:
+      ipaddr: 10.0.1.32
+      nic0: enp0s20f2
+      nic1: enp0s20f3
+      team_config: '{"runnner":{"name":"lacp"}}'
+{% elif grains['id'] == 'app3' %}
   network:
     team0:
       ipaddr: 10.0.0.33
       nic0: enp0s20f0
       nic1: enp0s20f1
       team_config: '{"runnner":{"name":"lacp"}}'
+    team1:
+      ipaddr: 10.0.1.33
+      nic0: enp0s20f2
+      nic1: enp0s20f3
+      team_config: '{"runnner":{"name":"lacp"}}'
+{% elif grains['id'] == 'app4' %}
+  network:
+    team0:
+      ipaddr: 10.0.0.34
+      nic0: enp0s20f0
+      nic1: enp0s20f1
+      team_config: '{"runnner":{"name":"lacp"}}'
+    team1:
+      ipaddr: 10.0.1.34
+      nic0: enp0s20f2
+      nic1: enp0s20f3
+      team_config: '{"runnner":{"name":"lacp"}}'
+{% elif grains['id'] == 'app5' %}
+  network:
+    team0:
+      ipaddr: 10.0.0.35
+      nic0: enp0s20f0
+      nic1: enp0s20f1
+      team_config: '{"runnner":{"name":"lacp"}}'
+    team1:
+      ipaddr: 10.0.1.35
+      nic0: enp0s20f2
+      nic1: enp0s20f3
+      team_config: '{"runnner":{"name":"lacp"}}'
 {% endif %}
+
 

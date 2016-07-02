@@ -46,27 +46,12 @@ pxelinux_default:
 /var/lib/tftpboot/centos/7/initrd.img:
   file.managed:
     - name: /var/ftp/tftpboot/centos/7/initrd.img
-    - source: /var/tmp/iso/centos/7/initrd.img
+    - source: /var/www/html/repo/centos/7/os/x86_64/isolinux/initrd.img
 
 /var/lib/tftpboot/centos/7/vmlinuz:
   file.managed:
     - name: /var/ftp/tftpboot/centos/7/vmlinuz
-    - source: /var/tmp/iso/centos/7/vmlinuz
-
-/var/lib/tftpboot/centos/6:
-  file.directory:
-    - name: /var/ftp/tftpboot/centos/6
-    - makedirs: True
-
-/var/lib/tftpboot/centos/6/initrd.img:
-  file.managed:
-    - name: /var/ftp/tftpboot/centos/6/initrd.img
-    - source: /var/tmp/iso/centos/6/initrd.img
-
-/var/lib/tftpboot/centos/6/vmlinuz:
-  file.managed:
-    - name: /var/ftp/tftpboot/centos/6/vmlinuz
-    - source: /var/tmp/iso/centos/6/vmlinuz
+    - source: /var/www/html/repo/centos/7/os/x86_64/isolinux/vmlinuz
 
 /var/ftp/pub/centos/7:
   file.directory:
@@ -79,16 +64,31 @@ pxelinux_default:
     - persist: True
     - fstype: iso9660
 
-/var/ftp/pub/centos/6:
-  file.directory:
-    - name: /var/ftp/pub/centos/6
-    - makedirs: True
-  mount.mounted:
-    - device: /var/tmp/iso/centos/6/CentOS-6.7-x86_64-bin-DVD1.iso
-    - opts: loop,ro
-    - mkmnt: True
-    - persist: True
-    - fstype: iso9660
+#/var/lib/tftpboot/centos/6:
+#  file.directory:
+#    - name: /var/ftp/tftpboot/centos/6
+#    - makedirs: True
+
+#/var/lib/tftpboot/centos/6/initrd.img:
+#  file.managed:
+#    - name: /var/ftp/tftpboot/centos/6/initrd.img
+#    - source: /var/www/html/repo/centos/6/os/x86_64/isolinux/initrd.img
+
+#/var/lib/tftpboot/centos/6/vmlinuz:
+#  file.managed:
+#    - name: /var/ftp/tftpboot/centos/6/vmlinuz
+#    - source: /var/www/html/repo/centos/6/os/x86_64/isolinux/vmlinuz
+
+#/var/ftp/pub/centos/6:
+#  file.directory:
+#    - name: /var/ftp/pub/centos/6
+#    - makedirs: True
+#  mount.mounted:
+#    - device: /var/tmp/iso/centos/6/CentOS-6.8-x86_64-bin-DVD1.iso
+#    - opts: loop,ro
+#    - mkmnt: True
+#    - persist: True
+#    - fstype: iso9660
 
 reposync.sh:
   file.managed:

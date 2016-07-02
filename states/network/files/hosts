@@ -13,16 +13,11 @@
 10.0.0.6        workstation2.mgmt workstation2 salt ntp yumrepo pxeserver
 10.0.0.7        workstation3.mgmt workstation3
 
-10.0.0.11       controller1.mgmt  controller1
-10.0.0.12       controller2.mgmt  controller2
-
-10.0.0.21       network1.mgmt  network1
-10.0.0.22       network2.mgmt  network1
-
-10.0.0.31       compute1.mgmt  compute1
-10.0.0.32       compute2.mgmt  compute2
-10.0.0.33       compute3.mgmt  compute3
-10.0.0.34       compute4.mgmt  compute4
+10.0.0.31       app1.mgmt  app1 
+10.0.0.32       app2.mgmt  app2
+10.0.0.33       app3.mgmt  app3
+10.0.0.34       app4.mgmt  app4
+10.0.0.35       app5.mgmt  app5
 
 10.0.0.41       store1.mgmt store1
 10.0.0.42       store2.mgmt store2
@@ -31,24 +26,15 @@
 10.0.0.45       store5.mgmt store5
 10.0.0.46       store6.mgmt store6
 
-10.0.0.51       conn1.mgmt conn1
-10.0.0.52       conn2.mgmt conn2
-10.0.0.53       conn3.mgmt conn3
-10.0.0.54       conn4.mgmt conn4
-10.0.0.55       conn5.mgmt conn5
-10.0.0.56       conn6.mgmt conn6
-
 10.0.0.61       super.mgmt super
 
 ###############
 
-10.0.1.21       network1.vm
-10.0.1.22       network2.vm
-
-10.0.1.31       compute1.vm
-10.0.1.32       compute2.vm
-10.0.1.33       compute3.vm
-10.0.1.34       compute4.vm
+10.0.1.31       app1.chord
+10.0.1.32       app2.chord
+10.0.1.33       app3.chord
+10.0.1.34       app4.chord
+10.0.1.35       app5.chord
 
 10.0.1.41       store1.chord
 10.0.1.42       store2.chord
@@ -57,26 +43,15 @@
 10.0.1.45       store5.chord
 10.0.1.46       store6.chord
 
-10.0.1.51       conn1.chord
-10.0.1.52       conn2.chord
-10.0.1.53       conn3.chord
-10.0.1.54       conn4.chord
-10.0.1.55       conn5.chord
-10.0.1.56       conn6.chord
-
-
 ###############
 
 192.168.1.5     workstation1.pub
 192.168.1.6     workstation2.pub
 192.168.1.7     workstation3.pub
 
-192.168.1.11    controller1.pub
-192.168.1.12    controller2.pub
-
 ###############
 
-10.0.0.31 scality-test1.compute1.mgmt
-10.0.0.31 scality-test2.compute1.mgmt
-10.0.0.31 scality-test3.compute1.mgmt
+#10.0.0.31 scality-test1.compute1.mgmt
+#10.0.0.31 scality-test2.compute1.mgmt
+#10.0.0.31 scality-test3.compute1.mgmt
 

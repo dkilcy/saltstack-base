@@ -56,20 +56,39 @@ cd /var/www/html/repo/centos/7/epel
 rsync -avrt --delete --exclude 'debug'  --exclude 'drpms' rsync://mirror.pnl.gov/epel/7/x86_64 .
 
 ####################################################################################
-
-####################################################################################
-### CentOS 7 - Openstack Kilo
-####################################################################################
-
-#reposync -p /var/www/html/repo/centos/7 --repoid=openstack-kilo
-#createrepo /var/www/html/repo/centos/7/openstack-kilo
-
-####################################################################################
 ### CentOS 7 - Scality Lorien
 ####################################################################################
 
 reposync -p /var/www/html/repo/centos/7/scality-lorien1/x86_64 --repoid=scality-lorien1-centos7 --norepopath
 createrepo /var/www/html/repo/centos/7/scality-lorien1/x86_64
+
+####################################################################################
+### OpenStack Liberty
+####################################################################################
+
+reposync -p /var/www/html/repo/centos/7 --repoid=centos-openstack-liberty
+createrepo /var/www/html/repo/centos/7/centos-openstack-liberty
+
+####################################################################################
+### Docker
+####################################################################################
+
+reposync -p /var/www/html/repo/centos/7 --repoid=dockerrepo
+createrepo  /var/www/html/repo/centos/7/dockerrepo
+
+####################################################################################
+### NodeJS
+####################################################################################
+
+reposync -p /var/www/html/repo/centos/7 --repoid=nodesource
+createrepo  /var/www/html/repo/centos/7/nodesource
+
+####################################################################################
+### Saltstack
+####################################################################################
+
+reposync -p /var/www/html/repo/redhat/7/saltstack --repoid=saltstack --norepopath
+createrepo  /var/www/html/repo/redhat/7/saltstack
 
 ####################################################################################
 
