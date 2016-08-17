@@ -67,7 +67,7 @@ salt '<id>' grains.setvals "{'saltstack-base':{'role':'minion'}}"
 ### Useful Commands
 
 Debug and output options:
-- Version: `salt --version`
+- Local Version: `salt-run manage.versions`
 - Output data using pprint: `salt 'store1' grains.items --output=pprint`
 - Output data using json: `salt 'store1' grains.items --output=json`
 - Debug level: `salt 'store1' --log-level=debug --state-output=mixed state.highstate test=True`
