@@ -165,6 +165,19 @@ mtu 9216
 exit
 ```
 
+#### Change stack ports from "ethernet" to "stack"
+
+Stack ports need to be in "stack" mode in order for stacking to work.
+
+```
+config
+stack 
+stack-port 1/xg1 stack
+stack-port 1/xg2 stack
+```
+
+- Reboot the switch
+
 #### References
 
 - [PowerConnect Common Example Commands](http://en.community.dell.com/support-forums/network-switches/f/866/t/19445143)
@@ -174,4 +187,5 @@ exit
 - [MTU Oversize Packages](http://en.community.dell.com/techcenter/networking/f/4454/t/19415314)
 - [MTU and VLANs](http://en.community.dell.com/support-forums/network-switches/f/866/t/19602268)
 - [MTU and ESX](http://www.penguinpunk.net/blog/dell-powerconnect-and-jumbo-frames/)
+- [Configuring Stacking on Dell 6248 Switches](http://www.seanlabrie.com/2011/configuring-stacking-on-dell-6248-switches/)
 
