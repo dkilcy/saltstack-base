@@ -15,6 +15,8 @@
 - IP: `ip addr`  `ip route`
 - Show which process is using a port: `netstat -anp | grep 8775`  
 - Set MTU to 9000: `ip link set enp0s20f2 mtu 9000`
+- Test Jumbo Frames: `ping -M do -s 8972 192.168.1.6`
+  The reason for the 8972 is that the ICMP/ping implementation doesn’t encapsulate the 28 byte ICMP (8) + IP (20) (ping + standard internet protocol packet) header – thus we must take the 9000 and subtract 28 = 8972.
 - Disable NetworkManager
   ```bash
   service NetworkManager stop
@@ -265,3 +267,4 @@ Slave queue ID: 0
 - [CentOS Teaming with VLANS](http://techgnat.blogspot.com/2014/12/centos-teaming-with-vlans.html)
 - [http://dak1n1.com/blog/7-performance-tuning-intel-10gbe](http://dak1n1.com/blog/7-performance-tuning-intel-10gbe)
 - [https://www.unixmen.com/configure-static-ip-centos-7/](https://www.unixmen.com/configure-static-ip-centos-7/)
+- [https://www.mylesgray.com/hardware/test-jumbo-frames-working/](https://www.mylesgray.com/hardware/test-jumbo-frames-working/)
