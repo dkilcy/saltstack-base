@@ -180,6 +180,7 @@ stack-port 1/xg2 stack
 
 #### References
 
+- [How to configure the optimal switch settings for an IP based SAN](http://en.community.dell.com/techcenter/enterprise-solutions/w/oracle_solutions/1422.how-to-configure-the-optimal-switch-settings-for-an-ip-based-san)
 - [PowerConnect Common Example Commands](http://en.community.dell.com/support-forums/network-switches/f/866/t/19445143)
 - [Firmware](http://www.dell.com/support/home/us/en/04/product-support/product/powerconnect-6224/drivers)
 - [Stacking switches](http://www.dell.com/downloads/global/products/pwcnt/en/pwcnt_stacking_switches.pdf)
