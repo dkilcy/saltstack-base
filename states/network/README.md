@@ -156,15 +156,8 @@ IPADDR=10.0.1.21
 NETMASK=255.255.255.0
 ONBOOT=yes
 USERCTL=no
-BONDING_OPTS="miimon=100 mode=4 lacp_rate=1 xmit_hash_policy=layer3+4"
-```
-
-Other bonding options:
-```
 BONDING_OPTS="miimon=100 mode=1"
 ```
-
-
 Bonding options:
 - LACP: `BONDING_OPTS="miimon 100 mode=4 lacp_rate=1 xmit_hash_policy=layer3+4"`
 
