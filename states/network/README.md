@@ -159,7 +159,7 @@ USERCTL=no
 BONDING_OPTS="miimon=100 mode=1"
 ```
 Bonding options:
-- LACP: `BONDING_OPTS="miimon 100 mode=4 lacp_rate=1 xmit_hash_policy=layer3+4"`
+- LACP: `BONDING_OPTS="miimon=100 mode=4 lacp_rate=1 xmit_hash_policy=layer3+4"`
 
 
 Edit /etc/sysconfig/network-scripts/ifcfg-eth1
