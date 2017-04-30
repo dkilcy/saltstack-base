@@ -165,6 +165,14 @@ mtu 9216
 exit
 ```
 
+For LAG/LACP ports:
+```
+console(config)#interface port-channel 1  
+console(config-if-ch1)#mtu 9216
+console(config-if-ch1)#exit
+```
+
+
 #### Change stack ports from "ethernet" to "stack"
 
 Stack ports need to be in "stack" mode in order for stacking to work.
@@ -189,4 +197,4 @@ stack-port 1/xg2 stack
 - [MTU and VLANs](http://en.community.dell.com/support-forums/network-switches/f/866/t/19602268)
 - [MTU and ESX](http://www.penguinpunk.net/blog/dell-powerconnect-and-jumbo-frames/)
 - [Configuring Stacking on Dell 6248 Switches](http://www.seanlabrie.com/2011/configuring-stacking-on-dell-6248-switches/)
-
+- [Set Jumbo Frame on LAG](https://forum.synology.com/enu/viewtopic.php?t=90788)
