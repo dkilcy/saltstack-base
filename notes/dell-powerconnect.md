@@ -157,6 +157,7 @@ Do you wish to update Boot Code and reset the switch? (y/n) y
 
 #### Set MTU to 9000 (9216)
 
+Set the MTU of 9000 on all ports:
 ```
 enable
 configure
@@ -165,7 +166,7 @@ mtu 9216
 exit
 ```
 
-For LAG/LACP ports:
+For LAG/LACP ports, must also do the following for each port channel (chX):
 ```
 console(config)#interface port-channel 1  
 console(config-if-ch1)#mtu 9216
