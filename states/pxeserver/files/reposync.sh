@@ -30,8 +30,15 @@ rsync -avrt --delete --exclude 'debug' --exclude 'drpms' rsync://mirror.pnl.gov/
 ### CentOS 6 - Scality Lorien
 ####################################################################################
 
-reposync -p /var/www/html/repo/centos/6/scality-lorien1/x86_64 --repoid=scality-lorien1-centos6 --norepopath
-createrepo /var/www/html/repo/centos/6/scality-lorien1/x86_64
+#reposync -p /var/www/html/repo/centos/6/scality-lorien1/x86_64 --repoid=scality-lorien1-centos6 --norepopath
+#createrepo /var/www/html/repo/centos/6/scality-lorien1/x86_64
+
+####################################################################################
+### CentOS 7 - Scality Mithrandir
+####################################################################################
+
+reposync -p /var/www/html/repo/centos/6/scality-mithrandir/x86_64 --repoid=scality-mithrandir-centos6 --norepopath
+createrepo /var/www/html/repo/centos/6/scality-mithrandir/x86_64
 
 ####################################################################################
 ### CentOS 7
@@ -59,35 +66,42 @@ rsync -avrt --delete --exclude 'debug'  --exclude 'drpms' rsync://mirror.pnl.gov
 ### CentOS 7 - Scality Lorien
 ####################################################################################
 
-reposync -p /var/www/html/repo/centos/7/scality-lorien1/x86_64 --repoid=scality-lorien1-centos7 --norepopath
-createrepo /var/www/html/repo/centos/7/scality-lorien1/x86_64
+#reposync -p /var/www/html/repo/centos/7/scality-lorien1/x86_64 --repoid=scality-lorien1-centos7 --norepopath
+#createrepo /var/www/html/repo/centos/7/scality-lorien1/x86_64
+
+####################################################################################
+### CentOS 7 - Scality Mithrandir
+####################################################################################
+
+reposync -p /var/www/html/repo/centos/7/scality-mithrandir/x86_64 --repoid=scality-mithrandir-centos7 --norepopath
+createrepo /var/www/html/repo/centos/7/scality-mithrandir/x86_64
 
 ####################################################################################
 ### OpenStack Liberty
 ####################################################################################
 
-reposync -p /var/www/html/repo/centos/7 --repoid=centos-openstack-liberty
-createrepo /var/www/html/repo/centos/7/centos-openstack-liberty
+#reposync -p /var/www/html/repo/centos/7 --repoid=centos-openstack-liberty
+#createrepo /var/www/html/repo/centos/7/centos-openstack-liberty
 
 ####################################################################################
 ### Docker
 ####################################################################################
 
-reposync -p /var/www/html/repo/centos/7 --repoid=dockerrepo
-createrepo  /var/www/html/repo/centos/7/dockerrepo
+#reposync -p /var/www/html/repo/centos/7 --repoid=dockerrepo
+#createrepo  /var/www/html/repo/centos/7/dockerrepo
 
 ####################################################################################
 ### NodeJS
 ####################################################################################
 
-reposync -p /var/www/html/repo/centos/7 --repoid=nodesource
-createrepo  /var/www/html/repo/centos/7/nodesource
+#reposync -p /var/www/html/repo/centos/7 --repoid=nodesource
+#createrepo  /var/www/html/repo/centos/7/nodesource
 
 ####################################################################################
 ### Saltstack
 ####################################################################################
 
-reposync -p /var/www/html/repo/redhat/7/saltstack --repoid=saltstack --norepopath
+reposync -p /var/www/html/repo/redhat/7/saltstack --repoid=saltstack-repo --norepopath
 createrepo  /var/www/html/repo/redhat/7/saltstack
 
 ####################################################################################

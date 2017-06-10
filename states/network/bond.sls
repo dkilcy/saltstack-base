@@ -1,79 +1,31 @@
-##############################################################################
-# bond.sls
-#
-# @author dkilcy
-#
-##############################################################################
 
-{% set id = grains['id'] %}
+/etc/sysconfig/network-scripts/ifcfg-bond0:
+  file.managed:
+    - name: /etc/sysconfig/network-scripts/ifcfg-bond0
+    - contents: |
+        DEVICE=bond0
+        BOOTPROTO=static
+        IPADDR={{ salt['grains.get']('fqdn_ip4:0') }}
+        NETMASK=255.255.255.0
+        ONBOOT=yes
+        USERCTL=no
+        BONDING_OPTS="miimon=100 mode=4 lacp_rate=1 xmit_hash_policy=layer3+4"
+        MTU=9000
 
-{% for num in range(0,4) %}
+{% set eth = 'enp0s20f' %}
+{% for num in range(0,4,1) %}
 
-{% set bond = 'bond' + num|string %}
-
-{% if pillar['systems']['network'][bond] is defined %}
-
-{% set nic0 =   pillar['systems']['network'][bond]['nic0'] %}
-{% set nic1 =   pillar['systems']['network'][bond]['nic1'] %}
-{% set ipaddr = pillar['systems']['network'][bond]['ipaddr'] %}
-
-{{ id }}_{{ nic0 }}:
-  network.managed:
-    - name: {{ nic0 }}
-    - enabled: True
-    - type: slave
-    - master: {{ bond }}
-    - order: 1
-
-{{ id }}_{{ nic1 }}:
-  network.managed:
-    - name: {{ nic1 }}
-    - enabled: True
-    - type: slave
-    - master: {{ bond }}
-    - order: 2
-
-{{ id }}_{{ bond }}:
-  network.managed:
-    - name: {{ bond }}
-    - type: bond
-    - ipaddr: {{ ipaddr }}
-    - netmask: 255.255.255.0
-    - mode: active-backup
-    - proto: none 
-    - slaves: {{ nic0 }} {{ nic1 }}
-    - require:
-      - network: {{ nic0 }}
-      - network: {{ nic1 }}
-    - miimon: 100
-    - arp_interval: 250
-    - downdelay: 200
-    - lacp_rate: fast
-    - max_bonds: 1
-    - updelay: 0
-    - use_carrier: on
-    - xmit_hash_policy: layer2
-    - mtu: 9000
-    - autoneg: off
-    - speed: 1000
-    - duplex: full
-    - rx: on
-    - tx: off
-    - sg: on
-    - tso: off
-    - ufo: off
-    - gso: off
-    - gro: off
-    - lro: off
-    - order: 3
-
-{% endif %}
+/etc/sysconfig/network-scripts/ifcfg-{{ eth }}{{ num }}:
+  file.managed:
+    - name: /etc/sysconfig/network-scripts/ifcfg-{{ eth }}{{ num }}
+    - contents: |
+        DEVICE={{ eth }}{{ num }}
+        NM_CONTROLLED=no
+        ONBOOT=yes
+        BOOTPROTO=none
+        MASTER=bond0
+        SLAVE=yes
+        USERCTL=no
 
 {% endfor %}
 
-#network:
-#  module.run:
-#      - name: service.restart
-#      - m_name: network
-#      - order: last
- 
