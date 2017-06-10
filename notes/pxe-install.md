@@ -12,13 +12,11 @@
     - accept the key from the salt minion:  `salt-key -a <minion_id>`
     - Verify connectivity to the Salt minion: `salt <minion_id> test.ping`
     - Assign the node the minion role: `salt <minion_id> grains.setvals "{'saltstack-base':{'role':'minion'}}"`
-    - Configure networking:  `salt <minion_id> state.sls network.team`
-10. From the console:
-    - restart networking: `service network restart`
-    - Restart networking again: `service network restart`
-    - Verify connectivity: `ping salt`
-
+    - Configure networking:  `salt <minion_id> state.sls network.bond`
+    - Reboot: `salt <minion id> cmd.run 'reboot'`
+    
 Proceed to [Run States](run-states.md)
+
 
 #### Notes
 
