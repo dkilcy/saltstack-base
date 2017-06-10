@@ -17,13 +17,14 @@ base:
 {% endif %}
     - ntp.server
     - users
+    - irqbalance
 
   'G@saltstack-base:role:minion':
     - local
     - selinux
 # NOTE: iptables is required for juno-saltstack
 #    - iptables
-#    - network
+    - network
     - kernel
     - yumrepo
     - packages
@@ -35,3 +36,4 @@ base:
 {% endif %}
     - ntp.client
     - users
+    - irqbalance
