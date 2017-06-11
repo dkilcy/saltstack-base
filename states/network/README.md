@@ -24,6 +24,25 @@
   service network start
   chkconfig network on
   ```
+  
+#### Multi-queue hashing algoritms
+
+```
+[root@store1 ~]$ ethtool -n enp0s20f0 rx-flow-hash udp4  
+UDP over IPV4 flows use these fields for computing Hash flow key:
+IP SA
+IP DA
+
+[root@store1 ~]$ ethtool -N enp0s20f0 rx-flow-hash udp4 sdfn  
+[root@store1 ~]$ ethtool -n enp0s20f0 rx-flow-hash udp4  
+UDP over IPV4 flows use these fields for computing Hash flow key:
+IP SA
+IP DA
+L4 bytes 0 & 1 [TCP/UDP src port]
+L4 bytes 2 & 3 [TCP/UDP dst port]
+
+[root@store1 ~]$ 
+```
 
 ### CentOS 7 Teaming
 
@@ -267,3 +286,4 @@ Slave queue ID: 0
 - [http://dak1n1.com/blog/7-performance-tuning-intel-10gbe](http://dak1n1.com/blog/7-performance-tuning-intel-10gbe)
 - [https://www.unixmen.com/configure-static-ip-centos-7/](https://www.unixmen.com/configure-static-ip-centos-7/)
 - [https://www.mylesgray.com/hardware/test-jumbo-frames-working/](https://www.mylesgray.com/hardware/test-jumbo-frames-working/)
+- [https://blog.cloudflare.com/how-to-receive-a-million-packets/](https://blog.cloudflare.com/how-to-receive-a-million-packets/)
