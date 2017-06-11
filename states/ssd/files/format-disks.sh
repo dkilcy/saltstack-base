@@ -24,8 +24,8 @@ do
         parted ${DEV} print
 done
 
-UUID=`blkid | grep /dev/sdb1 | awk {'print $2'}`; echo "${UUID} /scality/ssd1 ext4 data=writeback,noauto,noatime,barrier=1,discard 0 0" >> /etc/fstab
-UUID=`blkid | grep /dev/sdc1 | awk {'print $2'}`; echo "${UUID} /scality/ssd2 ext4 data=writeback,noauto,noatime,barrier=1,discard 0 0" >> /etc/fstab
+UUID=`blkid | grep /dev/sdb1 | awk {'print $2'}`; echo "${UUID} /scality/ssd1 ext4 noatime,data=ordered,barrier=1,discard 0 0" >> /etc/fstab
+UUID=`blkid | grep /dev/sdc1 | awk {'print $2'}`; echo "${UUID} /scality/ssd2 ext4 noatime,data=ordered,barrier=1,discard 0 0" >> /etc/fstab
 
 mkdir -p /scality/ssd1
 mkdir -p /scality/ssd2
