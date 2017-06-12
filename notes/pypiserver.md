@@ -111,7 +111,12 @@ Successfully installed pypiserver-1.2.0
 
 #### Test from client machine
 
+NOTE: `yumrepo` is a DNS alias for `ws2` machine used in the example above
+
 ```
+[root@app1 tmp]$ grep yumrepo /etc/hosts
+10.0.0.6        ws2.lab.local ws2 salt ntp yumrepo pxeserver
+[root@app1 tmp]$ 
 [root@app1 tmp]$ cat ~/.pip/pip.conf
 [global]
 index-url = http://yumrepo:8080/simple/
