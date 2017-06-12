@@ -1,6 +1,13 @@
 
 ## pypiserver Setup
 
+Implementation of pypiserver on CentOS 7
+
+Tested versions.
+
+- CentOS Linux release 7.3.1611 (Core) 
+
+
 ```
 yum install python-pip libffi-devel gcc python-devel openssl-devel
 pip install --upgrade setuptools
