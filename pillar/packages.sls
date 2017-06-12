@@ -1,6 +1,12 @@
 
 packages:
   recommended:
+{% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
+    - iperf3
+    - python2-pip
+{% elif grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '6' %}
+    - pdsh
+{% endif %}
     - bc
     - bind-utils
     - bonnie++
@@ -9,12 +15,15 @@ packages:
     - dstat
     - e2fsprogs
     - fio
+    - gcc
     - gdisk
     - hdparm
     - htop
     - iotop
+    - iperf
     - irqbalance
 #    - kernel-tools
+    - libffi-devel
     - lshw
     - lsof
     - lvm2
@@ -27,9 +36,11 @@ packages:
     - numactl
     - openldap-clients
     - openssh-clients
+    - openssl-devel
     - parted
     - perf
     - pciutils
+    - python-devel
     - rsync
 #    - s3cmd
     - screen
@@ -48,11 +59,3 @@ packages:
     - wireshark
     - yum-utils
     - zip
-
-{% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
-    - iperf3
-{% elif grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '6' %}
-    - iperf
-    - pdsh
-{% endif %}
-
