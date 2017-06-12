@@ -112,6 +112,11 @@ Successfully installed pypiserver-1.2.0
 #### Test from client machine
 
 ```
+[root@app1 tmp]$ cat ~/.pip/pip.conf
+[global]
+index-url = http://yumrepo:8080/simple/
+trusted-host = yumrepo
+[root@app1 tmp]$ 
 [root@app1 tmp]$ pip install pip==8.1.1
 Collecting pip==8.1.1
   Downloading http://yumrepo:8080/packages/pip-8.1.1.tar.gz (1.1MB)
@@ -122,11 +127,6 @@ Installing collected packages: pip
       Successfully uninstalled pip-9.0.1
   Running setup.py install for pip ... done
 Successfully installed pip-8.1.1
-[root@app1 tmp]$ 
-[root@app1 tmp]$ cat ~/.pip/pip.conf
-[global]
-index-url = http://yumrepo:8080/simple/
-trusted-host = yumrepo
 [root@app1 tmp]$ 
 ```
 
