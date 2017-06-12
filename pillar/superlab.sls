@@ -1,4 +1,15 @@
 
+docker:
+  version: 1.13.1-1.el7
+
+#pypiserver:
+#  host: pypiserver
+#  nginx_ssl_frontend_port: 7009
+#  pypi_port: 7010
+#  packages_dir: /var/www/html/pypiserver/packages
+#  certificate: /data/certs/local.crt
+#  certificate_key: /data/certs/local.pem
+
 user_list:
     [{
     'name':'devops',
