@@ -1,0 +1,16 @@
+{% set mysql = salt['grains.filter_by']({
+'Debian': {
+'server': 'mysql-server',
+'client': 'mysql-client',
+'service': 'mysql',
+'config': '/etc/mysql/my.cnf',
+'python': 'python-mysqldb',
+},
+'RedHat': {
+'server': 'mariadb-server',
+'client': 'mariadb',
+'service': 'mariadb',
+'config': '/etc/my.cnf.d/openstack.cnf',
+'python': 'python2-PyMySQL',
+},
+}, merge=salt['pillar.get']('mysql:lookup')) %}

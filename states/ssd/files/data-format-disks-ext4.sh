@@ -1,13 +1,10 @@
 #!/bin/bash
 
-umount /scality-s3
+umount /data
 
 dd if=/dev/zero of=/dev/sdb bs=1M count=512
 
-###rm -Rf /scality
-
-sed -i "/scality/d" /etc/fstab
-sed -i "/SCALITY/d" /etc/fstab
+sed -i "/data/d" /etc/fstab
 
 #exit
 
@@ -22,9 +19,8 @@ do
         parted ${DEV} print
 done
 
-UUID=`blkid | grep /dev/sdb1 | awk {'print $2'}`; echo "${UUID} /scality-s3 ext4 noatime,data=ordered,barrier=1,discard 0 0" >> /etc/fstab
+UUID=`blkid | grep /dev/sdb1 | awk {'print $2'}`; echo "${UUID} /data ext4 noatime,data=ordered,barrier=1,discard 0 0" >> /etc/fstab
 
-mkdir -p /scality-s3
+mkdir -p /data
 
-mount /scality-s3
-
+mount /data
