@@ -4,106 +4,10 @@
 
 {% from "mysql/map.jinja" import mysql with context %}
 
-{% set keystone_dbpass = salt['pillar.get']('openstack:auth:KEYSTONE_DBPASS') %}
 {% set mysql_host = salt['pillar.get']('openstack:controller:host') %}
-{% set mysql_root_password = salt['pillar.get']('mysql:root_pass') %}
 {% set controller = salt['pillar.get']('openstack:controller:host') %}
 
-#
-# Create the keystone database
-#
-
-{{ mysql.service }}-keystone:
-  service.running:
-    - name: {{ mysql.service }}
-
-keystone_db:
-  mysql_database.present:
-    - name: keystone
-    - host: {{ mysql_host }}
-    - connection_user: root
-    - connection_pass: '{{ mysql_root_password }}'
-    - connection_charset: utf8
-    - require:
-      - service: {{ mysql.service }}-keystone
-#      - pkg: {{ mysql.python }}
-
-# 
-# Grant proper access to the keystone database:
-#
-
-keystone_grant_localhost:
-  mysql_user.present:
-    - name: keystone
-    - host: localhost
-    - password: {{ keystone_dbpass }}
-    - connection_user: root
-    - connection_pass: '{{ mysql_root_password }}'
-    - connection_charset: utf8
-    - require:
-      - service: {{ mysql.service }}-keystone
-#      - pkg: {{ mysql.python }}
-
-  mysql_grants.present:
-    - grant: all privileges
-    - database: keystone.*
-    - user: keystone
-    - host: localhost
-    - connection_user: root
-    - connection_pass: '{{ mysql_root_password }}'
-    - connection_charset: utf8
-    - require:
-      - service: {{ mysql.service }}-keystone
-#      - pkg: {{ mysql.python }}
-
-keystone_grant_all:
-  mysql_user.present:
-    - name: keystone
-    - host: '%'
-    - password: {{ keystone_dbpass }}
-    - connection_user: root
-    - connection_pass: '{{ mysql_root_password }}'
-    - connection_charset: utf8
-    - require:
-      - service: {{ mysql.service }}-keystone
-#      - pkg: {{ mysql.python }}
-
-  mysql_grants.present:
-    - grant: all privileges
-    - database: keystone.*
-    - user: keystone
-    - host: '%'
-    - connection_user: root
-    - connection_pass: '{{ mysql_root_password }}'
-    - connection_charset: utf8
-    - require:
-      - service: {{ mysql.service }}-keystone
-#      - pkg: {{ mysql.python }}
-
-
-keystone_grant_controller:
-  mysql_user.present:
-    - name: keystone
-    - host: '{{ salt['grains.get']('nodename') }}'
-    - password: {{ keystone_dbpass }}
-    - connection_user: root
-    - connection_pass: '{{ mysql_root_password }}'
-    - connection_charset: utf8
-    - require:
-      - service: {{ mysql.service }}-keystone
-#      - pkg: {{ mysql.python }}
-
-  mysql_grants.present:
-    - grant: all privileges
-    - database: keystone.*
-    - user: keystone
-    - host: '{{ salt['grains.get']('nodename') }}'
-    - connection_user: root
-    - connection_pass: '{{ mysql_root_password }}'
-    - connection_charset: utf8
-    - require:
-      - service: {{ mysql.service }}-keystone
-#      - pkg: {{ mysql.python }}
+{% set keystone_dbpass = salt['pillar.get']('openstack:auth:KEYSTONE_DBPASS') %}
 
 #
 # Install and configure components
@@ -169,4 +73,42 @@ httpd-service:
     - watch:
       - file: /etc/httpd/conf/httpd.conf
       - file: /etc/httpd/conf.d/wsgi-keystone.conf
+
+create-service-project:
+  cmd.run:
+    - name: openstack project create --domain default --description "Service Project" service 
+    - env: {{ salt['pillar.get']('openstack:env', {}) }}
+    - unless:
+      - openstack project show service
+
+create-demo-project:
+  cmd.run:
+    - name: openstack project create --domain default --description "Demo Project" demo
+    - env: {{ salt['pillar.get']('openstack:env', {}) }}
+    - unless:
+      - openstack project show demo
+
+create-demo-user:
+  cmd.run:
+    - name: openstack user create --domain default --password {{ salt['pillar.get']('openstack:auth:DEMO_PASS') }} demo
+    - env: {{ salt['pillar.get']('openstack:env', {}) }}
+    - unless:
+      - openstack user show demo
+
+create-demo-user-role:
+  cmd.run:
+    - name: openstack role create user
+    - env: {{ salt['pillar.get']('openstack:env', {}) }}
+    - unless:
+      - openstack role show user
+
+add-user-role-to-demo:
+  cmd.run:
+    - name: openstack role add --project demo --user demo user
+    - env: {{ salt['pillar.get']('openstack:env', {}) }}
+
+keystone.sh:
+  file.managed:
+    - name: {{ salt['pillar.get']('openstack:tools_dir') }}/keystone.sh
+    - source: salt://openstack/keystone/files/keystone.sh
 

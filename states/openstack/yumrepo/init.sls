@@ -7,3 +7,7 @@ openstack-repo:
     - enabled: True
   cmd.run:
     - name: yum -y clean all
+
+python-openstackclient:
+  pkg.installed
+

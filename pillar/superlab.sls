@@ -3,16 +3,14 @@ docker:
   version: 1.13.1-1.el7
 
 openstack:
-
   repo:
     baseurl: http://yumrepo/repo/centos/7/centos-openstack-ocata
-
   controller: 
     host: controller
-  
+  neutron:
+    provider_interface_name: 'external:enp0s20f2'
   user: devops
   tools_dir: /home/devops/openstack
-
   auth:
     ADMIN_PASS: admin
     CINDER_DBPASS: cinder
@@ -28,11 +26,20 @@ openstack:
     NOVA_DBPASS: nova
     NOVA_PASS: nova
     PLACEMENT_PASS: placement
-    RABBIT_PASS: guest
-
+    # below needs to be same as rabbitmq pass for openstack user. 
+    RABBIT_PASS: openstack
   rabbitmq:
     user: openstack
     pass: openstack
+  env:
+    OS_USERNAME: admin
+    OS_PASSWORD: admin
+    OS_PROJECT_NAME: admin
+    OS_USER_DOMAIN_NAME: Default
+    OS_PROJECT_DOMAIN_NAME: Default
+    OS_AUTH_URL: http://controller:35357/v3
+    OS_IDENTITY_API_VERSION: 3
+    OS_IMAGE_API_VERSION: 2
 
 mysql:
   root_pass: password
@@ -91,3 +98,65 @@ systems:
       - ws2.lab.local
 {% endif %}
 
+packages:
+  recommended:
+{% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
+    - iperf3
+    - python2-pip
+{% elif grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '6' %}
+    - pdsh
+{% endif %}
+    - bc
+    - bind-utils
+    - bonnie++
+    - createrepo
+    - curl
+    - dstat
+    - e2fsprogs
+    - fio
+    - gcc
+    - gdisk
+    - hdparm
+    - htop
+    - iotop
+    - iperf
+    - irqbalance
+#    - kernel-tools
+    - libffi-devel
+    - lshw
+    - lsof
+    - lvm2
+    - net-snmp
+    - net-snmp-perl
+    - net-snmp-utils
+    - ngrep
+    - nmap
+    - ntp
+    - numactl
+    - openldap-clients
+    - openssh-clients
+    - openssl-devel
+    - parted
+    - perf
+    - pciutils
+    - python-devel
+    - python-pip
+    - python-virtualenv
+    - rsync
+#    - s3cmd
+    - screen
+    - sdparm
+    - smartmontools
+    - strace
+    - sysstat
+    - tcpdump
+    - telnet
+    - traceroute
+    - tuned
+    - unzip
+#    - util-linux-ng
+    - vim-enhanced
+    - wget
+    - wireshark
+    - yum-utils
+    - zip

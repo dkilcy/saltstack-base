@@ -1,6 +1,5 @@
 
 base:
   '*':
-    - packages
     - superlab
 
