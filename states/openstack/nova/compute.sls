@@ -44,10 +44,10 @@ openstack-nova-compute-pkgs:
           lock_path: /var/lib/nova/tmp
         placement:
           os_region_name: RegionOne
-          project_domain_name: Default
+          project_domain_name: default
           project_name: service
           auth_type: password
-          user_domain_name: Default
+          user_domain_name: default
           auth_url: http://{{ controller }}:35357/v3
           username: placement
           password: {{ placement_pass }}

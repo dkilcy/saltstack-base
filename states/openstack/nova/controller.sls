@@ -13,26 +13,6 @@
 {% set controller = salt['pillar.get']('openstack:controller:host') %}
 
 
-# This needs to go here for placement API endpoints to be created successfully ??
-# packaging bug...
-/etc/httpd/conf.d/00-nova-placement-api.conf:
-  file.append:
-    - name: /etc/httpd/conf.d/00-nova-placement-api.conf
-    - text: |
-        <Directory /usr/bin>
-           <IfVersion >= 2.4>
-              Require all granted
-           </IfVersion>
-           <IfVersion < 2.4>
-              Order allow,deny
-              Allow from all
-           </IfVersion>
-        </Directory>
-  service.running:
-    - name: httpd
-    - watch:
-      - file: /etc/httpd/conf.d/00-nova-placement-api.conf
-
 create-nova-user:
   cmd.run:
     - name: openstack user create --password {{ salt['pillar.get']('openstack:auth:NOVA_PASS') }} nova
@@ -70,7 +50,7 @@ nova-admin-service-endpoint:
 # Placement
 create-placement-user:
   cmd.run:
-    - name: openstack user create --password {{ salt['pillar.get']('openstack:auth:PLACEMENT_PASS') }} placement
+    - name: openstack user create --domain default --password {{ salt['pillar.get']('openstack:auth:PLACEMENT_PASS') }} placement
     - env: {{ salt['pillar.get']('openstack:env', {}) }}
     - unless:
       - openstack user show placement
@@ -117,6 +97,26 @@ nova-pkgs:
       - openstack-nova-scheduler
       - openstack-nova-placement-api
 
+# This needs to go here for placement API endpoints to be created successfully ??
+# packaging bug...
+/etc/httpd/conf.d/00-nova-placement-api.conf:
+  file.append:
+    - name: /etc/httpd/conf.d/00-nova-placement-api.conf
+    - text: |
+        <Directory /usr/bin>
+           <IfVersion >= 2.4>
+              Require all granted
+           </IfVersion>
+           <IfVersion < 2.4>
+              Order allow,deny
+              Allow from all
+           </IfVersion>
+        </Directory>
+  service.running:
+    - name: httpd
+    - watch:
+      - file: /etc/httpd/conf.d/00-nova-placement-api.conf
+
 # 2. Edit the /etc/nova/nova-api.conf file and complete the following actions:
 /etc/nova/nova.conf:
   ini.options_present:
@@ -151,10 +151,10 @@ nova-pkgs:
           lock_path: /var/lib/nova/tmp
         placement:
           os_region_name: RegionOne
-          project_domain_name: Default
+          project_domain_name: default
           project_name: service
           auth_type: password
-          user_domain_name: Default
+          user_domain_name: default
           auth_url: 'http://{{ controller }}:35357/v3'
           username: placement
           password: {{ placement_pass }}

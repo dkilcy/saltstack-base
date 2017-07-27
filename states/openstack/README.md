@@ -2,7 +2,9 @@
 ## Deploy OpenStack Ocela using SaltStack on CentOS 7
 
 
+
 1. Configure the pillar
+
 
 2.
 
@@ -45,11 +47,20 @@ glance.sh
 salt 'controller' state.sls openstack.nova.controller
 ```
 
+```
+nova-controller.sh
+```
+
 6. 
 
 ```
 salt 'compute1' state.sls openstack.nova.compute
 ```
+
+```
+nova-compute.sh
+```
+
 
 8. 
 
@@ -62,6 +73,10 @@ salt 'controller' state.sls openstack.neutron.controller
 ```
 salt 'compute1' state.sls openstack.neutron.compute
 
+
+```
+neutron-compute.sh
+```
 
 ### Verifying the Installation
 
@@ -89,12 +104,16 @@ rm -Rf /var/log/neutron
 ```
 yum -y erase mod_wsgi
 yum -y erase httpd
-mum -y erase memcached
+rm -Rf /etc/httpd
+
+yum -y erase memcached
 yum -y erase rabbitmq-server
 
 yum -y erase mariadb
 rm -Rf /var/lib/mysql
+
 rm -Rf /etc/my.cnf.db
+rm -Rf /var/log/httpd
 
 
 

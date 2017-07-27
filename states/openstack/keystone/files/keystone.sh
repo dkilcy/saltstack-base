@@ -27,16 +27,24 @@
 
 openstack project list
 openstack project show service
+
+openstack role list
+
 openstack user list
 openstack user show demo
-openstack role list
+
+openstack service list
+openstack endpoint list
+
+#
+#
+#
 
 unset OS_AUTH_URL OS_PASSWORD
 
-echo "use password for the admin user $ADMIN_PASS"
 openstack --os-auth-url http://controller:35357/v3 \
   --os-project-domain-name default --os-user-domain-name default \
-  --os-project-name admin --os-username admin token issue
+  --os-project-name admin --os-username admin --os-password ${ADMIN_PASS} token issue
 
 . demo-openrc.sh
 

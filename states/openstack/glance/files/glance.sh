@@ -13,6 +13,18 @@
 #openstack endpoint create --region RegionOne image internal http://controller:9292
 #openstack endpoint create --region RegionOne image admin http://controller:9292
 
+openstack user list
+openstack user show glance
+
+openstack service list
+openstack service show glance
+
+openstack service list
+openstack endpoint list
+
+#
+#
+#
 
 openstack image list
 

@@ -11,12 +11,12 @@
 {% set nova_pass = salt['pillar.get']('openstack:auth:NOVA_PASS') %}
 {% set rabbit_pass = salt['pillar.get']('openstack:auth:RABBIT_PASS') %}
 {% set metadata_secret = salt['pillar.get']('openstack:auth:METADATA_SECRET') %}
-{% set provider_interface_name = salt['pillar.get']('openstack:neutron:provider_interface_name') %}
+{% set provider_interface_name = salt['pillar.get']('openstack:neutron:controller_provider_interface_name') %}
 {% set controller = salt['pillar.get']('openstack:controller:host') %}
 
 create-neutron-user:
   cmd.run:
-    - name: openstack user create --password {{ salt['pillar.get']('openstack:auth:NEUTRON_PASS') }} neutron
+    - name: openstack user create --domain default --password {{ salt['pillar.get']('openstack:auth:NEUTRON_PASS') }} neutron
     - env: {{ salt['pillar.get']('openstack:env', {}) }}
     - unless:
       - openstack user show neutron
@@ -37,22 +37,22 @@ neutron-public-service-endpoint:
   cmd.run:
     - name: 'openstack endpoint create --region RegionOne network public http://{{ controller }}:9696'
     - env: {{ salt['pillar.get']('openstack:env', {}) }}
-    - unless:
-      - openstack endpoint list --service network --interface public
+#    - unless:
+#      - openstack endpoint list --service network --interface public
 
 neutron-internal-service-endpoint:
   cmd.run:
     - name: 'openstack endpoint create --region RegionOne network internal http://{{ controller }}:9696'
     - env: {{ salt['pillar.get']('openstack:env', {}) }}
-    - unless:
-      - openstack endpoint list --service network --interface internal
+#    - unless:
+#      - openstack endpoint list --service network --interface internal
 
 neutron-admin-service-endpoint:
   cmd.run:
     - name: 'openstack endpoint create --region RegionOne network admin http://{{ controller }}:9696'
     - env: {{ salt['pillar.get']('openstack:env', {}) }}
-    - unless:
-      - openstack endpoint list --service network --interface admin
+#    - unless:
+#      - openstack endpoint list --service network --interface admin
 
 neutron-packages:
   pkg.installed:
@@ -114,7 +114,7 @@ neutron-packages:
     - sections:
         linux_bridge:
           physical_interface_mappings: {{ provider_interface_name }}
-        vlan:
+        vxlan:
           enable_vxlan: false
         securitygroup:
           enable_security_group: true
@@ -132,7 +132,7 @@ neutron-packages:
   ini.options_present:
     - sections:
         DEFAULT:
-          nova_metadata_ip: controller
+          nova_metadata_ip: {{ controller }}
           metadata_proxy_shared_secret: {{ metadata_secret }}
 
 /etc/nova/nova.conf:

@@ -11,7 +11,7 @@
 {% set nova_pass = salt['pillar.get']('openstack:auth:NOVA_PASS') %}
 {% set rabbit_pass = salt['pillar.get']('openstack:auth:RABBIT_PASS') %}
 {% set metadata_secret = salt['pillar.get']('openstack:auth:METADATA_SECRET') %}
-{% set provider_interface_name = salt['pillar.get']('openstack:neutron:provider_interface_name') %}
+{% set provider_interface_name = salt['pillar.get']('openstack:neutron:compute_provider_interface_name') %}
 {% set controller = salt['pillar.get']('openstack:controller:host') %}
 
 neutron-compute-packages:
@@ -47,7 +47,7 @@ neutron-compute-packages:
     - sections:
         linux_bridge:
           physical_interface_mappings: {{ provider_interface_name }}
-        vlan:
+        vxlan:
           enable_vxlan: false
         securitygroup:
           enable_security_group: true
@@ -67,8 +67,8 @@ neutron-compute-packages:
           project_name: service
           username: neutron
           password: {{ neutron_pass }}
-          service_metadata_proxy: true
-          metadata_proxy_shared_secret: {{ metadata_secret }}
+#          service_metadata_proxy: true
+#          metadata_proxy_shared_secret: {{ metadata_secret }}
 
 restart-compute:
   cmd.run:

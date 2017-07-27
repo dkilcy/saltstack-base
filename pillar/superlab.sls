@@ -8,7 +8,8 @@ openstack:
   controller: 
     host: controller
   neutron:
-    provider_interface_name: 'external:enp0s20f2'
+    controller_provider_interface_name: 'provider:enp5s0'
+    compute_provider_interface_name: 'provider:enp0s20f2'
   user: devops
   tools_dir: /home/devops/openstack
   auth:
