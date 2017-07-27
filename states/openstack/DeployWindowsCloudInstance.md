@@ -53,4 +53,14 @@ Perform the following steps on the **controller** with the **demo** environment:
   xfreerdp -u Admin 10.0.0.208
   ```
   
+### References
+
+Where to get images:
+
+- [RDO Image resources](https://openstack.redhat.com/resources/image-resources/)
+- [OpenStack Windows Server 2012 R2 Evaluation Image](https://cloudbase.it/openstack-windows-server-2012-r2-evalution-images/
+)
+
+
+  
   
