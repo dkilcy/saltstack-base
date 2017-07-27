@@ -71,7 +71,7 @@ nova-compute.sh
 ```
 
 
-8. Create the Networkign service 
+8. Create the Networking service 
 
 ```
 salt 'controller' state.sls openstack.neutron.controller
@@ -79,7 +79,7 @@ salt 'controller' state.sls openstack.neutron.controller
 
 ```
 salt 'compute1' state.sls openstack.neutron.compute
-
+```
 
 ```
 neutron-compute.sh
