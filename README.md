@@ -7,12 +7,6 @@ Contents:
 4. [Useful Commands](#useful-commands)
 5. [References](#references)
 
-Other projects that use this repository:
-- [kilo-saltstack](https://github.com/dkilcy/kilo-saltstack) - OpenStack 3+ node architecture on CentOS 7
-
-Deprecated projects:
-- [juno-saltstack](https://github.com/dkilcy/juno-saltstack) - OpenStack 3+ node architecture on CentOS 7
-- [icehouse-saltstack](https://github.com/dkilcy/icehouse-saltstack) - OpenStack on CentOS 6.5
 
 ### Introduction
 
