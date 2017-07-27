@@ -34,9 +34,12 @@ Perform the following steps on the **controller** with the **demo** environment:
     --nic net-id=bad3be29-b22a-4e3e-bd6a-fb855d5ad652 \
     --security-group default \
     --key-name devops-key win2012r2-1
-    
-  openstack server list
+  ```
   
+  - To assign a static IP to the instance: `--nic net-id="bad3be29-b22a-4e3e-bd6a-fb855d5ad652",v4-fixed-ip="10.0.0.81" \`
+  
+  ```
+  openstack server list
   ```
 6. Get the Administrator password
 
@@ -55,25 +58,11 @@ Perform the following steps on the **controller** with the **demo** environment:
   
 ### Configure Active Directory and DNS Server
 
-DNS Suffix is lab.local
-
 1. Login as Administrator.
-2. From the Server Manager Dashboard, set the VM with a static IP address (You must do this for AD to work)
- * a. Click the network icon at the lower right and Open Network and Sharing Center .
- * b. Click Ethernet
- * c. Click Properties
- * d. Select Internet Protocol Version 4 
- * e. Click Properties
-     - IP Address: 10.0.0.81
-     - Netmask: 255.255.255.0
-     - Gateway: 10.0.0.1
-     - Preferred DNS Server: 127.0.0.1
- * f. Close
- * g. Restart the OS and log back in
-
+2. From the Server Manager Dashboard, verify the VM is set with a static IP address -- **You must do this for AD to work**
 3. From the Server Manager Dashboard, set the Active Directory and DNS Roles
   * a. Click Add roles and features
-  * b. Select a server from the server pool: demo-windows201 172.16.1.10 2012 R2 Standard Evaluation
+  * b. Select a server from the server pool: 
   * c. The Select Roles dialog appears. Check:
       - Active Directory Domain Services
       - DNS Server
@@ -83,15 +72,15 @@ DNS Suffix is lab.local
 5. Promote the server to Domain Controller
   * a. Select notification icon in Dashboard and click Promote this server to a domain controller
   * b. For Select the deployment operation choose Add a new forest
-    - Root domain name: lab.local
+    - Root domain name: **lab.local**
   * c. Click Change and supply credentials
-  * d. Type the Directory Services Restore Mode (DSRM) password: DSRMpassword1
+  * d. Type the Directory Services Restore Mode (DSRM) password: **DSRMpassword1**
   * e. Ignore the authoritative parent zone warning - click Next
-  * f. Verify NetBIOS name: LAB
+  * f. Verify NetBIOS name: **LAB**
   * g. Review your selections and click Install
   * h. OS restarts
 6. Log back into the OS and set the correct time zone (EST)
-7. Create testuser1@lab.local user in Active Directory Users and Computers as a test
+7. Create a **testuser1@lab.local** user in Active Directory Users and Computers as a test
     
 
 ### References
