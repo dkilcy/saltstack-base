@@ -90,6 +90,7 @@ Where to get images:
 - [RDO Image resources](https://openstack.redhat.com/resources/image-resources/)
 - [OpenStack Windows Server 2012 R2 Evaluation Image](https://cloudbase.it/openstack-windows-server-2012-r2-evalution-images/
 )
+- [https://social.technet.microsoft.com/Forums/en-US/024cce0f-f2f1-4714-abc9-1a4ecf40638a/what-difference-between-primary-dns-suffix-and-connectionspecific-dns-suffix?forum=winserverNIS](https://social.technet.microsoft.com/Forums/en-US/024cce0f-f2f1-4714-abc9-1a4ecf40638a/what-difference-between-primary-dns-suffix-and-connectionspecific-dns-suffix?forum=winserverNIS)
 
 
   
