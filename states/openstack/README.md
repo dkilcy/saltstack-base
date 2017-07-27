@@ -132,6 +132,28 @@ ping 10.0.0.207
   openstack flavor create --id 5 --vcpus 8 --ram 16384 --disk 80  m1.xlarge
   ```
 
+#### Services to check on the controller
+
+```
+systemctl status httpd.service
+systemctl status mariadb.service
+systemctl status mongod.service
+systemctl status mongod.service
+systemctl status memcached.service
+systemctl status openstack-glance-api.service \
+ openstack-glance-registry.service
+systemctl status openstack-nova-api.service \
+ openstack-nova-cert.service \
+ openstack-nova-consoleauth.service \
+ openstack-nova-scheduler.service \
+ openstack-nova-conductor.service \
+ openstack-nova-novncproxy.service
+systemctl status openstack-nova-api
+systemctl status neutron-server.service \
+ neutron-linuxbridge-agent.service \
+ neutron-dhcp-agent.service \
+ neutron-metadata-agent.service
+```
 
 ### Cleanup
 
