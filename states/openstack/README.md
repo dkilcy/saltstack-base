@@ -97,18 +97,41 @@ openstack keypair create --public-key ~/.ssh/id_rsa.pub mykey
 openstack keypair list
 openstack security group rule create --proto icmp default
 openstack security group rule create --proto tcp --dst-port 22 default
-openstack network create  --share --external   --provider-physical-network provider   --provider-network-type flat provider
-openstack subnet create --network provider --allocation-pool start=10.0.0.200,end=10.0.0.216   --dns-nameserver 10.0.0.6 --gateway 10.0.0.1 --subnet-range 10.0.0.0/24 provider
+openstack network create  --share --external  \
+  --provider-physical-network provider  \
+  --provider-network-type flat provider
+openstack subnet create --network provider \
+  --allocation-pool start=10.0.0.200,end=10.0.0.216 \
+  --dns-nameserver 10.0.0.6 \
+  --gateway 10.0.0.1 \
+  --subnet-range 10.0.0.0/24 provider
 openstack flavor create --id 0 --vcpus 1 --ram 64 --disk 1 m1.nano
 openstack flavor list
 openstack image list
 openstack network list
 openstack security group list
-openstack server create --flavor m1.nano --image cirros   --nic net-id=bad3be29-b22a-4e3e-bd6a-fb855d5ad652  --security-group default   --key-name mykey provider-instance
+openstack server create --flavor m1.nano --image cirros \
+  --nic net-id=bad3be29-b22a-4e3e-bd6a-fb855d5ad652  \
+  --security-group default \
+  --key-name mykey provider-instance
 openstack server list
 openstack console url show provider-instance
 ping 10.0.0.207 
 ```
+
+### Post-Install
+
+1. Create default flavors
+
+  ```
+  openstack flavor create --id 0 --vcpus 1 --ram 64    --disk 1   m1.nano
+  openstack flavor create --id 1 --vcpus 1 --ram 512   --disk 1   m1.tiny
+  openstack flavor create --id 2 --vcpus 1 --ram 2048  --disk 20  m1.small
+  openstack flavor create --id 3 --vcpus 2 --ram 4096  --disk 30  m1.medium
+  openstack flavor create --id 4 --vcpus 4 --ram 8192  --disk 40  m1.large
+  openstack flavor create --id 5 --vcpus 8 --ram 16384 --disk 80  m1.xlarge
+  ```
+
 
 ### Cleanup
 
