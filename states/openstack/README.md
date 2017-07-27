@@ -1,26 +1,37 @@
 
-## Deploy OpenStack Ocela using SaltStack on CentOS 7
+## Deploy OpenStack Ocela using SaltStack on RHEL/CentOS 7
 
 
 
 1. Configure the pillar
 
 
-2.
+2. Configure the repo on all machines in the cluster, and install the python-openstackclient package
 
 ```
-salt 'controller' state.sls openstack.yumrepo
-salt 'compute1' state.sls openstack.yumrepo
+salt 'c*' state.sls openstack.yumrepo
 ```
 
-```
-salt 'controller' state.sls openstack.auth
-salt 'controller' state.sls openstack.mysql
-salt 'controller' state.sls openstack.rabbitmq
-salt 'controller' state.sls openstack.memcached
-```
+3. Setup the Environment
 
-3. 
+
+  a. Create the security methods
+  ```
+  salt 'controller' state.sls openstack.auth
+  ```
+
+  b. Install MariaDB and configure the database schema and users
+  ```
+  salt 'controller' state.sls openstack.mysql
+  ```
+
+  c. Install and configure the message queue and memcached services
+  ```
+  salt 'controller' state.sls openstack.rabbitmq
+  salt 'controller' state.sls openstack.memcached
+  ```
+
+4. Create the Identity service
 
 ```
 salt 'controller' state.sls openstack.keystone
@@ -31,7 +42,7 @@ keystone.sh
 ```
 
 
-4. 
+4. Create the Image service
 
 ```
 salt 'controller' state.sls openstack.glance
@@ -41,7 +52,7 @@ salt 'controller' state.sls openstack.glance
 glance.sh
 ```
 
-5. 
+5. Create the Compute Service 
 
 ```
 salt 'controller' state.sls openstack.nova.controller
@@ -50,8 +61,6 @@ salt 'controller' state.sls openstack.nova.controller
 ```
 nova-controller.sh
 ```
-
-6. 
 
 ```
 salt 'compute1' state.sls openstack.nova.compute
@@ -62,13 +71,11 @@ nova-compute.sh
 ```
 
 
-8. 
+8. Create the Networkign service 
 
 ```
 salt 'controller' state.sls openstack.neutron.controller
 ```
-
-9. 
 
 ```
 salt 'compute1' state.sls openstack.neutron.compute
@@ -80,6 +87,28 @@ neutron-compute.sh
 
 ### Verifying the Installation
 
+```
+. ./admin-openrc.sh
+openstack extension list --network
+openstack network agent list
+openstack flavor create --id 0 --vcpus 1 --ram 64 --disk 1 m1.nano
+. ./demo-openrc.sh 
+openstack keypair create --public-key ~/.ssh/id_rsa.pub mykey
+openstack keypair list
+openstack security group rule create --proto icmp default
+openstack security group rule create --proto tcp --dst-port 22 default
+openstack network create  --share --external   --provider-physical-network provider   --provider-network-type flat provider
+openstack subnet create --network provider --allocation-pool start=10.0.0.200,end=10.0.0.216   --dns-nameserver 10.0.0.6 --gateway 10.0.0.1 --subnet-range 10.0.0.0/24 provider
+openstack flavor create --id 0 --vcpus 1 --ram 64 --disk 1 m1.nano
+openstack flavor list
+openstack image list
+openstack network list
+openstack security group list
+openstack server create --flavor m1.nano --image cirros   --nic net-id=bad3be29-b22a-4e3e-bd6a-fb855d5ad652  --security-group default   --key-name mykey provider-instance
+openstack server list
+openstack console url show provider-instance
+ping 10.0.0.207 
+```
 
 ### Cleanup
 
@@ -114,9 +143,5 @@ rm -Rf /var/lib/mysql
 
 rm -Rf /etc/my.cnf.db
 rm -Rf /var/log/httpd
-
-
-
-
 ```
 
