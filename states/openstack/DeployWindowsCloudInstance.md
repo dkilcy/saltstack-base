@@ -53,6 +53,47 @@ Perform the following steps on the **controller** with the **demo** environment:
   xfreerdp -u Admin 10.0.0.208
   ```
   
+### Configure Active Directory and DNS Server
+
+DNS Suffix is lab.local
+
+1. Login as Administrator.
+2. From the Server Manager Dashboard, set the VM with a static IP address (You must do this for AD to work)
+ * a. Click the network icon at the lower right and Open Network and Sharing Center .
+ * b. Click Ethernet
+ * c. Click Properties
+ * d. Select Internet Protocol Version 4 
+ * e. Click Properties
+     - IP Address: 10.0.0.81
+     - Netmask: 255.255.255.0
+     - Gateway: 10.0.0.1
+     - Preferred DNS Server: 127.0.0.1
+ * f. Close
+ * g. Restart the OS and log back in
+
+3. From the Server Manager Dashboard, set the Active Directory and DNS Roles
+  * a. Click Add roles and features
+  * b. Select a server from the server pool: demo-windows201 172.16.1.10 2012 R2 Standard Evaluation
+  * c. The Select Roles dialog appears. Check:
+      - Active Directory Domain Services
+      - DNS Server
+  * d. Take the defaults for the remaining steps and click Next
+  
+4. You should see AD DS and DNS added to the list column in the Server Manager Dashboard
+5. Promote the server to Domain Controller
+  * a. Select notification icon in Dashboard and click Promote this server to a domain controller
+  * b. For Select the deployment operation choose Add a new forest
+    - Root domain name: lab.local
+  * c. Click Change and supply credentials
+  * d. Type the Directory Services Restore Mode (DSRM) password: DSRMpassword1
+  * e. Ignore the authoritative parent zone warning - click Next
+  * f. Verify NetBIOS name: LAB
+  * g. Review your selections and click Install
+  * h. OS restarts
+6. Log back into the OS and set the correct time zone (EST)
+7. Create testuser1@lab.local user in Active Directory Users and Computers as a test
+    
+
 ### References
 
 Where to get images:
