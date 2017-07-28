@@ -2,7 +2,7 @@
 # https://docs.openstack.org/ocata/install-guide-rdo/keystone-install.html
 #
 
-{% from "mysql/map.jinja" import mysql with context %}
+{% from "openstack/mysql/map.jinja" import mysql with context %}
 
 {% set mysql_host = salt['pillar.get']('openstack:controller:host') %}
 {% set controller = salt['pillar.get']('openstack:controller:host') %}

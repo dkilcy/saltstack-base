@@ -2,7 +2,7 @@
 # https://docs.openstack.org/ocata/install-guide-rdo/nova-controller-install.html
 #
 
-{% from "mysql/map.jinja" import mysql with context %}
+{% from "openstack/mysql/map.jinja" import mysql with context %}
 
 {% set nova_dbpass = salt['pillar.get']('openstack:auth:NOVA_DBPASS') %}
 {% set nova_pass = salt['pillar.get']('openstack:auth:NOVA_PASS') %}

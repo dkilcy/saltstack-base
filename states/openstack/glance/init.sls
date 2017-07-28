@@ -2,7 +2,7 @@
 # https://docs.openstack.org/ocata/install-guide-rdo/glance-install.html
 #
 
-{% from "mysql/map.jinja" import mysql with context %}
+{% from "openstack/mysql/map.jinja" import mysql with context %}
 
 {% set glance_dbpass = salt['pillar.get']('openstack:auth:GLANCE_DBPASS') %}
 {% set glance_pass = salt['pillar.get']('openstack:auth:GLANCE_PASS') %}

@@ -1,5 +1,5 @@
 
-{% from "mysql/map.jinja" import mysql with context %}
+{% from "openstack/mysql/map.jinja" import mysql with context %}
 
 {% set rabbit_pass = salt['pillar.get']('openstack:auth:RABBIT_PASS') %}
 {% set nova_pass = salt['pillar.get']('openstack:auth:NOVA_PASS') %}

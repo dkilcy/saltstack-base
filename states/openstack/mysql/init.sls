@@ -1,4 +1,4 @@
-{% from "mysql/map.jinja" import mysql with context %}
+{% from "openstack/mysql/map.jinja" import mysql with context %}
 
 {% set mysql_host = salt['pillar.get']('openstack:controller:host') %}
 {% set mysql_root_password = salt['pillar.get']('mysql:root_pass') %}
