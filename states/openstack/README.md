@@ -37,20 +37,71 @@ salt 'c*' state.sls openstack.yumrepo
 salt 'controller' state.sls openstack.keystone
 ```
 
-```
-keystone.sh
-```
+Verify the installation
 
+On the **controller** node, run these commands:
+
+```
+. admin-openrc.sh
+
+openstack project list
+openstack project show service
+
+openstack role list
+
+openstack user list
+openstack user show demo
+
+openstack service list
+openstack endpoint list
+
+unset OS_AUTH_URL OS_PASSWORD
+
+openstack --os-auth-url http://controller:35357/v3 \
+  --os-project-domain-name default --os-user-domain-name default \
+  --os-project-name admin --os-username admin --os-password ${ADMIN_PASS} token issue
+
+. demo-openrc.sh
+
+openstack --os-auth-url http://controller:5000/v3 \
+  --os-project-domain-name default --os-user-domain-name default \
+  --os-project-name demo --os-username demo token issue
+
+
+. admin-openrc.sh
+```
 
 4. Create the Image service
 
 ```
 salt 'controller' state.sls openstack.glance
 ```
+Verify the installation
+
+On the **controller** node, run these commands:
 
 ```
-glance.sh
+. admin-openrc.sh
+openstack user list
+openstack user show glance
+
+openstack service list
+openstack service show glance
+
+openstack service list
+openstack endpoint list
+
+openstack image list
+
+openstack image create "cirros" \
+  --file ./images/cirros-0.3.4-x86_64-disk.img \
+  --disk-format qcow2 --container-format bare \
+  --public
+
+openstack image list
 ```
+
+
 
 5. Create the Compute Service 
 
@@ -58,8 +109,9 @@ glance.sh
 salt 'controller' state.sls openstack.nova.controller
 ```
 
+Verify novacello0 and cell1 are registered correctly
 ```
-nova-controller.sh
+nova-manage cell_v2 list_cellsrm n
 ```
 
 ```
@@ -67,7 +119,12 @@ salt 'compute1' state.sls openstack.nova.compute
 ```
 
 ```
-nova-compute.sh
+openstack hypervisor list
+su -s /bin/sh -c "nova-manage cell_v2 discover_hosts --verbose" nova
+openstack compute service list
+openstack catalog list
+openstack image list
+nova-status upgrade check
 ```
 
 
