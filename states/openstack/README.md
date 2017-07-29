@@ -1,5 +1,5 @@
 
-## Deploy OpenStack Ocela using SaltStack on RHEL/CentOS 7
+## Deploy OpenStack Ocata using SaltStack on RHEL/CentOS 7
 
 https://docs.openstack.org/ocata/install-guide-rdo/index.html
 
@@ -422,19 +422,67 @@ On the **controller** node, run these commands:
 salt 'controller' state.sls openstack.neutron.controller
 ```
 
-```
-salt 'compute1' state.sls openstack.neutron.compute
-```
+11. Create the Networking service on the Compute nodes
 
 ```
-openstack extension list --network
-openstack network agent list
-openstack network list
+salt 'compute*' state.sls openstack.neutron.compute
 ```
 
-### Verifying the Installation
+##### Verify the installation
 
+On the **controller** node, run these commands:
 
+```
+[root@controller openstack]$ openstack extension list --network
++-------------------------------------------------------------+---------------------------+----------------------------------------------------------------------------------------------------------------------------+
+| Name                                                        | Alias                     | Description                                                                                                                |
++-------------------------------------------------------------+---------------------------+----------------------------------------------------------------------------------------------------------------------------+
+| Default Subnetpools                                         | default-subnetpools       | Provides ability to mark and use a subnetpool as the default                                                               |
+| Availability Zone                                           | availability_zone         | The availability zone extension.                                                                                           |
+| Network Availability Zone                                   | network_availability_zone | Availability zone support for network.                                                                                     |
+| Port Binding                                                | binding                   | Expose port bindings of a virtual port to external application                                                             |
+| agent                                                       | agent                     | The agent management extension.                                                                                            |
+| Subnet Allocation                                           | subnet_allocation         | Enables allocation of subnets from a subnet pool                                                                           |
+| DHCP Agent Scheduler                                        | dhcp_agent_scheduler      | Schedule networks among dhcp agents                                                                                        |
+| Tag support                                                 | tag                       | Enables to set tag on resources.                                                                                           |
+| Neutron external network                                    | external-net              | Adds external network attribute to network resource.                                                                       |
+| Neutron Service Flavors                                     | flavors                   | Flavor specification for Neutron advanced services                                                                         |
+| Network MTU                                                 | net-mtu                   | Provides MTU attribute for a network resource.                                                                             |
+| Network IP Availability                                     | network-ip-availability   | Provides IP availability data for each network and subnet.                                                                 |
+| Quota management support                                    | quotas                    | Expose functions for quotas management per tenant                                                                          |
+| Provider Network                                            | provider                  | Expose mapping of virtual networks to physical networks                                                                    |
+| Multi Provider Network                                      | multi-provider            | Expose mapping of virtual networks to multiple physical networks                                                           |
+| Address scope                                               | address-scope             | Address scopes extension.                                                                                                  |
+| Subnet service types                                        | subnet-service-types      | Provides ability to set the subnet service_types field                                                                     |
+| Resource timestamps                                         | standard-attr-timestamp   | Adds created_at and updated_at fields to all Neutron resources that have Neutron standard attributes.                      |
+| Neutron Service Type Management                             | service-type              | API for retrieving service providers for Neutron advanced services                                                         |
+| Tag support for resources: subnet, subnetpool, port, router | tag-ext                   | Extends tag support to more L2 and L3 resources.                                                                           |
+| Neutron Extra DHCP opts                                     | extra_dhcp_opt            | Extra options configuration for DHCP. For example PXE boot options to DHCP clients can be specified (e.g. tftp-server,     |
+|                                                             |                           | server-ip-address, bootfile-name)                                                                                          |
+| Resource revision numbers                                   | standard-attr-revisions   | This extension will display the revision number of neutron resources.                                                      |
+| Pagination support                                          | pagination                | Extension that indicates that pagination is enabled.                                                                       |
+| Sorting support                                             | sorting                   | Extension that indicates that sorting is enabled.                                                                          |
+| security-group                                              | security-group            | The security groups extension.                                                                                             |
+| RBAC Policies                                               | rbac-policies             | Allows creation and modification of policies that control tenant access to resources.                                      |
+| standard-attr-description                                   | standard-attr-description | Extension to add descriptions to standard attributes                                                                       |
+| Port Security                                               | port-security             | Provides port security                                                                                                     |
+| Allowed Address Pairs                                       | allowed-address-pairs     | Provides allowed address pairs                                                                                             |
+| project_id field enabled                                    | project-id                | Extension that indicates that project_id field is enabled.                                                                 |
++-------------------------------------------------------------+---------------------------+----------------------------------------------------------------------------------------------------------------------------+
+[root@controller openstack]$ openstack network agent list
++--------------------------------------+--------------------+----------------------+-------------------+-------+-------+---------------------------+
+| ID                                   | Agent Type         | Host                 | Availability Zone | Alive | State | Binary                    |
++--------------------------------------+--------------------+----------------------+-------------------+-------+-------+---------------------------+
+| 146df99e-9b0c-4ec7-a206-d1695e2338bd | Linux bridge agent | compute5.lab.local   | None              | True  | UP    | neutron-linuxbridge-agent |
+| 1eaf4f5c-07de-424d-be65-7b08f99c7a1c | Linux bridge agent | compute1.lab.local   | None              | True  | UP    | neutron-linuxbridge-agent |
+| 1f7d55de-1483-4be5-907b-77a6708866b7 | DHCP agent         | controller.lab.local | nova              | True  | UP    | neutron-dhcp-agent        |
+| 3b7e25ad-fb0d-4154-b845-fc93ea05b482 | Metadata agent     | controller.lab.local | None              | True  | UP    | neutron-metadata-agent    |
+| 6896c867-c3ca-4006-9530-f6189ab3ef65 | Linux bridge agent | compute2.lab.local   | None              | True  | UP    | neutron-linuxbridge-agent |
+| 9e2c2fb2-ff09-4097-b106-7857fc189ef6 | Linux bridge agent | controller.lab.local | None              | True  | UP    | neutron-linuxbridge-agent |
+| d0a3ecee-facb-4069-8c7e-bdcaabc5dd67 | Linux bridge agent | compute4.lab.local   | None              | True  | UP    | neutron-linuxbridge-agent |
+| d8b5f02a-9d48-45fa-b150-09213da6c091 | Linux bridge agent | compute3.lab.local   | None              | True  | UP    | neutron-linuxbridge-agent |
++--------------------------------------+--------------------+----------------------+-------------------+-------+-------+---------------------------+
+```
 
 ### Post-Install
 
@@ -491,7 +539,7 @@ openstack subnet create --network provider \
 openstack subnet list
 ```
 
-3. Create test instance
+3. Create a test instance
 
 ```
 . demo-openrc.sh
@@ -502,7 +550,8 @@ openstack server create --flavor m1.nano --image cirros-0.3.4 \
   
 openstack server list
 openstack console url show test-instance
-ping 10.0.0.207 
+ping 10.0.0.207
+ssh cirros@10.0.0.207
 ```
 
 #### Services to check on the controller
