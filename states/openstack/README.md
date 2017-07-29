@@ -2,9 +2,7 @@
 ## Deploy OpenStack Ocela using SaltStack on RHEL/CentOS 7
 
 
-
 1. Configure the pillar
-
 
 2. Configure the repo on all machines in the cluster, and install the python-openstackclient package
 
@@ -12,26 +10,26 @@
 salt 'c*' state.sls openstack.yumrepo
 ```
 
-3. Setup the Environment
+3. Create the security methods
 
+```
+salt 'controller' state.sls openstack.auth
+```
 
-  a. Create the security methods
-  ```
-  salt 'controller' state.sls openstack.auth
-  ```
+4. Install MariaDB and configure the database schema and users
 
-  b. Install MariaDB and configure the database schema and users
-  ```
-  salt 'controller' state.sls openstack.mysql
-  ```
+```
+salt 'controller' state.sls openstack.mysql
+```
 
-  c. Install and configure the message queue and memcached services
-  ```
-  salt 'controller' state.sls openstack.rabbitmq
-  salt 'controller' state.sls openstack.memcached
-  ```
+5. Install and configure the message queue and memcached services
 
-4. Create the Identity service
+```
+salt 'controller' state.sls openstack.rabbitmq
+salt 'controller' state.sls openstack.memcached
+```
+
+6. Create the Identity service
 
 ```
 salt 'controller' state.sls openstack.keystone
@@ -42,33 +40,106 @@ Verify the installation
 On the **controller** node, run these commands:
 
 ```
-. admin-openrc.sh
+[root@controller openstack]$ source auth-openrc.sh 
+[root@controller openstack]$ source admin-openrc.sh 
+[root@controller openstack]$ openstack project list
++----------------------------------+---------+
+| ID                               | Name    |
++----------------------------------+---------+
+| 049bc1d6c4924390840e3d94ecdff939 | admin   |
+| 4169bbd85dc349d6ba22016115d83532 | service |
+| dc908b893b3e4a5f95948a2781a5efb8 | demo    |
++----------------------------------+---------+
+[root@controller openstack]$
+[root@controller openstack]$ openstack project show service
++-------------+----------------------------------+
+| Field       | Value                            |
++-------------+----------------------------------+
+| description | Service Project                  |
+| domain_id   | default                          |
+| enabled     | True                             |
+| id          | 4169bbd85dc349d6ba22016115d83532 |
+| is_domain   | False                            |
+| name        | service                          |
+| parent_id   | default                          |
++-------------+----------------------------------+
+[root@controller openstack]$ openstack role list
++----------------------------------+----------+
+| ID                               | Name     |
++----------------------------------+----------+
+| 37afbc37db3b490fb5a70d3317cc5440 | user     |
+| 9fe2ff9ee4384b1894a90878d3e92bab | _member_ |
+| b4a3340d4e8d4a6db580ceb63df89154 | admin    |
++----------------------------------+----------+
+[root@controller openstack]$ openstack user list
++----------------------------------+-------+
+| ID                               | Name  |
++----------------------------------+-------+
+| a3c712f29e7e4101ba7b7eb1bbb57a28 | admin |
+| a441ebf301124b3a8ab9ff36b23c16b9 | demo  |
++----------------------------------+-------+
+[root@controller openstack]$ openstack user show demo
++---------------------+----------------------------------+
+| Field               | Value                            |
++---------------------+----------------------------------+
+| domain_id           | default                          |
+| enabled             | True                             |
+| id                  | a441ebf301124b3a8ab9ff36b23c16b9 |
+| name                | demo                             |
+| options             | {}                               |
+| password_expires_at | None                             |
++---------------------+----------------------------------+
+[root@controller openstack]$ openstack user show admin
++---------------------+----------------------------------+
+| Field               | Value                            |
++---------------------+----------------------------------+
+| domain_id           | default                          |
+| enabled             | True                             |
+| id                  | a3c712f29e7e4101ba7b7eb1bbb57a28 |
+| name                | admin                            |
+| options             | {}                               |
+| password_expires_at | None                             |
++---------------------+----------------------------------+
+[root@controller openstack]$ openstack service list
++----------------------------------+----------+----------+
+| ID                               | Name     | Type     |
++----------------------------------+----------+----------+
+| 173dcbf4b38746309d7b866f22916aad | keystone | identity |
++----------------------------------+----------+----------+
+[root@controller openstack]$ openstack endpoint list
++----------------------------------+-----------+--------------+--------------+---------+-----------+-----------------------------+
+| ID                               | Region    | Service Name | Service Type | Enabled | Interface | URL                         |
++----------------------------------+-----------+--------------+--------------+---------+-----------+-----------------------------+
+| be8b723c4a924b04b7b9ad0af6c4d0a5 | RegionOne | keystone     | identity     | True    | public    | http://controller:5000/v3/  |
+| ce44f744238746ad89d8295ff765131b | RegionOne | keystone     | identity     | True    | admin     | http://controller:35357/v3/ |
+| e5ee3b36c3094c229057b312cf82d823 | RegionOne | keystone     | identity     | True    | internal  | http://controller:5000/v3/  |
++----------------------------------+-----------+--------------+--------------+---------+-----------+-----------------------------+
 
-openstack project list
-openstack project show service
-
-openstack role list
-
-openstack user list
-openstack user show demo
-
-openstack service list
-openstack endpoint list
-
-unset OS_AUTH_URL OS_PASSWORD
-
-openstack --os-auth-url http://controller:35357/v3 \
-  --os-project-domain-name default --os-user-domain-name default \
-  --os-project-name admin --os-username admin --os-password ${ADMIN_PASS} token issue
-
-. demo-openrc.sh
-
-openstack --os-auth-url http://controller:5000/v3 \
-  --os-project-domain-name default --os-user-domain-name default \
-  --os-project-name demo --os-username demo token issue
-
-
-. admin-openrc.sh
+[root@controller openstack]$ 
+[root@controller openstack]$ unset OS_AUTH_URL OS_PASSWORD
+[root@controller openstack]$ openstack --os-auth-url http://controller:35357/v3 \
+>   --os-project-domain-name default --os-user-domain-name default \
+>   --os-project-name admin --os-username admin --os-password ${ADMIN_PASS} token issue
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field      | Value                                                                                                                                                                                   |
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| expires    | 2017-07-29T16:59:41+0000                                                                                                                                                                |
+| id         | gAAAAABZfLDtLq7EG6klU4nnQoeMypZx9AYC546VRQg2ljp-wbTW1Mh-R3JXqdhT5_JGiksv7zIF-K-rIu-geBRVD-_yfczIKWKQG19r86DCQOdedSYhKDePyVsbhNlF6_q1ZBmSMkYQ5r2-RgvD_pud8mortFnulh-5o5zpZ2cc1szGBsZJeco |
+| project_id | 049bc1d6c4924390840e3d94ecdff939                                                                                                                                                        |
+| user_id    | a3c712f29e7e4101ba7b7eb1bbb57a28                                                                                                                                                        |
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+[root@controller openstack]$ . demo-openrc.sh
+[root@controller openstack]$ openstack --os-auth-url http://controller:5000/v3 \
+>   --os-project-domain-name default --os-user-domain-name default \
+>   --os-project-name demo --os-username demo token issue
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Field      | Value                                                                                                                                                                                   |
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| expires    | 2017-07-29T17:00:04+0000                                                                                                                                                                |
+| id         | gAAAAABZfLEEuf1UDfHePlfO3FUvWONuG3qQi_u6ylrBbXL6LqCPO8CkbO49By3f2UW15AOp6VhD5Y9sWaFRZ5-v9gH_M6g0rIk40-b7ZqlGFFw6PbYDbiDgta1ifJVMz7DVz33aMnHbxuOfjEEftVPEmkNB-deKEhkYeh0qj_eLClwvRN3aWXI |
+| project_id | dc908b893b3e4a5f95948a2781a5efb8                                                                                                                                                        |
+| user_id    | a441ebf301124b3a8ab9ff36b23c16b9                                                                                                                                                        |
++------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
 4. Create the Image service
@@ -223,8 +294,6 @@ ping 10.0.0.207
 ```
 systemctl status httpd.service
 systemctl status mariadb.service
-systemctl status mongod.service
-systemctl status mongod.service
 systemctl status memcached.service
 
 systemctl status openstack-glance-api.service \
@@ -247,36 +316,16 @@ systemctl status neutron-server.service \
 
 ### Cleanup
 
-1. Compute and Controller
+Run the clean-all.sh script on the Salt master
 
 ```
-yum -y erase \*openstack\*
-yum -y erase libvirtd
-
-rm -Rf /etc/nova
-rm -Rf /etc/neutron
-rm -Rf /etc/keystone
-rm -Rf /etc/glance
-
-rm -Rf /var/log/keystone
-rm -Rf /var/log/glance
-rm -Rf /var/log/nova
-rm -Rf /var/log/neutron
+[root@ws2 openstack]$ time ./clean-all.sh 
+This is going to destroy the OpenStack cluster
+You have 10 seconds to abort....
+...
+real	2m17.222s
+user	0m4.964s
+sys	0m0.452s
 ```
 
-2. Controller
-```
-yum -y erase mod_wsgi
-yum -y erase httpd
-rm -Rf /etc/httpd
-
-yum -y erase memcached
-yum -y erase rabbitmq-server
-
-yum -y erase mariadb
-rm -Rf /var/lib/mysql
-
-rm -Rf /etc/my.cnf.db
-rm -Rf /var/log/httpd
-```
 
