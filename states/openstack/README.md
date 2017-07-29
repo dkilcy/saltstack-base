@@ -6,6 +6,8 @@ https://docs.openstack.org/ocata/install-guide-rdo/index.html
 Controller hostname is 'controller.lab.local'
 Compute nodes are 'compute[12345].lab.local'
 
+Where to get cloud images: [RDO Image resources](https://openstack.redhat.com/resources/image-resources/)
+
 1. Configure the pillar
 
 2. Configure the repo on all machines in the cluster, and install the python-openstackclient package
