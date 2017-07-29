@@ -76,6 +76,7 @@ openstack --os-auth-url http://controller:5000/v3 \
 ```
 salt 'controller' state.sls openstack.glance
 ```
+
 Verify the installation
 
 On the **controller** node, run these commands:
@@ -93,7 +94,7 @@ openstack endpoint list
 
 openstack image list
 
-openstack image create "cirros" \
+openstack image create "cirros-0.3.4" \
   --file ./images/cirros-0.3.4-x86_64-disk.img \
   --disk-format qcow2 --container-format bare \
   --public
@@ -139,42 +140,14 @@ salt 'compute1' state.sls openstack.neutron.compute
 ```
 
 ```
-neutron-compute.sh
+openstack extension list --network
+openstack network agent list
+openstack network list
 ```
 
 ### Verifying the Installation
 
-```
-. ./admin-openrc.sh
-openstack extension list --network
-openstack network agent list
-openstack flavor create --id 0 --vcpus 1 --ram 64 --disk 1 m1.nano
-. ./demo-openrc.sh 
-openstack keypair create --public-key ~/.ssh/id_rsa.pub mykey
-openstack keypair list
-openstack security group rule create --proto icmp default
-openstack security group rule create --proto tcp --dst-port 22 default
-openstack network create  --share --external  \
-  --provider-physical-network provider  \
-  --provider-network-type flat provider
-openstack subnet create --network provider \
-  --allocation-pool start=10.0.0.200,end=10.0.0.216 \
-  --dns-nameserver 10.0.0.6 \
-  --gateway 10.0.0.1 \
-  --subnet-range 10.0.0.0/24 provider
-openstack flavor create --id 0 --vcpus 1 --ram 64 --disk 1 m1.nano
-openstack flavor list
-openstack image list
-openstack network list
-openstack security group list
-openstack server create --flavor m1.nano --image cirros \
-  --nic net-id=bad3be29-b22a-4e3e-bd6a-fb855d5ad652  \
-  --security-group default \
-  --key-name mykey provider-instance
-openstack server list
-openstack console url show provider-instance
-ping 10.0.0.207 
-```
+
 
 ### Post-Install
 
@@ -187,7 +160,63 @@ ping 10.0.0.207
   openstack flavor create --id 3 --vcpus 2 --ram 4096  --disk 30  m1.medium
   openstack flavor create --id 4 --vcpus 4 --ram 8192  --disk 40  m1.large
   openstack flavor create --id 5 --vcpus 8 --ram 16384 --disk 80  m1.xlarge
+  
+  openstack flavor list
   ```
+
+2. Create security groups
+
+  Create the new security group:
+  ```
+  openstack security group create windows-default
+  openstack security group rule create --proto icmp windows-default
+  openstack security group rule create --proto tcp --dst-port 3389 windows-default
+  
+  openstack security group create linux-default
+  openstack security group rule create --proto icmp linux-default
+  openstack security group rule create --proto tcp --dst-port 22 linux-default
+  openstack security group rule create --proto tcp --dst-port 80 linux-default
+  openstack security group rule create --proto tcp --dst-port 443 linux-default
+  
+  openstack security group list
+  ```
+
+4. Add the public key for the devops user to the key store
+  ```
+  openstack keypair create --public-key /home/devops/.ssh/id_rsa.pub devops-key
+  openstack keypair list
+  ```
+  
+5. Create provider network and subnet
+```
+openstack network create  --share --external  \
+  --provider-physical-network provider  \
+  --provider-network-type flat provider
+  
+openstack network list
+
+openstack subnet create --network provider \
+  --allocation-pool start=10.0.0.200,end=10.0.0.216 \
+  --dns-nameserver 10.0.0.6 \
+  --gateway 10.0.0.1 \
+  --subnet-range 10.0.0.0/24 provider
+  
+openstack subnet list
+```
+
+3. Create test instance
+
+```
+. demo-openrc.sh
+openstack server create --flavor m1.nano --image cirros-0.3.4 \
+  --nic net-id=bad3be29-b22a-4e3e-bd6a-fb855d5ad652  \
+  --security-group default \
+  --key-name devops-key test-instance
+  
+openstack server list
+openstack console url show test-instance
+ping 10.0.0.207 
+```
 
 #### Services to check on the controller
 
@@ -197,15 +226,19 @@ systemctl status mariadb.service
 systemctl status mongod.service
 systemctl status mongod.service
 systemctl status memcached.service
+
 systemctl status openstack-glance-api.service \
  openstack-glance-registry.service
+ 
 systemctl status openstack-nova-api.service \
  openstack-nova-cert.service \
  openstack-nova-consoleauth.service \
  openstack-nova-scheduler.service \
  openstack-nova-conductor.service \
  openstack-nova-novncproxy.service
+ 
 systemctl status openstack-nova-api
+
 systemctl status neutron-server.service \
  neutron-linuxbridge-agent.service \
  neutron-dhcp-agent.service \
