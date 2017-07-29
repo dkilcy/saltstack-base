@@ -542,16 +542,72 @@ openstack subnet list
 3. Create a test instance
 
 ```
-. demo-openrc.sh
-openstack server create --flavor m1.nano --image cirros-0.3.4 \
-  --nic net-id=bad3be29-b22a-4e3e-bd6a-fb855d5ad652  \
-  --security-group default \
-  --key-name devops-key test-instance
-  
-openstack server list
-openstack console url show test-instance
-ping 10.0.0.207
-ssh cirros@10.0.0.207
+[root@controller openstack]$ . admin-openrc.sh
+[root@controller openstack]$ openstack server create --flavor m1.nano --image cirros-0.3.4 \
+>   --nic net-id=a275e07f-6e11-4ce1-92c1-40c32e764428 \
+>   --security-group linux-default \
+>   --key-name devops-key test-instance
++-------------------------------------+-----------------------------------------------------+
+| Field                               | Value                                               |
++-------------------------------------+-----------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                              |
+| OS-EXT-AZ:availability_zone         |                                                     |
+| OS-EXT-SRV-ATTR:host                | None                                                |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                |
+| OS-EXT-SRV-ATTR:instance_name       |                                                     |
+| OS-EXT-STS:power_state              | NOSTATE                                             |
+| OS-EXT-STS:task_state               | scheduling                                          |
+| OS-EXT-STS:vm_state                 | building                                            |
+| OS-SRV-USG:launched_at              | None                                                |
+| OS-SRV-USG:terminated_at            | None                                                |
+| accessIPv4                          |                                                     |
+| accessIPv6                          |                                                     |
+| addresses                           |                                                     |
+| adminPass                           | N4Le973659Tr                                        |
+| config_drive                        |                                                     |
+| created                             | 2017-07-29T17:25:23Z                                |
+| flavor                              | m1.nano (0)                                         |
+| hostId                              |                                                     |
+| id                                  | c08726b5-52c4-4c02-a092-e9e15a83343c                |
+| image                               | cirros-0.3.4 (22a2efef-29fb-4221-a38a-695b56bfddf2) |
+| key_name                            | devops-key                                          |
+| name                                | test-instance                                       |
+| progress                            | 0                                                   |
+| project_id                          | 049bc1d6c4924390840e3d94ecdff939                    |
+| properties                          |                                                     |
+| security_groups                     | name='linux-default'                                |
+| status                              | BUILD                                               |
+| updated                             | 2017-07-29T17:25:23Z                                |
+| user_id                             | a3c712f29e7e4101ba7b7eb1bbb57a28                    |
+| volumes_attached                    |                                                     |
++-------------------------------------+-----------------------------------------------------+
+[root@controller openstack]$ openstack server list
++--------------------------------------+---------------+--------+---------------------+--------------+
+| ID                                   | Name          | Status | Networks            | Image Name   |
++--------------------------------------+---------------+--------+---------------------+--------------+
+| c08726b5-52c4-4c02-a092-e9e15a83343c | test-instance | ACTIVE | provider=10.0.0.207 | cirros-0.3.4 |
++--------------------------------------+---------------+--------+---------------------+--------------+
+[root@controller openstack]$ openstack console url show test-instance
++-------+---------------------------------------------------------------------------------+
+| Field | Value                                                                           |
++-------+---------------------------------------------------------------------------------+
+| type  | novnc                                                                           |
+| url   | http://controller:6080/vnc_auto.html?token=9d469096-672f-464e-8fea-1040c644169c |
++-------+---------------------------------------------------------------------------------+
+[root@controller openstack]$ ping -c 4 10.0.0.207
+PING 10.0.0.207 (10.0.0.207) 56(84) bytes of data.
+64 bytes from 10.0.0.207: icmp_seq=1 ttl=64 time=0.588 ms
+64 bytes from 10.0.0.207: icmp_seq=2 ttl=64 time=0.298 ms
+64 bytes from 10.0.0.207: icmp_seq=3 ttl=64 time=0.324 ms
+64 bytes from 10.0.0.207: icmp_seq=4 ttl=64 time=0.416 ms
+
+--- 10.0.0.207 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3000ms
+rtt min/avg/max/mdev = 0.298/0.406/0.588/0.115 ms
+[root@controller openstack]$ ssh cirros@10.0.0.207 -i /home/devops/.ssh/id_rsa
+$ hostname
+test-instance
+$ 
 ```
 
 #### Services to check on the controller
