@@ -1,54 +1,151 @@
 
 ## Deploy Windows Cloud Instance on OpenStack Ocata
 
-1. Download the evaulation image for KVM from https://cloudbase.it/windows-cloud-images/
-2. Deploy the downloaded image to Glance
+1. Download the evaulation image for KVM from https://cloudbase.it/windows-cloud-images/.  Decompress the image and save it to the /home/devops/openstack/images directory on the controller.
 
-Perform the following steps on the **controller** with the **admin** environment: `. admin-openrc.sh`
+2. Deploy the downloaded image to Glance 
 
-  ```
-  gunzip -d windows_server_2012_r2_standard_eval_kvm_20170321.qcow2.gz
-  
-  openstack image create "win2012-r2-std-eval-20170321" \
-   --file windows_server_2012_r2_standard_eval_kvm_20170321.qcow2 \
-   --disk-format qcow2 --container-format bare \
-   --property hypervisor_type=QEMU --property os_type=windows \
-   --public
-  ```
+Perform the following steps on the **controller** with the **admin** environment
+
+```
+[root@controller openstack]$ . admin-openrc.sh 
+[root@controller openstack]$ cd images/
+[root@controller images]$ openstack image create "win2012-r2-std-eval-20170321" \
+  --file windows_server_2012_r2_standard_eval_kvm_20170321.qcow2 \
+  --disk-format qcow2 --container-format bare \
+  --property hypervisor_type=QEMU --property os_type=windows \
+  --public
++------------------+------------------------------------------------------+
+| Field            | Value                                                |
++------------------+------------------------------------------------------+
+| checksum         | a05ead3a04ae663da77eee5d2cb2fa73                     |
+| container_format | bare                                                 |
+| created_at       | 2017-07-29T17:28:07Z                                 |
+| disk_format      | qcow2                                                |
+| file             | /v2/images/74cb96cd-1aef-4770-8f87-c6694a372a3b/file |
+| id               | 74cb96cd-1aef-4770-8f87-c6694a372a3b                 |
+| min_disk         | 0                                                    |
+| min_ram          | 0                                                    |
+| name             | win2012-r2-std-eval-20170321                         |
+| owner            | 049bc1d6c4924390840e3d94ecdff939                     |
+| properties       | hypervisor_type='QEMU', os_type='windows'            |
+| protected        | False                                                |
+| schema           | /v2/schemas/image                                    |
+| size             | 12001017856                                          |
+| status           | active                                               |
+| tags             |                                                      |
+| updated_at       | 2017-07-29T17:29:42Z                                 |
+| virtual_size     | None                                                 |
+| visibility       | public                                               |
++------------------+------------------------------------------------------+
+```
    
-6. Launch the instance
-  ```
-  openstack server create --flavor m1.medium --image "win2012-r2-std-eval-20170321" \
-    --nic net-id=bad3be29-b22a-4e3e-bd6a-fb855d5ad652 \
-    --security-group windows-server \
-    --key-name devops-key \
-    win2012r2-1
-  ```
+#### Launch an instance (DHCP)
+
+Perform the following steps on the **controller** with the **admin** environment
+
+```
+[root@controller openstack]$ . admin-openrc.sh 
+[root@controller openstack]$ openstack server create --flavor m1.medium --image "win2012-r2-std-eval-20170321" \
+  --nic net-id=a275e07f-6e11-4ce1-92c1-40c32e764428 \
+  --security-group windows-default --key-name devops-key \
+   win2012r2-test-1
++-------------------------------------+---------------------------------------------------------------------+
+| Field                               | Value                                                               |
++-------------------------------------+---------------------------------------------------------------------+
+| OS-DCF:diskConfig                   | MANUAL                                                              |
+| OS-EXT-AZ:availability_zone         |                                                                     |
+| OS-EXT-SRV-ATTR:host                | None                                                                |
+| OS-EXT-SRV-ATTR:hypervisor_hostname | None                                                                |
+| OS-EXT-SRV-ATTR:instance_name       |                                                                     |
+| OS-EXT-STS:power_state              | NOSTATE                                                             |
+| OS-EXT-STS:task_state               | scheduling                                                          |
+| OS-EXT-STS:vm_state                 | building                                                            |
+| OS-SRV-USG:launched_at              | None                                                                |
+| OS-SRV-USG:terminated_at            | None                                                                |
+| accessIPv4                          |                                                                     |
+| accessIPv6                          |                                                                     |
+| addresses                           |                                                                     |
+| adminPass                           | sExxFrDB346Q                                                        |
+| config_drive                        |                                                                     |
+| created                             | 2017-07-29T17:30:35Z                                                |
+| flavor                              | m1.medium (3)                                                       |
+| hostId                              |                                                                     |
+| id                                  | cc70ac8d-d2f8-4c1f-9202-d396b9e54cbd                                |
+| image                               | win2012-r2-std-eval-20170321 (74cb96cd-1aef-4770-8f87-c6694a372a3b) |
+| key_name                            | devops-key                                                          |
+| name                                | win2012r2-test-1                                                    |
+| progress                            | 0                                                                   |
+| project_id                          | 049bc1d6c4924390840e3d94ecdff939                                    |
+| properties                          |                                                                     |
+| security_groups                     | name='windows-default'                                              |
+| status                              | BUILD                                                               |
+| updated                             | 2017-07-29T17:30:35Z                                                |
+| user_id                             | a3c712f29e7e4101ba7b7eb1bbb57a28                                    |
+| volumes_attached                    |                                                                     |
++-------------------------------------+---------------------------------------------------------------------+
+```
   
-  Wait for the status to go to ACTIVE
-  ```
-  openstack server list
-  ```
+Wait for the status to go to ACTIVE
+```
+[root@controller openstack]$ openstack server list
++--------------------------------------+------------------+--------+---------------------+------------------------------+
+| ID                                   | Name             | Status | Networks            | Image Name                   |
++--------------------------------------+------------------+--------+---------------------+------------------------------+
+| cc70ac8d-d2f8-4c1f-9202-d396b9e54cbd | win2012r2-test-1 | BUILD  | provider=10.0.0.204 | win2012-r2-std-eval-20170321 |
+| c08726b5-52c4-4c02-a092-e9e15a83343c | test-instance    | ACTIVE | provider=10.0.0.207 | cirros-0.3.4                 |
++--------------------------------------+------------------+--------+---------------------+------------------------------+
+[root@controller openstack]$ openstack server list
++--------------------------------------+------------------+--------+---------------------+------------------------------+
+| ID                                   | Name             | Status | Networks            | Image Name                   |
++--------------------------------------+------------------+--------+---------------------+------------------------------+
+| cc70ac8d-d2f8-4c1f-9202-d396b9e54cbd | win2012r2-test-1 | ACTIVE | provider=10.0.0.204 | win2012-r2-std-eval-20170321 |
+| c08726b5-52c4-4c02-a092-e9e15a83343c | test-instance    | ACTIVE | provider=10.0.0.207 | cirros-0.3.4                 |
++--------------------------------------+------------------+--------+---------------------+------------------------------+
+```
   
 6. Get the Administrator password
 
-  ```
-  nova get-password win2012r2-1 /home/devops/.ssh/id_rsa
-  ```
+**NOTE**: There is a lag between when the instance goes ACTIVE and the password is retrievable.  Wait for the instance to return the password before attempting to login.
+```
+[root@controller openstack]$ openstack server list
++--------------------------------------+------------------+--------+---------------------+------------------------------+
+| ID                                   | Name             | Status | Networks            | Image Name                   |
++--------------------------------------+------------------+--------+---------------------+------------------------------+
+| cc70ac8d-d2f8-4c1f-9202-d396b9e54cbd | win2012r2-test-1 | ACTIVE | provider=10.0.0.204 | win2012-r2-std-eval-20170321 |
+| c08726b5-52c4-4c02-a092-e9e15a83343c | test-instance    | ACTIVE | provider=10.0.0.207 | cirros-0.3.4                 |
++--------------------------------------+------------------+--------+---------------------+------------------------------+
+[root@controller openstack]$ nova get-password win2012r2-test-1 /home/devops/.ssh/id_rsa
+
+[root@controller openstack]$ nova get-password win2012r2-test-1 /home/devops/.ssh/id_rsa
+
+[root@controller openstack]$ nova get-password win2012r2-test-1 /home/devops/.ssh/id_rsa
+fo0RMXmcfeOQwFsJvojd
+[root@controller openstack]$ openstack console url show win2012r2-test-1
++-------+---------------------------------------------------------------------------------+
+| Field | Value                                                                           |
++-------+---------------------------------------------------------------------------------+
+| type  | novnc                                                                           |
+| url   | http://controller:6080/vnc_auto.html?token=2bed2a3e-c43d-4003-8383-67f0d4221c66 |
++-------+---------------------------------------------------------------------------------+
+```
   
 ### Using FreeRDP to connect to the Instance
 
 1. Connect to the instance via RDP
 
-  ```
-  yum install freerdp
-  xfreerdp -u Admin 10.0.0.216
-  ```
-  
+```
+yum install freerdp
+xfreerdp -u Admin 10.0.0.204
+```
+
+### Launch an instance with Static IP
+
+A dynamic IP is still configured in Internet Protocol Version 4 (TCP/IPv4) Properties as the static IP is managed on the Openstack level and not on the VM level.
+
 ### Configure Active Directory and DNS Server
 
 1. Login as Administrator.
-2. From the Server Manager Dashboard, verify the VM is set with a static IP address -- **You must do this for AD to work**
 3. From the Server Manager Dashboard, set the Active Directory and DNS Roles
   * a. Click Add roles and features
   * b. Select a server from the server pool: 
@@ -74,11 +171,9 @@ Perform the following steps on the **controller** with the **admin** environment
 
 ### References
 
-Where to get images:
-
-- [RDO Image resources](https://openstack.redhat.com/resources/image-resources/)
 - [OpenStack Windows Server 2012 R2 Evaluation Image](https://cloudbase.it/openstack-windows-server-2012-r2-evalution-images/
 )
+- [How to Assign a Private Static IP to an Azure VM](https://social.technet.microsoft.com/wiki/contents/articles/23447.how-to-assign-a-private-static-ip-to-an-azure-vm.aspx)
 - [https://social.technet.microsoft.com/Forums/en-US/024cce0f-f2f1-4714-abc9-1a4ecf40638a/what-difference-between-primary-dns-suffix-and-connectionspecific-dns-suffix?forum=winserverNIS](https://social.technet.microsoft.com/Forums/en-US/024cce0f-f2f1-4714-abc9-1a4ecf40638a/what-difference-between-primary-dns-suffix-and-connectionspecific-dns-suffix?forum=winserverNIS)
 
 
