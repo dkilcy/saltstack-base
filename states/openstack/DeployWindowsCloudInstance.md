@@ -15,32 +15,21 @@ Perform the following steps on the **controller** with the **admin** environment
    --property hypervisor_type=QEMU --property os_type=windows \
    --public
   ```
-
-Perform the following steps on the **controller** with the **demo** environment: `. demo-openrc.sh`
-  
-3. Add the RDP TCP port to the default security group
-  ```
-  openstack security group rule create --proto tcp --dst-port 3389 default
-  ```
-
-4. Add the public key for the devops user to the key store
-  ```
-  openstack keypair create --public-key ~/.ssh/id_rsa.pub devops-key
-  ```
-  
-5. Launch the instance
+   
+6. Launch the instance
   ```
   openstack server create --flavor m1.medium --image "win2012-r2-std-eval-20170321" \
     --nic net-id=bad3be29-b22a-4e3e-bd6a-fb855d5ad652 \
-    --security-group default \
-    --key-name devops-key win2012r2-1
+    --security-group windows-server \
+    --key-name devops-key \
+    win2012r2-1
   ```
   
-  - To assign a static IP to the instance: `--nic net-id="bad3be29-b22a-4e3e-bd6a-fb855d5ad652",v4-fixed-ip="10.0.0.81" \`
-  
+  Wait for the status to go to ACTIVE
   ```
   openstack server list
   ```
+  
 6. Get the Administrator password
 
   ```
@@ -53,7 +42,7 @@ Perform the following steps on the **controller** with the **demo** environment:
 
   ```
   yum install freerdp
-  xfreerdp -u Admin 10.0.0.208
+  xfreerdp -u Admin 10.0.0.216
   ```
   
 ### Configure Active Directory and DNS Server
