@@ -103,10 +103,10 @@ Wait for the status to go to ACTIVE
 | c08726b5-52c4-4c02-a092-e9e15a83343c | test-instance    | ACTIVE | provider=10.0.0.207 | cirros-0.3.4                 |
 +--------------------------------------+------------------+--------+---------------------+------------------------------+
 ```
-  
+** NOTE: The instance tan take some time to fully spin up after entering ACTIVE status**
+ 
 6. Get the Administrator password
 
-**NOTE**: There is a lag between when the instance goes ACTIVE and the password is retrievable.  Wait for the instance to return the password before attempting to login.
 ```
 [root@controller openstack]$ openstack server list
 +--------------------------------------+------------------+--------+---------------------+------------------------------+
@@ -115,12 +115,6 @@ Wait for the status to go to ACTIVE
 | cc70ac8d-d2f8-4c1f-9202-d396b9e54cbd | win2012r2-test-1 | ACTIVE | provider=10.0.0.204 | win2012-r2-std-eval-20170321 |
 | c08726b5-52c4-4c02-a092-e9e15a83343c | test-instance    | ACTIVE | provider=10.0.0.207 | cirros-0.3.4                 |
 +--------------------------------------+------------------+--------+---------------------+------------------------------+
-[root@controller openstack]$ nova get-password win2012r2-test-1 /home/devops/.ssh/id_rsa
-
-[root@controller openstack]$ nova get-password win2012r2-test-1 /home/devops/.ssh/id_rsa
-
-[root@controller openstack]$ nova get-password win2012r2-test-1 /home/devops/.ssh/id_rsa
-fo0RMXmcfeOQwFsJvojd
 [root@controller openstack]$ openstack console url show win2012r2-test-1
 +-------+---------------------------------------------------------------------------------+
 | Field | Value                                                                           |
@@ -128,6 +122,8 @@ fo0RMXmcfeOQwFsJvojd
 | type  | novnc                                                                           |
 | url   | http://controller:6080/vnc_auto.html?token=2bed2a3e-c43d-4003-8383-67f0d4221c66 |
 +-------+---------------------------------------------------------------------------------+
+[root@controller openstack]$ nova get-password win2012r2-test-1 /home/devops/.ssh/id_rsa
+fo0RMXmcfeOQwFsJvojd
 ```
   
 ### Using FreeRDP to connect to the Instance
@@ -139,9 +135,58 @@ yum install freerdp
 xfreerdp -u Admin 10.0.0.204
 ```
 
-### Launch an instance with Static IP
+### Launch an instance with a fixed IP
 
 A dynamic IP is still configured in Internet Protocol Version 4 (TCP/IPv4) Properties as the static IP is managed on the Openstack level and not on the VM level.
+
+1. Create a port
+
+```
+[root@controller openstack]$ openstack port create --network provider --fixed-ip subnet=2a20fb19-9150-4878-8f74-6ab44317ad56,ip-address=10.0.0.216 res216
++-----------------------+---------------------------------------------------------------------------+
+| Field                 | Value                                                                     |
++-----------------------+---------------------------------------------------------------------------+
+| admin_state_up        | UP                                                                        |
+| allowed_address_pairs |                                                                           |
+| binding_host_id       |                                                                           |
+| binding_profile       |                                                                           |
+| binding_vif_details   |                                                                           |
+| binding_vif_type      | unbound                                                                   |
+| binding_vnic_type     | normal                                                                    |
+| created_at            | 2017-07-29T20:45:17Z                                                      |
+| description           |                                                                           |
+| device_id             |                                                                           |
+| device_owner          |                                                                           |
+| dns_assignment        | None                                                                      |
+| dns_name              | None                                                                      |
+| extra_dhcp_opts       |                                                                           |
+| fixed_ips             | ip_address='10.0.0.216', subnet_id='2a20fb19-9150-4878-8f74-6ab44317ad56' |
+| id                    | 72871cef-f511-4414-b731-70afb2ff65ae                                      |
+| ip_address            | None                                                                      |
+| mac_address           | fa:16:3e:00:59:87                                                         |
+| name                  | res216                                                                    |
+| network_id            | a275e07f-6e11-4ce1-92c1-40c32e764428                                      |
+| option_name           | None                                                                      |
+| option_value          | None                                                                      |
+| port_security_enabled | True                                                                      |
+| project_id            | 049bc1d6c4924390840e3d94ecdff939                                          |
+| qos_policy_id         | None                                                                      |
+| revision_number       | 5                                                                         |
+| security_groups       | fff0ae97-9395-4601-ad9e-199767996ff5                                      |
+| status                | DOWN                                                                      |
+| subnet_id             | None                                                                      |
+| updated_at            | 2017-07-29T20:45:17Z                                                      |
++-----------------------+---------------------------------------------------------------------------+
+```
+
+2. Launch instance
+
+```
+[root@controller openstack]$ openstack server create --flavor m1.large --image "win2012-r2-std-eval-20170321" \
+  --nic port-id=72871cef-f511-4414-b731-70afb2ff65ae \
+  --security-group windows-default --key-name devops-key \
+   win2012r2-s1
+```
 
 ### Configure Active Directory and DNS Server
 
@@ -174,6 +219,8 @@ A dynamic IP is still configured in Internet Protocol Version 4 (TCP/IPv4) Prope
 - [OpenStack Windows Server 2012 R2 Evaluation Image](https://cloudbase.it/openstack-windows-server-2012-r2-evalution-images/
 )
 - [How to Assign a Private Static IP to an Azure VM](https://social.technet.microsoft.com/wiki/contents/articles/23447.how-to-assign-a-private-static-ip-to-an-azure-vm.aspx)
+- [Creating an Instance with a Specific Fixed IP](http://ibm-blue-box-help.github.io/help-documentation/openstack/userdocs/Creating-an-Instance-with-a-Specific-Fixed-IP/)
+- [How to Create An Instance With Static IP](http://ibm-blue-box-help.github.io/help-documentation/openstack/userdocs/Creating_Instances_With_Static_IP/)
 - [https://social.technet.microsoft.com/Forums/en-US/024cce0f-f2f1-4714-abc9-1a4ecf40638a/what-difference-between-primary-dns-suffix-and-connectionspecific-dns-suffix?forum=winserverNIS](https://social.technet.microsoft.com/Forums/en-US/024cce0f-f2f1-4714-abc9-1a4ecf40638a/what-difference-between-primary-dns-suffix-and-connectionspecific-dns-suffix?forum=winserverNIS)
 
 
