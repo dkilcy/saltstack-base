@@ -1,6 +1,8 @@
 
 ## Deploy OpenStack Ocela using SaltStack on RHEL/CentOS 7
 
+https://docs.openstack.org/ocata/install-guide-rdo/index.html
+
 Controller hostname is 'controller.lab.local'
 Compute nodes are 'compute[12345].lab.local'
 
@@ -37,7 +39,7 @@ salt 'controller' state.sls openstack.memcached
 salt 'controller' state.sls openstack.keystone
 ```
 
-Verify the installation
+##### Verify the installation
 
 On the **controller** node, run these commands:
 
@@ -118,7 +120,6 @@ On the **controller** node, run these commands:
 | ce44f744238746ad89d8295ff765131b | RegionOne | keystone     | identity     | True    | admin     | http://controller:35357/v3/ |
 | e5ee3b36c3094c229057b312cf82d823 | RegionOne | keystone     | identity     | True    | internal  | http://controller:5000/v3/  |
 +----------------------------------+-----------+--------------+--------------+---------+-----------+-----------------------------+
-
 [root@controller openstack]$ 
 [root@controller openstack]$ unset OS_AUTH_URL OS_PASSWORD
 [root@controller openstack]$ openstack --os-auth-url http://controller:35357/v3 \
@@ -152,7 +153,7 @@ On the **controller** node, run these commands:
 salt 'controller' state.sls openstack.glance
 ```
 
-Verify the installation
+##### Verify the installation
 
 On the **controller** node, run these commands:
 
@@ -249,34 +250,173 @@ total 13335480
 +--------------------------------------+--------------+--------+
 ```
 
-
-
-5. Create the Compute Service 
+8. Create the Compute Service on the Controller
 
 ```
 salt 'controller' state.sls openstack.nova.controller
 ```
 
-Verify novacello0 and cell1 are registered correctly
+##### Verify the installation
+
+On the **controller** node, run these commands:
+
+Verify nova cell0 and cell1 are registered correctly
 ```
-nova-manage cell_v2 list_cellsrm n
+[root@controller openstack]$ nova-manage cell_v2 list_cells
++-------+--------------------------------------+
+|  Name |                 UUID                 |
++-------+--------------------------------------+
+| cell0 | 00000000-0000-0000-0000-000000000000 |
+| cell1 | d86e225e-6673-456e-b158-8dedce9bdee1 |
++-------+--------------------------------------+
 ```
 
+Verify the creation of the service and endpoints
 ```
-salt 'compute1' state.sls openstack.nova.compute
+[root@controller openstack]$ openstack service list
++----------------------------------+-----------+-----------+
+| ID                               | Name      | Type      |
++----------------------------------+-----------+-----------+
+| 173dcbf4b38746309d7b866f22916aad | keystone  | identity  |
+| 4d4c293d9b5243f6a3a498fcc4d44ffb | nova      | compute   |
+| ad5b11bfda874556927d04450daa58bc | placement | placement |
+| b90926a8a570403cbecd40064ac4b998 | glance    | image     |
++----------------------------------+-----------+-----------+
+[root@controller openstack]$ openstack endpoint list
++----------------------------------+-----------+--------------+--------------+---------+-----------+-----------------------------+
+| ID                               | Region    | Service Name | Service Type | Enabled | Interface | URL                         |
++----------------------------------+-----------+--------------+--------------+---------+-----------+-----------------------------+
+| 042e0ce8faf54468a69bd83b247f3c49 | RegionOne | glance       | image        | True    | public    | http://controller:9292      |
+| 229c401ca08b46e094860a27c91c475c | RegionOne | placement    | placement    | True    | public    | http://controller:8778      |
+| 22d73d997d964a40801d12dd30500acf | RegionOne | glance       | image        | True    | internal  | http://controller:9292      |
+| 445aae310fdf4b43bb6b05e6202cfba2 | RegionOne | nova         | compute      | True    | admin     | http://controller:8774/v2.1 |
+| 83b7b5fbba274305aed5aa8bc1f44688 | RegionOne | placement    | placement    | True    | internal  | http://controller:8778      |
+| b2af4c8f265f4a2798626e3cfce128da | RegionOne | glance       | image        | True    | admin     | http://controller:9292      |
+| be8b723c4a924b04b7b9ad0af6c4d0a5 | RegionOne | keystone     | identity     | True    | public    | http://controller:5000/v3/  |
+| ce44f744238746ad89d8295ff765131b | RegionOne | keystone     | identity     | True    | admin     | http://controller:35357/v3/ |
+| df542af1bf644eea8aeb67064112bdaf | RegionOne | nova         | compute      | True    | internal  | http://controller:8774/v2.1 |
+| e5ee3b36c3094c229057b312cf82d823 | RegionOne | keystone     | identity     | True    | internal  | http://controller:5000/v3/  |
+| fac5bf3381364285a9311ba10945fb25 | RegionOne | placement    | placement    | True    | admin     | http://controller:8778      |
+| fe495bcd1f9f43cd83fcb42321b8ba18 | RegionOne | nova         | compute      | True    | public    | http://controller:8774/v2.1 |
++----------------------------------+-----------+--------------+--------------+---------+-----------+-----------------------------+
 ```
 
+9. Create the Compute Service on the Compute Nodes
 ```
-openstack hypervisor list
-su -s /bin/sh -c "nova-manage cell_v2 discover_hosts --verbose" nova
-openstack compute service list
-openstack catalog list
-openstack image list
-nova-status upgrade check
+salt 'compute*' state.sls openstack.nova.compute
 ```
 
+##### Finalize the Installation
 
-8. Create the Networking service 
+Confirm there are compute nodes in the database, and discover them.
+
+On the **controller** node, run these commands:
+
+```
+[root@controller openstack]$ openstack hypervisor list
++----+---------------------+-----------------+-----------+-------+
+| ID | Hypervisor Hostname | Hypervisor Type | Host IP   | State |
++----+---------------------+-----------------+-----------+-------+
+|  1 | compute4.lab.local  | QEMU            | 10.0.0.34 | up    |
+|  2 | compute5.lab.local  | QEMU            | 10.0.0.35 | up    |
+|  3 | compute3.lab.local  | QEMU            | 10.0.0.33 | up    |
+|  4 | compute1.lab.local  | QEMU            | 10.0.0.31 | up    |
+|  5 | compute2.lab.local  | QEMU            | 10.0.0.32 | up    |
++----+---------------------+-----------------+-----------+-------+
+[root@controller openstack]$ su -s /bin/sh -c "nova-manage cell_v2 discover_hosts --verbose" nova
+Found 2 cell mappings.
+Skipping cell0 since it does not contain hosts.
+Getting compute nodes from cell 'cell1': d86e225e-6673-456e-b158-8dedce9bdee1
+Found 5 computes in cell: d86e225e-6673-456e-b158-8dedce9bdee1
+Checking host mapping for compute host 'compute4.lab.local': f9590fe5-607e-48cd-a2f6-7d5fecb798ee
+Creating host mapping for compute host 'compute4.lab.local': f9590fe5-607e-48cd-a2f6-7d5fecb798ee
+Checking host mapping for compute host 'compute5.lab.local': 464f56d5-3b07-4e73-82e1-f871994b94d9
+Creating host mapping for compute host 'compute5.lab.local': 464f56d5-3b07-4e73-82e1-f871994b94d9
+Checking host mapping for compute host 'compute3.lab.local': 9f5498b2-9da9-4bea-ac2c-d0f0ca125ca4
+Creating host mapping for compute host 'compute3.lab.local': 9f5498b2-9da9-4bea-ac2c-d0f0ca125ca4
+Checking host mapping for compute host 'compute1.lab.local': ab68adb6-e8de-4cbf-b52e-23c336c1bb67
+Creating host mapping for compute host 'compute1.lab.local': ab68adb6-e8de-4cbf-b52e-23c336c1bb67
+Checking host mapping for compute host 'compute2.lab.local': d492fe92-5913-498c-8264-508ec0a1ee3c
+Creating host mapping for compute host 'compute2.lab.local': d492fe92-5913-498c-8264-508ec0a1ee3c
+[root@controller openstack]$
+```
+
+##### Verify the installation
+
+On the **controller** node, run these commands:
+
+```
+[root@controller openstack]$ openstack compute service list
++----+------------------+----------------------+----------+---------+-------+----------------------------+
+| ID | Binary           | Host                 | Zone     | Status  | State | Updated At                 |
++----+------------------+----------------------+----------+---------+-------+----------------------------+
+|  3 | nova-consoleauth | controller.lab.local | internal | enabled | up    | 2017-07-29T16:59:25.000000 |
+|  4 | nova-scheduler   | controller.lab.local | internal | enabled | up    | 2017-07-29T16:59:29.000000 |
+|  5 | nova-conductor   | controller.lab.local | internal | enabled | up    | 2017-07-29T16:59:23.000000 |
+|  7 | nova-compute     | compute4.lab.local   | nova     | enabled | up    | 2017-07-29T16:59:29.000000 |
+|  8 | nova-compute     | compute5.lab.local   | nova     | enabled | up    | 2017-07-29T16:59:20.000000 |
+|  9 | nova-compute     | compute3.lab.local   | nova     | enabled | up    | 2017-07-29T16:59:21.000000 |
+| 10 | nova-compute     | compute1.lab.local   | nova     | enabled | up    | 2017-07-29T16:59:29.000000 |
+| 11 | nova-compute     | compute2.lab.local   | nova     | enabled | up    | 2017-07-29T16:59:20.000000 |
++----+------------------+----------------------+----------+---------+-------+----------------------------+
+[root@controller openstack]$ openstack catalog list
++-----------+-----------+-----------------------------------------+
+| Name      | Type      | Endpoints                               |
++-----------+-----------+-----------------------------------------+
+| keystone  | identity  | RegionOne                               |
+|           |           |   public: http://controller:5000/v3/    |
+|           |           | RegionOne                               |
+|           |           |   admin: http://controller:35357/v3/    |
+|           |           | RegionOne                               |
+|           |           |   internal: http://controller:5000/v3/  |
+|           |           |                                         |
+| nova      | compute   | RegionOne                               |
+|           |           |   admin: http://controller:8774/v2.1    |
+|           |           | RegionOne                               |
+|           |           |   internal: http://controller:8774/v2.1 |
+|           |           | RegionOne                               |
+|           |           |   public: http://controller:8774/v2.1   |
+|           |           |                                         |
+| placement | placement | RegionOne                               |
+|           |           |   public: http://controller:8778        |
+|           |           | RegionOne                               |
+|           |           |   internal: http://controller:8778      |
+|           |           | RegionOne                               |
+|           |           |   admin: http://controller:8778         |
+|           |           |                                         |
+| glance    | image     | RegionOne                               |
+|           |           |   public: http://controller:9292        |
+|           |           | RegionOne                               |
+|           |           |   internal: http://controller:9292      |
+|           |           | RegionOne                               |
+|           |           |   admin: http://controller:9292         |
+|           |           |                                         |
++-----------+-----------+-----------------------------------------+
+[root@controller openstack]$ openstack image list
++--------------------------------------+--------------+--------+
+| ID                                   | Name         | Status |
++--------------------------------------+--------------+--------+
+| 22a2efef-29fb-4221-a38a-695b56bfddf2 | cirros-0.3.4 | active |
++--------------------------------------+--------------+--------+
+[root@controller openstack]$ nova-status upgrade check
++---------------------------+
+| Upgrade Check Results     |
++---------------------------+
+| Check: Cells v2           |
+| Result: Success           |
+| Details: None             |
++---------------------------+
+| Check: Placement API      |
+| Result: Success           |
+| Details: None             |
++---------------------------+
+| Check: Resource Providers |
+| Result: Success           |
+| Details: None             |
++---------------------------+
+```
+
+10. Create the Networking service on the Controller
 
 ```
 salt 'controller' state.sls openstack.neutron.controller
