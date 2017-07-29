@@ -1,6 +1,8 @@
 
 ## Deploy OpenStack Ocela using SaltStack on RHEL/CentOS 7
 
+Controller hostname is 'controller.lab.local'
+Compute nodes are 'compute[12345].lab.local'
 
 1. Configure the pillar
 
@@ -40,8 +42,10 @@ Verify the installation
 On the **controller** node, run these commands:
 
 ```
-[root@controller openstack]$ source auth-openrc.sh 
-[root@controller openstack]$ source admin-openrc.sh 
+[root@controller openstack]$ pwd
+/home/devops/openstack
+[root@controller openstack]$ . auth-openrc.sh 
+[root@controller openstack]$ . admin-openrc.sh 
 [root@controller openstack]$ openstack project list
 +----------------------------------+---------+
 | ID                               | Name    |
@@ -142,7 +146,7 @@ On the **controller** node, run these commands:
 +------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
 
-4. Create the Image service
+7. Create the Image service
 
 ```
 salt 'controller' state.sls openstack.glance
@@ -153,24 +157,96 @@ Verify the installation
 On the **controller** node, run these commands:
 
 ```
-. admin-openrc.sh
-openstack user list
-openstack user show glance
-
-openstack service list
-openstack service show glance
-
-openstack service list
-openstack endpoint list
-
-openstack image list
-
-openstack image create "cirros-0.3.4" \
-  --file ./images/cirros-0.3.4-x86_64-disk.img \
-  --disk-format qcow2 --container-format bare \
-  --public
-
-openstack image list
+[root@controller openstack]$ pwd
+/home/devops/openstack
+[root@controller openstack]$ . admin-openrc.sh
+[root@controller openstack]$ openstack user list
++----------------------------------+--------+
+| ID                               | Name   |
++----------------------------------+--------+
+| 448318f93f0c4999acf158218b043587 | glance |
+| a3c712f29e7e4101ba7b7eb1bbb57a28 | admin  |
+| a441ebf301124b3a8ab9ff36b23c16b9 | demo   |
++----------------------------------+--------+
+[root@controller openstack]$ openstack user show glance
++---------------------+----------------------------------+
+| Field               | Value                            |
++---------------------+----------------------------------+
+| domain_id           | default                          |
+| enabled             | True                             |
+| id                  | 448318f93f0c4999acf158218b043587 |
+| name                | glance                           |
+| options             | {}                               |
+| password_expires_at | None                             |
++---------------------+----------------------------------+
+[root@controller openstack]$ openstack service list
++----------------------------------+----------+----------+
+| ID                               | Name     | Type     |
++----------------------------------+----------+----------+
+| 173dcbf4b38746309d7b866f22916aad | keystone | identity |
+| b90926a8a570403cbecd40064ac4b998 | glance   | image    |
++----------------------------------+----------+----------+
+[root@controller openstack]$ openstack service show glance
++-------------+----------------------------------+
+| Field       | Value                            |
++-------------+----------------------------------+
+| description | OpenStack Image service          |
+| enabled     | True                             |
+| id          | b90926a8a570403cbecd40064ac4b998 |
+| name        | glance                           |
+| type        | image                            |
++-------------+----------------------------------+
+[root@controller openstack]$ openstack endpoint list
++----------------------------------+-----------+--------------+--------------+---------+-----------+-----------------------------+
+| ID                               | Region    | Service Name | Service Type | Enabled | Interface | URL                         |
++----------------------------------+-----------+--------------+--------------+---------+-----------+-----------------------------+
+| 042e0ce8faf54468a69bd83b247f3c49 | RegionOne | glance       | image        | True    | public    | http://controller:9292      |
+| 22d73d997d964a40801d12dd30500acf | RegionOne | glance       | image        | True    | internal  | http://controller:9292      |
+| b2af4c8f265f4a2798626e3cfce128da | RegionOne | glance       | image        | True    | admin     | http://controller:9292      |
+| be8b723c4a924b04b7b9ad0af6c4d0a5 | RegionOne | keystone     | identity     | True    | public    | http://controller:5000/v3/  |
+| ce44f744238746ad89d8295ff765131b | RegionOne | keystone     | identity     | True    | admin     | http://controller:35357/v3/ |
+| e5ee3b36c3094c229057b312cf82d823 | RegionOne | keystone     | identity     | True    | internal  | http://controller:5000/v3/  |
++----------------------------------+-----------+--------------+--------------+---------+-----------+-----------------------------+
+[root@controller openstack]$
+[root@controller openstack]$ ls -l ./images/
+total 13335480
+-rw-r--r-- 1 devops devops   731185152 Jul 22 23:08 CentOS-6-x86_64-GenericCloud-1601.qcow2
+-rw-r--r-- 1 devops devops   910032896 Jul 22 23:08 CentOS-7-x86_64-GenericCloud-1601.qcow2
+-rw-r--r-- 1 devops devops    13287936 Jul 22 23:08 cirros-0.3.4-x86_64-disk.img
+-rw-r--r-- 1 devops devops 12001017856 Jul 27 14:48 windows_server_2012_r2_standard_eval_kvm_20170321.qcow2
+[root@controller openstack]$ 
+[root@controller openstack]$ openstack image create "cirros-0.3.4" \
+>   --file ./images/cirros-0.3.4-x86_64-disk.img \
+>   --disk-format qcow2 --container-format bare \
+>   --public
++------------------+------------------------------------------------------+
+| Field            | Value                                                |
++------------------+------------------------------------------------------+
+| checksum         | ee1eca47dc88f4879d8a229cc70a07c6                     |
+| container_format | bare                                                 |
+| created_at       | 2017-07-29T16:10:36Z                                 |
+| disk_format      | qcow2                                                |
+| file             | /v2/images/22a2efef-29fb-4221-a38a-695b56bfddf2/file |
+| id               | 22a2efef-29fb-4221-a38a-695b56bfddf2                 |
+| min_disk         | 0                                                    |
+| min_ram          | 0                                                    |
+| name             | cirros-0.3.4                                         |
+| owner            | 049bc1d6c4924390840e3d94ecdff939                     |
+| protected        | False                                                |
+| schema           | /v2/schemas/image                                    |
+| size             | 13287936                                             |
+| status           | active                                               |
+| tags             |                                                      |
+| updated_at       | 2017-07-29T16:10:37Z                                 |
+| virtual_size     | None                                                 |
+| visibility       | public                                               |
++------------------+------------------------------------------------------+
+[root@controller openstack]$ openstack image list
++--------------------------------------+--------------+--------+
+| ID                                   | Name         | Status |
++--------------------------------------+--------------+--------+
+| 22a2efef-29fb-4221-a38a-695b56bfddf2 | cirros-0.3.4 | active |
++--------------------------------------+--------------+--------+
 ```
 
 
