@@ -105,7 +105,7 @@ Wait for the status to go to ACTIVE
 ```
 ** NOTE: The instance tan take some time to fully spin up after entering ACTIVE status**
  
-6. Get the Administrator password
+6. Connect to the console and get the Administrator password
 
 ```
 [root@controller openstack]$ openstack server list
@@ -142,7 +142,10 @@ A dynamic IP is still configured in Internet Protocol Version 4 (TCP/IPv4) Prope
 1. Create a port
 
 ```
-[root@controller openstack]$ openstack port create --network provider --fixed-ip subnet=2a20fb19-9150-4878-8f74-6ab44317ad56,ip-address=10.0.0.216 res216
+[root@controller openstack]$ openstack port create --network provider \
+  --fixed-ip subnet=2a20fb19-9150-4878-8f74-6ab44317ad56,ip-address=10.0.0.216 \
+  --security-group f25811d8-8d41-4976-a9ea-9bea8e0bad15 \
+  res216
 +-----------------------+---------------------------------------------------------------------------+
 | Field                 | Value                                                                     |
 +-----------------------+---------------------------------------------------------------------------+
@@ -191,21 +194,24 @@ A dynamic IP is still configured in Internet Protocol Version 4 (TCP/IPv4) Prope
 ### Configure Active Directory and DNS Server
 
 1. Login as Administrator.
+2. Configure the server for static IP address and set the FQDN. Then reestart the computer.
 3. From the Server Manager Dashboard, set the Active Directory and DNS Roles
-  * a. Click Add roles and features
-  * b. Select a server from the server pool: 
-  * c. The Select Roles dialog appears. Check:
+  * a. Click Add roles and features.  The Add Roles and Features Wizard appears.
+  * b. Click Next at Before you begin screen.
+  * c. The Installation Type page appears.  Make sure Roles-based or feature-based installation is checked.   Click Next.
+  * d. The Server Selection page appears.  MAke sure Select a server from the server pool is clicked, and the server is highlighted.  Click Next. 
+  * e. The Server Roles dialog appears. Check:
       - Active Directory Domain Services
       - DNS Server
   * d. Take the defaults for the remaining steps and click Next
+  * e. Click Install
   
 4. You should see AD DS and DNS added to the list column in the Server Manager Dashboard
 5. Promote the server to Domain Controller
   * a. Select notification icon in Dashboard and click Promote this server to a domain controller
   * b. For Select the deployment operation choose Add a new forest
     - Root domain name: **lab.local**
-  * c. Click Change and supply credentials
-  * d. Type the Directory Services Restore Mode (DSRM) password: **DSRMpassword1**
+  * c. Type the Directory Services Restore Mode (DSRM) password: **DSRMpassword1**
   * e. Ignore the authoritative parent zone warning - click Next
   * f. Verify NetBIOS name: **LAB**
   * g. Review your selections and click Install
