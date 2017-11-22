@@ -25,6 +25,20 @@
   chkconfig network on
   ```
   
+- TCP Memory Stack: 
+  ```bash
+# cat /proc/sys/net/ipv4/tcp_mem
+93231	124311	186462
+# cat /proc/net/sockstat
+sockets: used 609
+TCP: inuse 5 orphan 0 tw 0 alloc 6 mem 2
+UDP: inuse 3 mem 2
+UDPLITE: inuse 0
+RAW: inuse 0
+FRAG: inuse 0 memory 0
+  ```
+
+  
 #### Multi-queue hashing algoritms
 
 ```
