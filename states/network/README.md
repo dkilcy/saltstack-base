@@ -24,8 +24,8 @@
   service network start
   chkconfig network on
   ```
-- TCP Memory Stack: 
-  ```bash
+- TCP Memory Stack
+```
 # cat /proc/sys/net/ipv4/tcp_mem
 93231	124311	186462
 # cat /proc/net/sockstat
@@ -35,9 +35,9 @@ UDP: inuse 3 mem 2
 UDPLITE: inuse 0
 RAW: inuse 0
 FRAG: inuse 0 memory 0
-  ```
+```
 
-  
+ 
 #### Multi-queue hashing algoritms
 
 ```
