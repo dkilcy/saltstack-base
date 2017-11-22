@@ -24,7 +24,6 @@
   service network start
   chkconfig network on
   ```
-  
 - TCP Memory Stack: 
   ```bash
 # cat /proc/sys/net/ipv4/tcp_mem
