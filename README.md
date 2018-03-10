@@ -14,30 +14,26 @@ This is the reference setup I use in my home lab.
 
 SaltStack (Salt) is used in conjunction with PXE server/kickstart to install and provision multiple bare-metal machines running CentOS.  The machines designated as the Salt masters have the OS installed installed manually, and the Salt minions are installed via PXE/kickstart.  
 
-Tested against salt 2015.5.2 (Lithium)
+Tested against salt 2015.5.10 (Lithium)
 
 ### Lab Infrastructure
 
 - 3 [MintBox2](http://www.fit-pc.com/web/products/mintbox/mintbox-2/)
 - 6 [Supermicro SYS-5018A-TN4](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101836)
-- 4 [Supermicro SYS-5108A-FTN4](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101837)
-- 2 [TP-Link TL-SG-3216 L2 Switches](http://www.tp-link.com/lk/products/details/cat-39_TL-SG3216.html)
-- 2 [TP-Link TL-SG-3424 L2 Switches](http://www.tp-link.com/lk/products/details/cat-39_TL-SG3424.html)
-- 2 [Dell Powerconnect 6224 L3 Switches](http://www.dell.com/us/business/p/powerconnect-6200-series/pd)
+- 5 [Supermicro SYS-5108A-FTN4](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101837)
+- 4 [Dell Powerconnect 6224 L3 Switches](http://www.dell.com/us/business/p/powerconnect-6200-series/pd)
 
 ![Lab](notes/20150312_215209.jpg) "Lab"
 
 The MintBox2 machines are the Salt masters running CentOS 7 with the MATE desktop.  They are also referred to as the **workstation** machines.  They are also the PXE servers, yum mirror, and NTP servers.
 
-The Supermicros are the Salt minions running CentOS 6 or 7.  These have the Salt minion installed.  
+The Supermicros are the Salt minions running CentOS 7.  These have the Salt minion installed.  
 
 ##### Network infrastructure
 
-On the Supermicro 5018-series hardware the first 2 network interfaces (eth0 and eth1) are always bonded to team0. This is considered the management interface.  Depending on the use-case for the machine, the last 2 network interfaces may or may not be bonded to team1. 
+On the Supermicro 5018-series hardware all 4 interfaces are bonded as bond0 using 802.3ad and LACP mode 4
 
-View the current network setup here: [/etc/hosts](states/network/files/hosts)   
-View the network interface setup here: [/etc/dhcp/dhcpd.conf](states/pxeserver/files/dhcpd.conf)
-View the pillar configuration here: [pillar/top.sls](pillar/top.sls)  
+View the pillar configuration here: [pillar/superlab.sls](pillar/superlab.sls)  
 
 If you plan to fork the repository, unless you use the exact same hardware and IP addressing scheme you need to change the pillar and other network infrastructure files appropriately.  There should be no other hardcoded dependency changes to make.
 
