@@ -7,33 +7,34 @@ base:
     - iptables
     - network
     - kernel
-    - yumrepo
     - packages
     - ssd
 {% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
     - cpupower
+    - chrony.server
 {% elif grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '6' %}
     - cpuspeed
-{% endif %}
     - ntp.server
+{% endif %}
     - users
     - irqbalance
 
   'G@saltstack-base:role:minion':
     - local
     - selinux
-# NOTE: iptables is required for juno-saltstack
-#    - iptables
+    - iptables
     - network
+    - network.bond
     - kernel
     - yumrepo
     - packages
     - ssd
 {% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
     - cpupower
+    - chrony.client
 {% elif grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '6' %}
     - cpuspeed
-{% endif %}
     - ntp.client
+{% endif %}
     - users
     - irqbalance

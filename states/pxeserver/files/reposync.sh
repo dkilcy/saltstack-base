@@ -27,20 +27,6 @@ cd /var/www/html/repo/centos/6/epel
 rsync -avrt --delete --exclude 'debug' --exclude 'drpms' rsync://mirror.pnl.gov/epel/6/x86_64 .
 
 ####################################################################################
-### CentOS 6 - Scality Mithrandir
-####################################################################################
-
-reposync -p /var/www/html/repo/centos/6/scality-mithrandir/x86_64 --repoid=scality-mithrandir-centos6 --norepopath
-createrepo /var/www/html/repo/centos/6/scality-mithrandir/x86_64
-
-####################################################################################
-### CentOS 6 - Scality Numendil 7.X
-####################################################################################
-
-reposync -p /var/www/html/repo/centos/6/scality-numendil/x86_64 --repoid=scality-numendil-centos6 --norepopath
-createrepo /var/www/html/repo/centos/6/scality-numendil/x86_64
-
-####################################################################################
 ### CentOS 7
 ####################################################################################
 
@@ -61,41 +47,6 @@ rsync -avrt --delete --exclude 'debug' --exclude 'drpms' rsync://mirror.umd.edu/
 mkdir -p /var/www/html/repo/centos/7/epel
 cd /var/www/html/repo/centos/7/epel
 rsync -avrt --delete --exclude 'debug'  --exclude 'drpms' rsync://mirror.pnl.gov/epel/7/x86_64 .
-
-####################################################################################
-### CentOS 7 - Scality Mithrandir 6.X
-####################################################################################
-
-reposync -p /var/www/html/repo/centos/7/scality-mithrandir/x86_64 --repoid=scality-mithrandir-centos7 --norepopath
-createrepo /var/www/html/repo/centos/7/scality-mithrandir/x86_64
-
-####################################################################################
-### CentOS 7 - Scality Numendil 7.X
-####################################################################################
-
-reposync -p /var/www/html/repo/centos/7/scality-numendil/x86_64 --repoid=scality-numendil-centos7 --norepopath
-createrepo /var/www/html/repo/centos/7/scality-numendil/x86_64
-
-####################################################################################
-### OpenStack Liberty
-####################################################################################
-
-#reposync -p /var/www/html/repo/centos/7 --repoid=centos-openstack-liberty
-#createrepo /var/www/html/repo/centos/7/centos-openstack-liberty
-
-####################################################################################
-### Docker
-####################################################################################
-
-#reposync -p /var/www/html/repo/centos/7 --repoid=dockerrepo
-#createrepo  /var/www/html/repo/centos/7/dockerrepo
-
-####################################################################################
-### NodeJS
-####################################################################################
-
-#reposync -p /var/www/html/repo/centos/7 --repoid=nodesource
-#createrepo  /var/www/html/repo/centos/7/nodesource
 
 ####################################################################################
 ### Saltstack

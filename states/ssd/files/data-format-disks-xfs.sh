@@ -1,14 +1,10 @@
 #!/bin/bash
 
-umount /data
-
-dd if=/dev/zero of=/dev/sdb bs=1M count=512
-
-###rm -Rf /scality
-
-sed -i "/data/d" /etc/fstab
-
 #exit
+
+umount /data
+dd if=/dev/zero of=/dev/sdb bs=1M count=512
+sed -i "/data/d" /etc/fstab
 
 for DEV in /dev/sdb
 do
@@ -20,10 +16,7 @@ do
         parted ${DEV} print
 done
 
-# Add nobarrier for battery-backed RAID controller 
 UUID=`blkid | grep /dev/sdb1 | awk {'print $3'}`; echo "${UUID} /data xfs rw,noatime,logbufs=8,logbsize=256k,inode64 0 0" >> /etc/fstab
-
 mkdir -p /data
-
 mount /data
 

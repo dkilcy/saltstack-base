@@ -9,7 +9,7 @@
         NETMASK=255.255.255.0
         ONBOOT=yes
         USERCTL=no
-        BONDING_OPTS="miimon=100 mode=4 lacp_rate=1 xmit_hash_policy=layer3+4"
+        BONDING_OPTS="miimon=100 mode=4 lacp_rate=1"
         MTU=9000
 
 {% set eth = 'enp0s20f' %}
@@ -26,6 +26,5 @@
         MASTER=bond0
         SLAVE=yes
         USERCTL=no
-
 {% endfor %}
 

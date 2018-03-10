@@ -33,7 +33,7 @@ echo
 
 if [ "$2" != "" ]; then
     if [ -z "$IRQS_2" ]; then
-        echo No IRQs found for $1.
+        echo No IRQs found for $2.
     else
         echo Discovered irqs for $2: $IRQS_2
         mask=$limit_1 ; for IRQ in $IRQS_2 ; do echo Assign irq $IRQ mask 0x$(printf "%x" $mask) ; echo $(printf "%x" $mask) > /proc/irq/$IRQ/smp_affinity ; mask=$(( mask * $hop)) ; if [ $mask -ge $limit_2 ] ; then mask=$limit_1 ; fi ;done

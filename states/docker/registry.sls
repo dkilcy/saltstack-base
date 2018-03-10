@@ -38,7 +38,7 @@ docker-registry-container:
     - detach: True
     - port_bindings: {{ port }}:{{ port }}/tcp
     - binds:
-      - /etc/pki/scality:/certs:ro
+      - /etc/pki/docker:/certs:ro
       - {{ volume }}/data:/var/lib/registry:rw
       - {{ volume }}/auth:/auth:rw
     - environment:

@@ -58,13 +58,8 @@ user_list:
     'name':'devops',
     'shell':'/bin/bash',
     'group':'devops',
-    'ssh_public_key': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOBs6w4xiEvecrxC9a+F2tctZme25mq5VJQT858CLzSb16SMsJwGn3I5h2yY/6TzUC12NyQZgRoDvvkhOfu4Tz5RHEEsKbgGPB+IP55YbBlXuBZJ30fbReQZoIFkG0ESrXTWv0pD3gTItutFIaezo7KIaCjoeAo08gT9sHah4BeX4uDdHDmFUtwUP7ct3hA2zSwDeFIyvatWkkyqjR05KAeg6LqlGte9uLTZrCm7z+pUUkwd++k88JknFB8BaUMRHqJJu7jg5sTg1HvAhhmqlLA9DBp+7edwfIeylSppOc7keLz6kFFdhzGIHmiTG/jevZ0WI20d4gMJLkQQov1REf devops@ws2.lab.local'
-    },
-    {
-    'name':'scality',
-    'shell':'/bin/bash',
-    'group':'scality',
-    'ssh_public_key': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsfp91HukIlK5SoQ+Zgs+KC5pSy71yiQPNdAQBJdmX79bgbHnBWi2A/mK8+SzDN8q41CRh6g0MLn7H975x0N7XTm3DiaovK2KYpIpXBuVp3CQMxXtQWv74uN8zKMxA5Dbmmlb7QsnN92i2LqfFoUMkVJu2Y95dh85Odjvo7Cvg95xVxkENwbmF3Xaswa/ZqA4WnOmYOiGvcqJNmVyCcUByAJ9ousJI8di6eq4lVL6WFLCwPGNi/ILHh1ZHagnhdJnN5efsyA0VGT4mUhFh6zYw4sBxfKk54Un95JEpSMvoKttsi+ZUiW8rDcaTQSagmTPEm4WNHrnb64XiQ69Yk7QR scality@ws2.lab.local'
+    'ssh_public_key': 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCfMGfTjkyCn8puZ/1RxQFB7wnGjNacg/zWccGy+mzNi6g6xPsl4NDMRTkqWbnPQddsBd/4bTUi0TsUkw/bsVqCRXpE43Nb4KNxrPgmb9S0Z1hF4r/8uzVoUCCvQBNXHuqLAPWx16yx47LtTdDav1UiLLrggWWwSezboy6Z77UhUMVbavzmRKHyf1ssRHCun4VQKeddAEaZ2B9HKqbqEiBD/zYg5FacXGFrkfbm59G1wjer2cjNNeESnrJFsADdW2eLLZUWS9JwM6dsYSIOlwAZyvkejqPEj1K6YEafdaVuiNxyyyTHgXhN/vLwN7YCSwxk5ZT+MDqqYrnco9B5AasP devops@ws2.lab.local'
+
     }]
 
 kernel:
@@ -104,12 +99,16 @@ packages:
 {% if grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '7' %}
     - iperf3
     - python2-pip
+    - chrony
 {% elif grains['os_family'] == 'RedHat' and grains['osmajorrelease'] == '6' %}
+    - python-pip
     - pdsh
+    - ntp
 {% endif %}
     - bc
     - bind-utils
     - bonnie++
+    - chrony
     - createrepo
     - curl
     - dstat
@@ -132,7 +131,6 @@ packages:
     - net-snmp-utils
     - ngrep
     - nmap
-    - ntp
     - numactl
     - openldap-clients
     - openssh-clients
@@ -141,10 +139,8 @@ packages:
     - perf
     - pciutils
     - python-devel
-    - python-pip
     - python-virtualenv
     - rsync
-#    - s3cmd
     - screen
     - sdparm
     - smartmontools
