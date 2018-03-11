@@ -94,28 +94,6 @@ Perform all these steps on the workstation node as **root** user
 
 11. Repeat for all other machines in the network designated as Salt minions.
 
-#### Post-Install Setup
 
-1. Update the local minion with the pillar data as root user.
-
- ```bash
- salt '*' saltutil.refresh_pillar
- ```
-
-2. Set the grains for the Salt master:
-
- ```bash
- salt 'workstation*' grains.setvals "{'saltstack-base':{'role':'master'}}"
- ```
-3. Set the grains for all the Salt minions:
-
- ```bash
- salt 'controller*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
- salt 'network*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
- salt 'compute*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
- salt 'super*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
- salt 'store*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
- salt 'conn*' grains.setvals "{'saltstack-base':{'role':'minion'}}"
- ```
 
  
