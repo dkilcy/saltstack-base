@@ -25,13 +25,7 @@ Perform all these steps on the workstation node as **root** user
  [root@workstation2 ~]# 
  ```
 
-3. Create the /etc/salt/master.d file to hold configuration files
-
- ```bash
- mkdir -p /etc/salt/master.d
- ```
-
-4. Star the Salt master
+3. Star the Salt master
 
  ```bash
  systemctl start salt-master.service
