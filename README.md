@@ -29,7 +29,7 @@ The MintBox2 machines are the Salt masters running CentOS 7 with the MATE deskto
 
 The Supermicros are the Salt minions running CentOS 7.  These have the Salt minion installed.  
 
-##### Network infrastructure
+#### Network infrastructure
 
 On the Supermicro 5018-series hardware all 4 interfaces are bonded as bond0 using 802.3ad and LACP mode 4
 
