@@ -23,11 +23,11 @@ Tested against salt 2015.5.10 (Lithium)
 - 5 [Supermicro SYS-5108A-FTN4](http://www.newegg.com/Product/Product.aspx?Item=N82E16816101837)
 - 4 [Dell Powerconnect 6224 L3 Switches](http://www.dell.com/us/business/p/powerconnect-6200-series/pd)
 
-![Lab](notes/20150312_215209.jpg) "Lab"
+![Lab](notes/20180310_231645.jpg)
 
-The MintBox2 machines are the Salt masters running CentOS 7 with the MATE desktop.  They are also referred to as the **workstation** machines.  They are also the PXE servers, yum mirror, and NTP servers.
+The MintBox2 machines are Salt masters running CentOS 7 with the MATE desktop.  They are also referred to as the **workstation** machines.  They are also the PXE servers, yum mirror, and NTP servers.
 
-The Supermicros are the Salt minions running CentOS 7.  These have the Salt minion installed.  
+The Supermicros are Salt minions running CentOS 7.
 
 #### Network infrastructure
 
