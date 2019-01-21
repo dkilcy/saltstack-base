@@ -7,6 +7,7 @@
  ```bash
 git config --global user.name "dkilcy"
 git config --global user.email "david@kilcyconsulting.com"
+git config --global core.editor "vim"
 ```
 
 3. Clone the repository
